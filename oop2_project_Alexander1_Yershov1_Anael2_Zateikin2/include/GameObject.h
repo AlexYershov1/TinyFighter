@@ -4,10 +4,11 @@
 class GameObject
 {
 public:
-	GameObject();
-	~GameObject();
+	GameObject(const sf::Vector2f&);
+	virtual ~GameObject();
+	virtual void draw(sf::RenderWindow&) ; 
 
 private:
-
+	sf::Sprite m_picture;
 };
 
