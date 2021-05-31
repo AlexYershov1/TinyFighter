@@ -3,4 +3,5 @@ target_sources (oop2_project_Alexander1_Yershov1_Anael2_Zateikin2 PRIVATE "main.
 																		  "GameObject.cpp"
 																		  "MovingObject/MovingObject.cpp"
 																		  "Animation.cpp"
-																		  "AnimationData.cpp")
+																		  "AnimationData.cpp"
+																		  "ResourcesManager.cpp")

@@ -2,6 +2,7 @@
 #include <unordered_map>
 #include <vector>
 #include <SFML/Graphics.hpp>
+#include "macros.h"
 
 struct AnimeMap
 {
