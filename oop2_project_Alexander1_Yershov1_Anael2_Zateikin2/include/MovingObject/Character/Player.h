@@ -1,20 +1,12 @@
 #pragma once
-#include "../MovingObject.h"
+#include "../Character/Character.h"
 
-class Player : public MovingObject
+class Player : public Character
 {
 public:
-	Player();
+	Player(const sf::Vector2f&, CharacterType);
 	~Player();
 
 private:
-
+	Animation m_animation;
 };
-
-Player::Player()
-{
-}
-
-Player::~Player()
-{
-}

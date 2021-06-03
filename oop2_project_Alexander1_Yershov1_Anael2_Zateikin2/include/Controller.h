@@ -9,13 +9,7 @@ public:
 	~Controller();
 	void run();
 private:
+	//void draw();
 	sf::RenderWindow m_gameWindow;
+	sf::Time m_elapsed = {};
 };
-
-Controller::Controller()
-{
-}
-
-Controller::~Controller()
-{
-}

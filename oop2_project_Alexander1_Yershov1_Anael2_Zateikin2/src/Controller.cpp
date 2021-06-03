@@ -40,6 +40,6 @@ void Controller::run()
 			}
 		}
 
-		move(m_timer.restart());
+		move(m_elapsed.restart()); //update here
 	}
 }

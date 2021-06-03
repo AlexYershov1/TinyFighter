@@ -1,14 +1,19 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Animation.h"
+#include "ResourcesManager.h"
 
 class GameObject
 {
 public:
 	GameObject(const sf::Vector2f&);
-	virtual ~GameObject();
+	virtual ~GameObject() = default;
 	virtual void draw(sf::RenderWindow&) ; 
 
-private:
+protected:
 	sf::Sprite m_picture;
+	//Animation m_animation;
+private:
+
 };
 

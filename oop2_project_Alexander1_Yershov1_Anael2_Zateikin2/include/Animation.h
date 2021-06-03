@@ -5,12 +5,18 @@
 class Animation
 {
 public:
+	Animation(const AnimeMap&, sf::Sprite& );
 	~Animation();
-	static Animation& instance();
-private:
-	Animation();
-	Animation(const Animation&) = default;
-	Animation& operator=(const Animation&) = default;
+	//static Animation& instance();
 
-	std::unordered_map<std::type_info, AnimeMap> m_anime;
+	void update(sf::Time delta, Action);
+
+private:
+	void update(Action);
+
+	const AnimeMap& m_animeMap;
+	sf::Time m_elapsed = {};
+	int m_index = 0;
+	sf::Sprite& m_sprite;
+	//std::unordered_map<Characters, AnimeMap> m_animeMap;
 };
