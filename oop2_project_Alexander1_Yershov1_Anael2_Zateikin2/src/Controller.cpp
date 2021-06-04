@@ -21,7 +21,7 @@ void Controller::run()
 	{
 		//clear, draw , display
 		this->m_gameWindow.clear(sf::Color::White);
-		this->m_gameWindow.draw(/*Player*/);
+		//this->m_gameWindow.draw(/*Player*/);
 		this->m_gameWindow.display();
 
 		for (auto evnt = sf::Event(); m_gameWindow.pollEvent(evnt); )
@@ -31,7 +31,8 @@ void Controller::run()
 			case sf::Event::Closed:
 				m_gameWindow.close();
 				break;
-			case sf::Event::KeyPressed:	
+			case sf::Event::KeyPressed:
+				
 				break;
 			case sf::Event::MouseButtonReleased:		// stopping and resuming background music
 				break;
@@ -40,6 +41,6 @@ void Controller::run()
 			}
 		}
 
-		move(m_elapsed.restart()); //update here
+		//move(m_elapsed.restart()); //update here
 	}
 }

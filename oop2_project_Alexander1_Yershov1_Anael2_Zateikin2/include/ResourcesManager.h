@@ -26,8 +26,8 @@ public:
 
     const sf::Texture& texture(CharacterType character) const { return m_textures[int(character)]; }
    const AnimeMap& animationData(CharacterType character) { return m_animationData[int(character)]; }
-    //AnimeMap alexData() const;
-    //AnimeMap banditData() const;
+    AnimeMap alexData() const;
+    AnimeMap banditData() const;
 	
 
 private:
