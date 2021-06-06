@@ -14,6 +14,8 @@ Controller::~Controller()
 
 void Controller::run()
 {
+	//create objects
+
 
 	// game loop
 
@@ -40,7 +42,12 @@ void Controller::run()
 				break;
 			}
 		}
+<<<<<<< enemy
+		
+		update(m_elapsed.restart()); //update here
+=======
 
 		//move(m_elapsed.restart()); //update here
+>>>>>>> main
 	}
 }
