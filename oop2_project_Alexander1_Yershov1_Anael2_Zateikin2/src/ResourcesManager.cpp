@@ -2,18 +2,15 @@
 //#include "AnimationData.h"
 
 
-inline ResourcesManager& ResourcesManager::instance()
+ResourcesManager& ResourcesManager::instance()
 {
 	static ResourcesManager instance;
 	return instance;
 }
 
-//AnimeMap ResourcesManager::alexData() const
+//namespace
 //{
-
-namespace
-{
-    AnimeMap alexData()
+AnimeMap ResourcesManager::alexData() const
     {
 
     const auto size = sf::Vector2i(40, 40);
@@ -47,7 +44,7 @@ namespace
     return alex;
 }
 
-AnimeMap banditData()
+AnimeMap ResourcesManager::banditData() const
 {
     const auto size = sf::Vector2i(40, 40);
     const auto initSpace = sf::Vector2i(1, 2);
@@ -79,7 +76,7 @@ AnimeMap banditData()
 
     return bandit;
 }
-}
+//}
 
 ResourcesManager::ResourcesManager()
     :m_animationData(int(CharacterType::Max)), m_textures(int(CharacterType::Max))

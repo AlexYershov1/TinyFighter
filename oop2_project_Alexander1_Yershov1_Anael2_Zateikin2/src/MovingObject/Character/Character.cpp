@@ -1,7 +1,8 @@
+#pragma once
 #include "MovingObject/Character/Character.h"
 
-
-Character::Character()
+Character::Character(const sf::Vector2f& location)
+	: MovingObject(location), m_action(Action::Standing)
 {
 }
 

@@ -16,7 +16,7 @@ const auto AnimationTime = sf::seconds(0.3f);
 
 enum class Action
 {
-	Standing, Walking, Jumping, Punching
+	Standing, WalkingLeft, WalkingRight, Jumping, Punching
 };
 
 enum class CharacterType

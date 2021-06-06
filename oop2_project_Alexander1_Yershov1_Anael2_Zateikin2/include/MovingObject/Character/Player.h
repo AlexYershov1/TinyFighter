@@ -5,6 +5,7 @@ class Player : public Character
 {
 public:
 	Player(const sf::Vector2f&, CharacterType);
+	void update(sf::Time&);
 	~Player();
 
 private:

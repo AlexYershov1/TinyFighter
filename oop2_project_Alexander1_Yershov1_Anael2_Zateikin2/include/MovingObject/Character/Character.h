@@ -4,7 +4,7 @@
 class Character : public MovingObject
 {
 public:
-	Character();
+	Character(const sf::Vector2f& location);
 	~Character();
 
 protected:
