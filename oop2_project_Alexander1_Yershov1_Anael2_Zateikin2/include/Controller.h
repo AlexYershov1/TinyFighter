@@ -11,5 +11,5 @@ public:
 private:
 	//void draw();
 	sf::RenderWindow m_gameWindow;
-	sf::Time m_elapsed = {};
+	sf::Clock m_elapsed = {};
 };

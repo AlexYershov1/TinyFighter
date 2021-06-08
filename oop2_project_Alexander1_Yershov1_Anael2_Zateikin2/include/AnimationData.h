@@ -7,7 +7,7 @@
 struct AnimeMap
 {
 	using ListType = std::vector<sf::IntRect>;
-	using DataType = std::unordered_map<Action, ListType>;
+	using DataType = std::unordered_map<ActionType, ListType>;
 	DataType m_data;
 
 };

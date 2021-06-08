@@ -13,9 +13,9 @@ ResourcesManager& ResourcesManager::instance()
 AnimeMap ResourcesManager::alexData() const
     {
 
-    const auto size = sf::Vector2i(40, 40);
+    const auto size = sf::Vector2i(80, 80);
     const auto initSpace = sf::Vector2i(1, 2);
-    const auto middleSpace = sf::Vector2i(0, 10);
+    const auto middleSpace = sf::Vector2i(0, 0);
 
     auto alex = AnimeMap{};
     auto currentStart = initSpace;
@@ -27,14 +27,14 @@ AnimeMap ResourcesManager::alexData() const
         return currentStart;
     };
 
-    alex.m_data[Action::Standing].emplace_back(currentStart, size);
-    alex.m_data[Action::Standing].emplace_back(nextStart(), size);
-    alex.m_data[Action::Standing].emplace_back(nextStart(), size);
-    alex.m_data[Action::Standing].emplace_back(nextStart(), size);
-    alex.m_data[Action::Walking].emplace_back(nextStart(), size);
-    alex.m_data[Action::Walking].emplace_back(nextStart(), size);
-    alex.m_data[Action::Walking].emplace_back(nextStart(), size);
-    alex.m_data[Action::Walking].emplace_back(nextStart(), size);
+    alex.m_data[ActionType::Standing].emplace_back(currentStart, size);
+    alex.m_data[ActionType::Standing].emplace_back(nextStart(), size);
+    alex.m_data[ActionType::Standing].emplace_back(nextStart(), size);
+    alex.m_data[ActionType::Standing].emplace_back(nextStart(), size);
+    alex.m_data[ActionType::Walking].emplace_back(nextStart(), size);
+    alex.m_data[ActionType::Walking].emplace_back(nextStart(), size);
+    alex.m_data[ActionType::Walking].emplace_back(nextStart(), size);
+    alex.m_data[ActionType::Walking].emplace_back(nextStart(), size);
 
     //
     // TO DO - ADD ALL OTHER ACTION TEXTURES
@@ -46,7 +46,7 @@ AnimeMap ResourcesManager::alexData() const
 
 AnimeMap ResourcesManager::banditData() const
 {
-    const auto size = sf::Vector2i(40, 40);
+    const auto size = sf::Vector2i(100, 100);
     const auto initSpace = sf::Vector2i(1, 2);
     const auto middleSpace = sf::Vector2i(0, 10);
 
@@ -60,14 +60,14 @@ AnimeMap ResourcesManager::banditData() const
         return currentStart;
     };
 
-    bandit.m_data[Action::Standing].emplace_back(currentStart, size);
-    bandit.m_data[Action::Standing].emplace_back(nextStart(), size);
-    bandit.m_data[Action::Standing].emplace_back(nextStart(), size);
-    bandit.m_data[Action::Standing].emplace_back(nextStart(), size);
-    bandit.m_data[Action::Walking].emplace_back(nextStart(), size);
-    bandit.m_data[Action::Walking].emplace_back(nextStart(), size);
-    bandit.m_data[Action::Walking].emplace_back(nextStart(), size);
-    bandit.m_data[Action::Walking].emplace_back(nextStart(), size);
+    bandit.m_data[ActionType::Standing].emplace_back(currentStart, size);
+    bandit.m_data[ActionType::Standing].emplace_back(nextStart(), size);
+    bandit.m_data[ActionType::Standing].emplace_back(nextStart(), size);
+    bandit.m_data[ActionType::Standing].emplace_back(nextStart(), size);
+    bandit.m_data[ActionType::Walking].emplace_back(nextStart(), size);
+    bandit.m_data[ActionType::Walking].emplace_back(nextStart(), size);
+    bandit.m_data[ActionType::Walking].emplace_back(nextStart(), size);
+    bandit.m_data[ActionType::Walking].emplace_back(nextStart(), size);
 
     //
     // TO DO - ADD ALL OTHER ACTION TEXTURES
@@ -81,19 +81,17 @@ AnimeMap ResourcesManager::banditData() const
 ResourcesManager::ResourcesManager()
     :m_animationData(int(CharacterType::Max)), m_textures(int(CharacterType::Max))
 {
-    //for (auto& texture : m_textures)
-    //{
     sf::Texture image;
-    if (!image.loadFromFile("davis_0.bmp"))
+    if (!image.loadFromFile("davis_0.png"))
     {
         throw std::runtime_error("Can't load file");
     }
     m_textures[int(CharacterType::Alex)] = image;
-    if (!image.loadFromFile("bandit_0.bmp"))
+
+    if (!image.loadFromFile("bandit_0.png"))
     {
         throw std::runtime_error("Can't load file");
     }
-    //m_textures.push_back(image);
     m_textures[int(CharacterType::Bandit)] = image;
 
 

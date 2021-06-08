@@ -4,11 +4,12 @@
 class Character : public MovingObject
 {
 public:
-	Character(const sf::Vector2f& location);
+	Character(const sf::Vector2f&, CharacterType);
 	~Character();
 
 protected:
 	Action m_action;
+	Animation m_animation;
 private:
 
 };

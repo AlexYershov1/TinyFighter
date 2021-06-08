@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <stdexcept>
+#include <unordered_map>
 
 
 //grapics
@@ -12,11 +13,12 @@ const int SEED = 7;
 
 
 // animation
-const auto AnimationTime = sf::seconds(0.3f);
+const auto AnimationTime = sf::seconds(0.2f);
+const auto SPEED = 50.f;
 
-enum class Action
+enum class ActionType
 {
-	Standing, WalkingLeft, WalkingRight, Jumping, Punching
+	Standing, Walking, Jumping, Punching
 };
 
 enum class CharacterType
@@ -39,21 +41,17 @@ enum class Direction
 	}
 	inline sf::Vector2f convert(Direction dir)
 	{
-		switch (dir)
+		static const
+			std::unordered_map<Direction, sf::Vector2f>
+			dirToVectorMapping =
 		{
-		case Direction::Up:
-			return { 0, -1 };
-		case Direction::Down:
-			return { 0, 1 };
-		case Direction::Right:
-			return { 1, 0 };
-		case Direction::Left:
-			return { -1, 0 };
-		case Direction::Stay:
-			return { 0, 0 };
-		default:
-			throw std::runtime_error("Unknown direction");
-		}
+			{ Direction::Right, { 1, 0 } },
+			{ Direction::Left , { -1, 0 } },
+			{ Direction::Up   , { 0, -1 } },
+			{ Direction::Down , { 0, 1 } },
+			{ Direction::Stay , { 0, 0 } }
+		};
+		return dirToVectorMapping.at(dir);
 	}
 
 	inline Direction opposite(Direction dir)
@@ -74,3 +72,5 @@ enum class Direction
 			throw std::runtime_error("Unknown direction");
 		}
 	}
+
+using Action = std::pair <ActionType, Direction>;

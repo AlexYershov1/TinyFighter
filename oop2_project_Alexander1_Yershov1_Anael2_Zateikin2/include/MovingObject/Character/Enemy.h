@@ -6,8 +6,7 @@ class Enemy : public Character
 public:
 	
 	Enemy(/*vector of players' loctions*/const sf::Vector2f& , CharacterType );
-	~Enemy() = default;
+	virtual ~Enemy() = default;
 
 private:
-	Animation m_animation;
 };
