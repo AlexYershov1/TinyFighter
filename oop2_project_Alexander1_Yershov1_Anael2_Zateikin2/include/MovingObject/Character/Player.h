@@ -7,6 +7,7 @@ public:
 	Player(const sf::Vector2f&, CharacterType);
 	void update(const sf::Time&);
 	void setAction(Action);
+
 	Action getActionFromKey() const;
 	virtual ~Player();
 
