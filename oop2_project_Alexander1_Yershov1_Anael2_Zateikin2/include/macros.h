@@ -5,16 +5,17 @@
 
 
 //grapics
-const int WINDOW_WIDTH = 1500;
-const int WINDOW_HEIGHT = 800;
+const int WINDOW_WIDTH = 800;
+const int WINDOW_HEIGHT = 600;
 const int CAPTION_HEIGHT = 100;
+const int TERRAIN_HIGHT = 200;
 const float ICON_SIZE = 512;
 const int SEED = 7;
 
 
 // animation
 const auto AnimationTime = sf::seconds(0.2f);
-const auto SPEED = 50.f;
+const auto SPEED = 100.f;
 
 enum class ActionType
 {
@@ -74,3 +75,9 @@ enum class Direction
 	}
 
 using Action = std::pair <ActionType, Direction>;
+
+enum class ArenaType
+{
+	//remove the terrain
+	Arena1, Terrain1, Max
+};

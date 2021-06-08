@@ -1,2 +1,4 @@
 configure_file ("davis_0.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("bandit_0.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("bc2.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("bc5.png" ${CMAKE_BINARY_DIR} COPYONLY)

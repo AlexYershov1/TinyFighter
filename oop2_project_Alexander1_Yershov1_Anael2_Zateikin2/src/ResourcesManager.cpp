@@ -79,8 +79,10 @@ AnimeMap ResourcesManager::banditData() const
 //}
 
 ResourcesManager::ResourcesManager()
-    :m_animationData(int(CharacterType::Max)), m_textures(int(CharacterType::Max))
+    :m_animationData(int(CharacterType::Max)), m_textures(int(CharacterType::Max))//,
+    //m_BGtextures(int(ArenaType::Max))
 {
+    //create characters' animations
     sf::Texture image;
     if (!image.loadFromFile("davis_0.png"))
     {
@@ -94,8 +96,20 @@ ResourcesManager::ResourcesManager()
     }
     m_textures[int(CharacterType::Bandit)] = image;
 
-
-
     m_animationData[int(CharacterType::Alex)] = alexData();
     m_animationData[int(CharacterType::Bandit)] = banditData();
+
+
+    //load arena's textures
+    if (!image.loadFromFile("bc2.png"))
+    {
+        throw std::runtime_error("Can't load file");
+    }
+    m_BGtextures.push_back(image);
+    if (!image.loadFromFile("bc5.png"))
+    {
+        throw std::runtime_error("Can't load file");
+    }
+    m_BGtextures.push_back(image);
+    
 }

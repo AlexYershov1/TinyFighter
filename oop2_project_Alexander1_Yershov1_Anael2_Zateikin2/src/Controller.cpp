@@ -5,7 +5,7 @@
 #include <iostream>
 
 Controller::Controller()
-	: m_gameWindow(sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT + CAPTION_HEIGHT), "Game Window",
+	: m_gameWindow(sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Game Window",
 		sf::Style::Titlebar | sf::Style::Close))
 {
 	srand(SEED);
@@ -19,7 +19,7 @@ void Controller::run() try
 {
 	//create objects
 	auto ply = Player{ sf::Vector2f{40.f, 40.f}, CharacterType::Alex };
-
+	m_arena.createArena();
 	// game loop
 
 	while (this->m_gameWindow.isOpen())
@@ -27,6 +27,7 @@ void Controller::run() try
 		//clear, draw , display
 		this->m_gameWindow.clear(sf::Color::White);
 		//this->m_gameWindow.draw(ply);
+		m_arena.draw(m_gameWindow);
 		ply.draw(m_gameWindow);
 		this->m_gameWindow.display();
 

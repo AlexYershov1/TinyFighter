@@ -1,5 +1,5 @@
 #pragma once
-#include "Animation.h"
+//#include "Animation.h"
 #include "AnimationData.h"
 
 class Animation
