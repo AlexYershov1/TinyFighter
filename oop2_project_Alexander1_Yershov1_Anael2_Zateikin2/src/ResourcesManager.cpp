@@ -8,6 +8,11 @@ ResourcesManager& ResourcesManager::instance()
 	return instance;
 }
 
+const sf::Texture* ResourcesManager::texture(ArenaType arenaType, BackroundAssets bgAsset) const
+{
+    return &m_BGtextures[int(arenaType)][int(bgAsset)]; 
+}
+
 //namespace
 //{
 AnimeMap ResourcesManager::alexData() const
@@ -79,8 +84,8 @@ AnimeMap ResourcesManager::banditData() const
 //}
 
 ResourcesManager::ResourcesManager()
-    :m_animationData(int(CharacterType::Max)), m_textures(int(CharacterType::Max))//,
-    //m_BGtextures(int(ArenaType::Max))
+    :m_animationData(int(CharacterType::Max)), m_textures(int(CharacterType::Max)),
+    m_BGtextures(int(ArenaType::Max))
 {
     //create characters' animations
     sf::Texture image;
@@ -105,11 +110,11 @@ ResourcesManager::ResourcesManager()
     {
         throw std::runtime_error("Can't load file");
     }
-    m_BGtextures.push_back(image);
+    m_BGtextures[int(ArenaType::Arena1)].push_back(image);
     if (!image.loadFromFile("bc5.png"))
     {
         throw std::runtime_error("Can't load file");
     }
-    m_BGtextures.push_back(image);
+    m_BGtextures[int(ArenaType::Arena1)].push_back(image);
     
 }
