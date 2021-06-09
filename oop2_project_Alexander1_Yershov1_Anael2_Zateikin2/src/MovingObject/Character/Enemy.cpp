@@ -2,7 +2,7 @@
 #include "MovingObject/Character/Enemy.h"
 
 
-Enemy::Enemy(const std::vector<std::shared_ptr<sf::Vector2f>>& ply, const sf::Vector2f& location, CharacterType character)
+Enemy::Enemy(std::vector<const sf::Vector2f*>& ply, const sf::Vector2f& location, CharacterType character)
 	: Character(location, character),
 	  m_players(ply)
 {
@@ -18,18 +18,18 @@ void Enemy::update(const sf::Time& deltaTime)
 
 void Enemy::engageClosestPlayer()
 {
-	sf::Vector2f* res = nullptr;	// return value
+	const sf::Vector2f* res = nullptr;	// return value
 	auto min = float(INT_MAX);
 	float distance = 0.f;
 	auto collision = 10.f;
 
-	for (auto& player : m_players)
+	for (auto player : m_players)
 	{
 		distance = *this - player;
 		if (distance < min)
 		{
 			min = distance;
-			res = player.get();
+			res = player;
 		}
 	}
 
@@ -37,8 +37,8 @@ void Enemy::engageClosestPlayer()
 	{
 		if (distance < collision)
 			m_action = Action{ ActionType::Punching, Direction::Stay };
-		else if (abs(res->y - this->y()) < EPSILON)
-			attemptSpecialAbility(res);
+		//else if (abs(res->y - this->y()) < EPSILON)
+			//attemptSpecialAbility(res);
 		else
 			m_action = Action{ ActionType::Walking, directionToPlayer(res) };
 	}
@@ -46,23 +46,23 @@ void Enemy::engageClosestPlayer()
 		m_action = Action{ ActionType::Walking, directionToPlayer(res) };
 }
 
-Direction Enemy::directionToPlayer(sf::Vector2f* ply) const
+Direction Enemy::directionToPlayer(const sf::Vector2f* ply) const
 {
 	auto axis = rand() % 2;
 
 	switch (axis)	// get closer to player based on different axis
 	{
 	case YAxis:
-		if (ply->y > this->y() && abs(ply->y - this->y()) > EPSILON)
-			return Direction::Up;
-		if (ply->y < this->y() && abs(ply->y - this->y()) > EPSILON)
+		if (ply->y > this->y() && abs(ply->y - this->y()) > EPSILON)	// if player is below
 			return Direction::Down;
+		if (ply->y < this->y() && abs(ply->y - this->y()) > EPSILON)	// if player is above
+			return Direction::Up;
 		break;
 	case XAxis:
-		if (ply->x > this->x() && ply->x - this->x() > EPSILON)
-			return Direction::Left;
-		if (ply->y > this->x() && ply->y - this->x() > EPSILON)
+		if (ply->x > this->x() && abs(ply->x - this->x()) > EPSILON)	// if player is to the right of enemy 
 			return Direction::Right;
+		if (ply->x < this->x() && abs(ply->x - this->x()) > EPSILON)	// if player is to the left of enemy
+			return Direction::Left;
 		break;
 	default:
 		break;
@@ -70,7 +70,7 @@ Direction Enemy::directionToPlayer(sf::Vector2f* ply) const
 	return Direction::Stay;
 }
 
-bool Enemy::facingPlayer(sf::Vector2f* player) const
+bool Enemy::facingPlayer(const sf::Vector2f* player) const
 {
 	if ((this->m_action.second == Direction::Left && player->x < this->x()) ||
 		(this->m_action.second == Direction::Right && player->x > this->x()))
@@ -78,7 +78,7 @@ bool Enemy::facingPlayer(sf::Vector2f* player) const
 	return false;
 }
 
-void Enemy::attemptSpecialAbility(sf::Vector2f* player)
+void Enemy::attemptSpecialAbility(const sf::Vector2f* player)
 {
 	// TO-DO: initiate special ability
 	// m_action = Action{ ActionType::SpecialAbility, Direction::Stay };

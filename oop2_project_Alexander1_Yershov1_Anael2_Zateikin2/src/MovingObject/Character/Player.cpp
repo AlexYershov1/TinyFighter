@@ -18,6 +18,11 @@ void Player::setAction(Action action)
 	m_action = action;
 }
 
+const sf::Vector2f* Player::getLocation() const
+{
+    return &(m_picture.getPosition());
+}
+
 Action Player::getActionFromKey() const
 {
     static const

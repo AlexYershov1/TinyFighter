@@ -24,7 +24,7 @@ Character::~Character()
 }
 
 // find find the Euclidean distance between two characters
-float Character::operator-(const std::shared_ptr<sf::Vector2f> other) const
+float Character::operator-(const sf::Vector2f* other) const
 {
 	return std::hypot(this->x() - other->x, this->y() - other->y);
 }

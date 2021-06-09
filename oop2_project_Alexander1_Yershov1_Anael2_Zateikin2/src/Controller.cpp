@@ -1,6 +1,7 @@
 #pragma once
 #include "Controller.h"
 #include "MovingObject/Character/Player.h"
+#include "MovingObject/Character/Enemy.h"
 #include "Utillities.h"
 #include <iostream>
 
@@ -19,6 +20,8 @@ void Controller::run() try
 {
 	//create objects
 	auto ply = Player{ sf::Vector2f{40.f, 40.f}, CharacterType::Alex };
+	auto vecLoc = std::vector<const sf::Vector2f*>{ ply.getLocation() };
+	auto enemy = Enemy{ vecLoc, sf::Vector2f{150.f, 150.f}, CharacterType::Bandit };
 	m_arena.createArena();
 	// game loop
 
@@ -29,6 +32,7 @@ void Controller::run() try
 		//this->m_gameWindow.draw(ply);
 		m_arena.draw(m_gameWindow);
 		ply.draw(m_gameWindow);
+		enemy.draw(m_gameWindow);
 		this->m_gameWindow.display();
 
 		for (auto evnt = sf::Event(); m_gameWindow.pollEvent(evnt); )
@@ -48,8 +52,9 @@ void Controller::run() try
 				break;
 			}
 		}
-
-		ply.update(m_elapsed.restart());	// implement in Arena
+		auto time = m_elapsed.restart();
+		ply.update(time);	// implement in Arena
+		enemy.update(time);	// implement in Arena
 
 	}
 }

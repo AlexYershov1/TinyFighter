@@ -51,9 +51,9 @@ AnimeMap ResourcesManager::alexData() const
 
 AnimeMap ResourcesManager::banditData() const
 {
-    const auto size = sf::Vector2i(100, 100);
+    const auto size = sf::Vector2i(80, 80);
     const auto initSpace = sf::Vector2i(1, 2);
-    const auto middleSpace = sf::Vector2i(0, 10);
+    const auto middleSpace = sf::Vector2i(0, 0);
 
     auto bandit = AnimeMap{};
     auto currentStart = initSpace;
