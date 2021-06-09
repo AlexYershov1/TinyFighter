@@ -22,6 +22,7 @@ void Animation::update (sf::Time delta, Action action)
         m_elapsed -= AnimationTime;
         ++m_index;
         m_index %= m_animeMap.m_data.find(action.first) ->second.size();
+        if (action.first != ActionType::Standing)
         update(action);
     }
 }
@@ -29,7 +30,7 @@ void Animation::update (sf::Time delta, Action action)
 void Animation::update(Action action)
 {
     m_sprite.setTextureRect(m_animeMap.m_data.find(action.first)->second[m_index]);
-
+    
     //if received direction left and looking right or received direction right and looking left
     if ((action.second == Direction::Left && m_sprite.getScale().x > 0) ||
         (action.second == Direction::Right && m_sprite.getScale().x < 0))

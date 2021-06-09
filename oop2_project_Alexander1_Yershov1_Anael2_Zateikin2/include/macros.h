@@ -14,7 +14,7 @@ const int SEED = 7;
 
 
 // animation
-const auto AnimationTime = sf::seconds(0.2f);
+const auto AnimationTime = sf::seconds(0.1f);
 const auto SPEED = 100.f;
 
 const auto EPSILON = 40.f;

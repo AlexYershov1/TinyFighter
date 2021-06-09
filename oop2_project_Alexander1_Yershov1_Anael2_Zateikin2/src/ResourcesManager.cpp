@@ -84,7 +84,6 @@ AnimeMap ResourcesManager::banditData() const
 
 ResourcesManager::~ResourcesManager()
 {
-    for (auto& )
 }
 
 
@@ -109,9 +108,9 @@ ResourcesManager::ResourcesManager()
     m_animationData[int(CharacterType::Alex)] = alexData();
     m_animationData[int(CharacterType::Bandit)] = banditData();
 
-    sf::Texture* background = new sf::Texture{}, * ground = new sf::Texture{};
+    //sf::Texture* background = new sf::Texture{}, * ground = new sf::Texture{};
     //load arena's textures
-    if (!(*background).loadFromFile("bc2.png"))
+    if (!image.loadFromFile("bc2.png"))
     {
         throw std::runtime_error("Can't load file");
     }
