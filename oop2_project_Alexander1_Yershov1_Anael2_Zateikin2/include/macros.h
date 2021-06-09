@@ -87,3 +87,7 @@ enum class ArenaType
 	//remove the terrain
 	Arena1, Terrain1, Max
 };
+enum class BackroundAssets
+{
+	Background, Ground
+};

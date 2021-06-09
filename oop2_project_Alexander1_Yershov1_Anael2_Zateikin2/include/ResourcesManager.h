@@ -25,7 +25,9 @@ public:
     ResourcesManager& operator=(const ResourcesManager&) = delete;
 
     const sf::Texture& texture(CharacterType character) const { return m_textures[int(character)]; }
-    const std::pair<sf::Texture*, sf::Texture*> texture(ArenaType arenaType) const { return m_BGtextures[int(arenaType)]; }
+
+    const sf::Texture* texture(ArenaType, BackroundAssets) const; 
+
     const AnimeMap& animationData(CharacterType character) { return m_animationData[int(character)]; }
     AnimeMap alexData() const;
     AnimeMap banditData() const;
@@ -34,7 +36,7 @@ public:
 private:
 	ResourcesManager();
     std::vector<sf::Texture> m_textures;
-    std::vector<std::pair<sf::Texture*, sf::Texture*>> m_BGtextures; //backgroung textures
+    std::vector<std::vector<sf::Texture>> m_BGtextures; //backgroung textures
     std::vector<AnimeMap> m_animationData;
 
     

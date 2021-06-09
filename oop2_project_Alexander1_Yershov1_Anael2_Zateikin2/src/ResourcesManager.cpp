@@ -8,6 +8,11 @@ ResourcesManager& ResourcesManager::instance()
 	return instance;
 }
 
+const sf::Texture* ResourcesManager::texture(ArenaType arenaType, BackroundAssets bgAsset) const
+{
+    return &m_BGtextures[int(arenaType)][int(bgAsset)]; 
+}
+
 //namespace
 //{
 AnimeMap ResourcesManager::alexData() const
@@ -110,10 +115,12 @@ ResourcesManager::ResourcesManager()
     {
         throw std::runtime_error("Can't load file");
     }
-    if (!(*ground).loadFromFile("bc5.png"))
+      
+    m_BGtextures[int(ArenaType::Arena1)].push_back(image);
+    if (!image.loadFromFile("bc5.png"))
     {
         throw std::runtime_error("Can't load file");
     }
-    m_BGtextures[int(ArenaType::Arena1)] = std::make_pair( background, ground );
+    m_BGtextures[int(ArenaType::Arena1)].push_back(image);
     
 }
