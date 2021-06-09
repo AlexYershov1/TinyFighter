@@ -9,4 +9,5 @@ target_sources (oop2_project_Alexander1_Yershov1_Anael2_Zateikin2 PRIVATE "main.
 																		  "AnimationData.cpp"
 																		  "ResourcesManager.cpp"
 																		  "Utillities.cpp"
-																		  "Arena.cpp")
+																		  "Arena.cpp"
+																		  "Collision.cpp")

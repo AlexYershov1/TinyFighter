@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include "Collision.h"
 #include "macros.h"
 #include "Arena.h"
 

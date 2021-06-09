@@ -9,23 +9,13 @@
 class ResourcesManager
 {
 public:
-    /*
-    enum Characters
-    {
-        Alex,
-        Bandit,
-        //to be continued
-        Max
-    };
-    */
-
+   
     static ResourcesManager& instance();
 
     ResourcesManager(const ResourcesManager&) = delete;
     ResourcesManager& operator=(const ResourcesManager&) = delete;
 
     const sf::Texture& texture(CharacterType character) const { return m_textures[int(character)]; }
-
     const sf::Texture* texture(ArenaType, BackroundAssets) const; 
 
     const AnimeMap& animationData(CharacterType character) { return m_animationData[int(character)]; }
