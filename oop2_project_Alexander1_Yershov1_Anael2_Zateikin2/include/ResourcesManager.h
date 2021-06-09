@@ -25,11 +25,13 @@ public:
     ResourcesManager& operator=(const ResourcesManager&) = delete;
 
     const sf::Texture& texture(CharacterType character) const { return m_textures[int(character)]; }
+
     const sf::Texture* texture(ArenaType, BackroundAssets) const; 
+
     const AnimeMap& animationData(CharacterType character) { return m_animationData[int(character)]; }
     AnimeMap alexData() const;
     AnimeMap banditData() const;
-	
+    ~ResourcesManager();
 
 private:
 	ResourcesManager();
