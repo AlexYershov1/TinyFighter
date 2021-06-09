@@ -19,9 +19,9 @@ Controller::~Controller()
 void Controller::run() try
 {
 	//create objects
-	auto ply = Player{ sf::Vector2f{40.f, 40.f}, CharacterType::Alex };
+	auto ply = Player{ sf::Vector2f{40.f, 500.f}, CharacterType::Alex };
 	auto vecLoc = std::vector<const sf::Vector2f*>{ ply.getLocation() };
-	auto enemy = Enemy{ vecLoc, sf::Vector2f{150.f, 150.f}, CharacterType::Bandit };
+	auto enemy = Enemy{ vecLoc, sf::Vector2f{150.f, 500.f}, CharacterType::Bandit };
 	m_arena.createArena();
 	// game loop
 

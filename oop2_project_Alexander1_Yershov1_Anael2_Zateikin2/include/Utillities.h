@@ -1,5 +1,4 @@
 #pragma once
 #include "macros.h"
 
-Action toAction(const sf::Keyboard::Key& key);
-//sf::Vector2f toVector(Action);
+bool outOfBounds(const sf::Vector2f&);
