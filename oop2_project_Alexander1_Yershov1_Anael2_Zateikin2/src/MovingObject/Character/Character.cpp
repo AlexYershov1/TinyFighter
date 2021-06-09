@@ -9,6 +9,14 @@ Character::Character(const sf::Vector2f& location, CharacterType character)
 	m_picture.setOrigin(m_picture.getLocalBounds().height / 2, m_picture.getLocalBounds().width / 2);	// for correct rotation, setting origin at center
 }
 
+void Character::update(const sf::Time& deltaTime)
+{
+	m_picture.move(convert(m_action.second) * SPEED * deltaTime.asSeconds());
+	if (outOfBounds(this->m_picture.getPosition()))
+		m_picture.move(convert(opposite(m_action.second)) * SPEED * deltaTime.asSeconds());
+	m_animation.update(deltaTime, m_action);
+}
+
 float Character::x() const
 {
 	return m_picture.getPosition().x;

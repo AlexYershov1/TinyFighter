@@ -24,15 +24,6 @@ void Arena::draw(sf::RenderWindow& window)
 	window.draw(m_ground);
 }
 
-bool Arena::outOfBounds(const sf::Vector2f& location)
-{
-	if (location.x < 0 || location.x > WINDOW_WIDTH ||
-		location.y < WINDOW_HEIGHT - TERRAIN_HIGHT - CAPTION_HEIGHT ||
-		location.y > WINDOW_HEIGHT)
-		return true;
-	return false;
-}
-
 Arena::~Arena()
 {
 }

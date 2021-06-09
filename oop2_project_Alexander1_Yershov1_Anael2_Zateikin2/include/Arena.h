@@ -18,7 +18,6 @@ public:
 
 	void createArena(/*gameInfo*/);
 	void draw(sf::RenderWindow&);
-	bool outOfBounds(const sf::Vector2f&);
 	~Arena();
 
 private:

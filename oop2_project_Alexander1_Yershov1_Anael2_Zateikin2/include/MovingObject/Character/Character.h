@@ -6,6 +6,7 @@ class Character : public MovingObject
 {
 public:
 	Character(const sf::Vector2f&, CharacterType);
+	void update(const sf::Time&);
 	~Character();
 protected:
 	Action m_action;

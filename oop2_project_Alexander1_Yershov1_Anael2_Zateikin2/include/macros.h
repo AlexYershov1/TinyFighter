@@ -20,6 +20,8 @@ const auto SPEED = 100.f;
 const auto EPSILON = 40.f;
 const auto YAxis = 0;
 const auto XAxis = 1;
+const auto collisionDistance = 60.f;
+const auto WaitTime = 0.2;
 
 
 

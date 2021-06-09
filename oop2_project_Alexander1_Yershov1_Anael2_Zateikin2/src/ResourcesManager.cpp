@@ -13,22 +13,26 @@ const sf::Texture* ResourcesManager::texture(ArenaType arenaType, BackroundAsset
     return &m_BGtextures[int(arenaType)][int(bgAsset)]; 
 }
 
-//namespace
-//{
 AnimeMap ResourcesManager::alexData() const
     {
 
     const auto size = sf::Vector2i(80, 80);
     const auto initSpace = sf::Vector2i(1, 2);
-    const auto middleSpace = sf::Vector2i(0, 0);
+    //const auto middleSpace = sf::Vector2i(0, 0);
 
     auto alex = AnimeMap{};
     auto currentStart = initSpace;
 
     auto nextStart = [&]()
     {
-        currentStart += middleSpace;
+        //currentStart += middleSpace;
         currentStart.x += size.x;
+        if (currentStart.x > size.x * 10)
+        {
+            currentStart.x %= size.x * 10;
+            currentStart.y += size.y;
+        }
+        
         return currentStart;
     };
 
@@ -36,11 +40,11 @@ AnimeMap ResourcesManager::alexData() const
     alex.m_data[ActionType::Standing].emplace_back(nextStart(), size);
     alex.m_data[ActionType::Standing].emplace_back(nextStart(), size);
     alex.m_data[ActionType::Standing].emplace_back(nextStart(), size);
-    alex.m_data[ActionType::Walking].emplace_back(nextStart(), size);
-    alex.m_data[ActionType::Walking].emplace_back(nextStart(), size);
-    alex.m_data[ActionType::Walking].emplace_back(nextStart(), size);
-    alex.m_data[ActionType::Walking].emplace_back(nextStart(), size);
-
+    for (int repeat = 0; repeat < 4; repeat++)
+        alex.m_data[ActionType::Walking].emplace_back(nextStart(), size);
+    nextStart();    nextStart();
+    for (int repeat = 0; repeat < 8; repeat++)
+        alex.m_data[ActionType::Punching].emplace_back(nextStart(), size);
     //
     // TO DO - ADD ALL OTHER ACTION TEXTURES
     //
@@ -53,15 +57,20 @@ AnimeMap ResourcesManager::banditData() const
 {
     const auto size = sf::Vector2i(80, 80);
     const auto initSpace = sf::Vector2i(1, 2);
-    const auto middleSpace = sf::Vector2i(0, 0);
+    //const auto middleSpace = sf::Vector2i(0, 0);
 
     auto bandit = AnimeMap{};
     auto currentStart = initSpace;
 
     auto nextStart = [&]()
     {
-        currentStart += middleSpace;
+        //currentStart += middleSpace;
         currentStart.x += size.x;
+        if (currentStart.x > size.x * 10)
+        {
+            currentStart.x %= size.x * 10;
+            currentStart.y += size.y;
+        }
         return currentStart;
     };
 
@@ -69,10 +78,11 @@ AnimeMap ResourcesManager::banditData() const
     bandit.m_data[ActionType::Standing].emplace_back(nextStart(), size);
     bandit.m_data[ActionType::Standing].emplace_back(nextStart(), size);
     bandit.m_data[ActionType::Standing].emplace_back(nextStart(), size);
-    bandit.m_data[ActionType::Walking].emplace_back(nextStart(), size);
-    bandit.m_data[ActionType::Walking].emplace_back(nextStart(), size);
-    bandit.m_data[ActionType::Walking].emplace_back(nextStart(), size);
-    bandit.m_data[ActionType::Walking].emplace_back(nextStart(), size);
+    for (int repeat = 0; repeat < 4; repeat++)
+        bandit.m_data[ActionType::Walking].emplace_back(nextStart(), size);
+    nextStart();    nextStart();
+    for (int repeat = 0; repeat < 6; repeat++)
+        bandit.m_data[ActionType::Punching].emplace_back(nextStart(), size);
 
     //
     // TO DO - ADD ALL OTHER ACTION TEXTURES

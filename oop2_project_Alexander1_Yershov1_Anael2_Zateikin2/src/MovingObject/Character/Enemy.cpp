@@ -6,14 +6,22 @@ Enemy::Enemy(std::vector<const sf::Vector2f*>& ply, const sf::Vector2f& location
 	: Character(location, character),
 	  m_players(ply)
 {
+	m_difficulty = rand() % 3;
 }
 
 void Enemy::update(const sf::Time& deltaTime)
 {
 	engageClosestPlayer();
 
-	m_picture.move(convert(m_action.second) * SPEED * deltaTime.asSeconds());
-	m_animation.update(deltaTime, m_action);
+	// makes enemy wait based on difficulity
+	if (m_restTime.getElapsedTime().asSeconds() > m_difficulty)
+	{
+		if (m_restTime.getElapsedTime().asSeconds() > m_difficulty + WaitTime)
+			m_restTime.restart();
+		m_action = Action(ActionType::Standing, Direction::Stay);
+	}
+
+	Character::update(deltaTime);
 }
 
 void Enemy::engageClosestPlayer()
@@ -21,7 +29,7 @@ void Enemy::engageClosestPlayer()
 	const sf::Vector2f* res = nullptr;	// return value
 	auto min = float(INT_MAX);
 	float distance = 0.f;
-	auto collision = 10.f;
+	
 
 	for (auto player : m_players)
 	{
@@ -35,7 +43,7 @@ void Enemy::engageClosestPlayer()
 
 	if (facingPlayer(res))
 	{
-		if (distance < collision)
+		if (distance < collisionDistance)
 			m_action = Action{ ActionType::Punching, Direction::Stay };
 		//else if (abs(res->y - this->y()) < EPSILON)
 			//attemptSpecialAbility(res);
@@ -67,13 +75,13 @@ Direction Enemy::directionToPlayer(const sf::Vector2f* ply) const
 	default:
 		break;
 	}
-	return Direction::Stay;
+	return m_action.second;
 }
 
 bool Enemy::facingPlayer(const sf::Vector2f* player) const
 {
-	if ((this->m_action.second == Direction::Left && player->x < this->x()) ||
-		(this->m_action.second == Direction::Right && player->x > this->x()))
+	if ((this->m_picture.getScale().x < 0 && player->x < this->x()) ||
+		 (this->m_picture.getScale().x > 0 && player->x > this->x()))
 		return true;
 	return false;
 }

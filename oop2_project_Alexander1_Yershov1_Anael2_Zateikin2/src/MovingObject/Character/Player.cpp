@@ -9,8 +9,7 @@ Player::Player(const sf::Vector2f& location , CharacterType character)
 void Player::update(const sf::Time& deltaTime)
 {
     m_action = getActionFromKey();
-	m_picture.move(convert(m_action.second) * SPEED * deltaTime.asSeconds());
-	m_animation.update(deltaTime, m_action);
+    Character::update(deltaTime);
 }
 
 void Player::setAction(Action action)

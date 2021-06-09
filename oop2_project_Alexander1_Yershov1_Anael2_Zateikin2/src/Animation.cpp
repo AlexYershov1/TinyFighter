@@ -22,7 +22,6 @@ void Animation::update (sf::Time delta, Action action)
         m_elapsed -= AnimationTime;
         ++m_index;
         m_index %= m_animeMap.m_data.find(action.first) ->second.size();
-        if (action.first != ActionType::Standing)
         update(action);
     }
 }
