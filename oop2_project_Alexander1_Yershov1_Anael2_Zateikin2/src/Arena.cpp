@@ -8,11 +8,14 @@ Arena::Arena()
 
 void Arena::createArena()
 {
-	m_background.setTexture( ResourcesManager::instance().texture(ArenaType::Arena1));
+	auto texturePtrPair = ResourcesManager::instance().texture(ArenaType::Arena1);
+	//m_background.setTexture( ResourcesManager::instance().texture(ArenaType::Arena1));
+	m_background.setTexture( texturePtrPair.first);
 	m_background.setSize({ float(WINDOW_WIDTH), float(WINDOW_HEIGHT - TERRAIN_HIGHT- CAPTION_HEIGHT) });
 	m_background.setPosition({ 0,0+CAPTION_HEIGHT });
 	
-	m_ground.setTexture(ResourcesManager::instance().texture(ArenaType::Terrain1));
+	//m_ground.setTexture(ResourcesManager::instance().texture(ArenaType::Terrain1));
+	m_ground.setTexture(texturePtrPair.second);
 	m_ground.setSize({ float(WINDOW_WIDTH), float(TERRAIN_HIGHT) });
 	m_ground.setPosition({ 0,float(WINDOW_HEIGHT - TERRAIN_HIGHT) });
 }

@@ -11,7 +11,7 @@ protected:
 	Action m_action;
 	Animation m_animation;
 
-	float operator-(const std::unique_ptr<sf::Vector2f>&) const;
+	float operator-(const std::shared_ptr<sf::Vector2f>) const;
 	float x() const;
 	float y() const;
 private:

@@ -1,6 +1,8 @@
+#pragma warning ( disable : 6011)
 #include "MovingObject/Character/Enemy.h"
 
-Enemy::Enemy(const std::vector<std::unique_ptr<sf::Vector2f>>& ply, const sf::Vector2f& location, CharacterType character)
+
+Enemy::Enemy(const std::vector<std::shared_ptr<sf::Vector2f>>& ply, const sf::Vector2f& location, CharacterType character)
 	: Character(location, character),
 	  m_players(ply)
 {
@@ -16,9 +18,9 @@ void Enemy::update(const sf::Time& deltaTime)
 
 void Enemy::engageClosestPlayer()
 {
-	sf::Vector2f* res;	// return value
-	auto min = INT_MAX;
-	float distance;
+	sf::Vector2f* res = nullptr;	// return value
+	auto min = float(INT_MAX);
+	float distance = 0.f;
 	auto collision = 10.f;
 
 	for (auto& player : m_players)
@@ -46,25 +48,26 @@ void Enemy::engageClosestPlayer()
 
 Direction Enemy::directionToPlayer(sf::Vector2f* ply) const
 {
-	auto EPSILON = 10.f;
 	auto axis = rand() % 2;
 
 	switch (axis)	// get closer to player based on different axis
 	{
-	case Y:
+	case YAxis:
 		if (ply->y > this->y() && abs(ply->y - this->y()) > EPSILON)
 			return Direction::Up;
 		if (ply->y < this->y() && abs(ply->y - this->y()) > EPSILON)
 			return Direction::Down;
-	case X:
+		break;
+	case XAxis:
 		if (ply->x > this->x() && ply->x - this->x() > EPSILON)
 			return Direction::Left;
 		if (ply->y > this->x() && ply->y - this->x() > EPSILON)
 			return Direction::Right;
+		break;
 	default:
 		break;
 	}
-
+	return Direction::Stay;
 }
 
 bool Enemy::facingPlayer(sf::Vector2f* player) const

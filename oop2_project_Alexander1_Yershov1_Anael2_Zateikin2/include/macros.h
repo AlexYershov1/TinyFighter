@@ -17,6 +17,12 @@ const int SEED = 7;
 const auto AnimationTime = sf::seconds(0.2f);
 const auto SPEED = 100.f;
 
+const auto EPSILON = 40.f;
+const auto YAxis = 0;
+const auto XAxis = 1;
+
+
+
 enum class ActionType
 {
 	Standing, Walking, Jumping, Punching
