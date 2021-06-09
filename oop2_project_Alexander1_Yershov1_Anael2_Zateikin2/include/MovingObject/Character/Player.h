@@ -5,8 +5,8 @@ class Player : public Character
 {
 public:
 	Player(const sf::Vector2f&, CharacterType);
-	void update(const sf::Time&);
-	void setAction(Action);
+	void move(const sf::Time&);
+	
 	const sf::Vector2f* getLocation() const;
 
 	Action getActionFromKey() const;

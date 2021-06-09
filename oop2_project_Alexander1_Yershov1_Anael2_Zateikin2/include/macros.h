@@ -27,7 +27,7 @@ const auto WaitTime = 0.2;
 
 enum class ActionType
 {
-	Standing, Walking, Jumping, Punching
+	Standing, Walking, Jumping, Punching, Sprinting, Smacked
 };
 
 enum class CharacterType

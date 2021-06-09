@@ -7,7 +7,7 @@ class Enemy : public Character
 {
 public:
 	Enemy(std::vector<const sf::Vector2f*>&, const sf::Vector2f&, CharacterType);
-	void update(const sf::Time&);
+	void move(const sf::Time&);
 	virtual ~Enemy() = default;
 
 private:
@@ -17,6 +17,5 @@ private:
 
 	void engageClosestPlayer();
 	Direction directionToPlayer(const sf::Vector2f*) const;
-	bool facingPlayer(const sf::Vector2f*) const;
 	void attemptSpecialAbility(const sf::Vector2f*);
 };

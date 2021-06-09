@@ -6,15 +6,10 @@ Player::Player(const sf::Vector2f& location , CharacterType character)
 {
 }
 
-void Player::update(const sf::Time& deltaTime)
+void Player::move(const sf::Time& deltaTime)
 {
     m_action = getActionFromKey();
-    Character::update(deltaTime);
-}
-
-void Player::setAction(Action action)
-{
-	m_action = action;
+    Character::move(deltaTime);
 }
 
 const sf::Vector2f* Player::getLocation() const

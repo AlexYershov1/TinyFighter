@@ -53,9 +53,14 @@ void Controller::run() try
 			}
 		}
 		auto time = m_elapsed.restart();
+		ply.move(time);	// implement in Arena
+		enemy.move(time);	// implement in Arena
+		Collision::instance().processCollision(ply, enemy);
+
 		ply.update(time);	// implement in Arena
 		enemy.update(time);	// implement in Arena
 
+		
 	}
 }
 catch (std::exception& ex)

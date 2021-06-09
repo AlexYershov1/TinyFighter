@@ -9,7 +9,7 @@ Enemy::Enemy(std::vector<const sf::Vector2f*>& ply, const sf::Vector2f& location
 	m_difficulty = rand() % 3;
 }
 
-void Enemy::update(const sf::Time& deltaTime)
+void Enemy::move(const sf::Time& deltaTime)
 {
 	engageClosestPlayer();
 
@@ -21,7 +21,7 @@ void Enemy::update(const sf::Time& deltaTime)
 		m_action = Action(ActionType::Standing, Direction::Stay);
 	}
 
-	Character::update(deltaTime);
+	Character::move(deltaTime);
 }
 
 void Enemy::engageClosestPlayer()
@@ -41,7 +41,7 @@ void Enemy::engageClosestPlayer()
 		}
 	}
 
-	if (facingPlayer(res))
+	if (facing(res))
 	{
 		if (distance < collisionDistance)
 			m_action = Action{ ActionType::Punching, Direction::Stay };
@@ -77,7 +77,7 @@ Direction Enemy::directionToPlayer(const sf::Vector2f* ply) const
 	}
 	return m_action.second;
 }
-
+/*
 bool Enemy::facingPlayer(const sf::Vector2f* player) const
 {
 	if ((this->m_picture.getScale().x < 0 && player->x < this->x()) ||
@@ -85,7 +85,7 @@ bool Enemy::facingPlayer(const sf::Vector2f* player) const
 		return true;
 	return false;
 }
-
+*/
 void Enemy::attemptSpecialAbility(const sf::Vector2f* player)
 {
 	// TO-DO: initiate special ability

@@ -26,7 +26,22 @@ namespace
 
     void playerEnemy(GameObject& player, GameObject& enemy)
     {
+        
+        auto& ply = static_cast<Player&>(player);
+        auto& enm = static_cast<Enemy&>(enemy);
+
         //check if someone is punching
+        if ((ply.getActionType() == ActionType::Punching) && (ply.facing(enm)))
+        {
+            //check if facing enemy
+            //for later - change to take damage and move to Character
+            enm.setActionType(ActionType::Smacked);
+
+        }
+        else if ((enm.getActionType() == ActionType::Punching) && (enm.facing(ply)))
+        {
+            ply.setActionType(ActionType::Smacked);
+        }
         
     }
     void enemyPlayer(GameObject& enemy, GameObject& player)
