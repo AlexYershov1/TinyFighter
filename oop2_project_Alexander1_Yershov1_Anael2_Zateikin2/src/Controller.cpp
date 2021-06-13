@@ -1,7 +1,7 @@
 #pragma once
 #include "Controller.h"
-#include "MovingObject/Character/Player.h"
-#include "MovingObject/Character/Enemy.h"
+#include "Character/Player.h"
+#include "Character/Enemy.h"
 #include "Utillities.h"
 #include <iostream>
 
@@ -65,6 +65,6 @@ void Controller::run() try
 }
 catch (std::exception& ex)
 {
-	std::cerr << "Fucked: " << ex.what() << '\n';
+	std::cerr << "problem: " << ex.what() << '\n';
 	return;
 }

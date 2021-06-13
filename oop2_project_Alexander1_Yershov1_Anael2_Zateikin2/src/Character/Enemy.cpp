@@ -1,5 +1,5 @@
 #pragma warning ( disable : 6011)
-#include "MovingObject/Character/Enemy.h"
+#include "Character/Enemy.h"
 
 
 Enemy::Enemy(std::vector<const sf::Vector2f*>& ply, const sf::Vector2f& location, CharacterType character)

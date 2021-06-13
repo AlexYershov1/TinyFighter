@@ -1,8 +1,8 @@
 #pragma once
-#include "MovingObject/Character/Character.h"
+#include "Character/Character.h"
 
 Character::Character(const sf::Vector2f& location, CharacterType character)
-	: MovingObject(location), m_action(ActionType::Standing, Direction::Stay),
+	: GameObject(location), m_action(ActionType::Standing, Direction::Stay),
 	  m_animation(ResourcesManager::instance().animationData(character), m_picture)
 {
 	m_picture.setTexture(ResourcesManager::instance().texture(character));

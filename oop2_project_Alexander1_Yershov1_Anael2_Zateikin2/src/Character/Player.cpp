@@ -1,5 +1,5 @@
 #pragma once
-#include "MovingObject/Character/Player.h"
+#include "Character/Player.h"
 
 Player::Player(const sf::Vector2f& location , CharacterType character)
 	: Character(location, character)

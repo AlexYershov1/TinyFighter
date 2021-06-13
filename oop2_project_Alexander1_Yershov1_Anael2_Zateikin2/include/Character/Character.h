@@ -1,8 +1,8 @@
 #pragma once
-#include "MovingObject/MovingObject.h"
+#include "GameObject.h"
 #include <cmath>
 
-class Character : public MovingObject
+class Character : public GameObject
 {
 public:
 	Character(const sf::Vector2f&, CharacterType);

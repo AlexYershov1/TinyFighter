@@ -2,8 +2,8 @@
 #include <map>
 #include <typeinfo>
 #include <typeindex>
-#include "MovingObject/Character/Player.h"
-#include "MovingObject/Character/Enemy.h"
+#include "Character/Player.h"
+#include "Character/Enemy.h"
 
 
 Collision::Collision()
