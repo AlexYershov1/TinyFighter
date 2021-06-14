@@ -1,5 +1,4 @@
 #pragma once
-//#include "Animation.h"
 #include "AnimationData.h"
 
 class Animation
@@ -9,7 +8,8 @@ public:
 	~Animation();
 	//static Animation& instance();
 
-	void update(sf::Time delta, Action);
+	void update(sf::Time, Action);
+	void update(sf::Time, Direction);
 
 private:
 	void update(Action);

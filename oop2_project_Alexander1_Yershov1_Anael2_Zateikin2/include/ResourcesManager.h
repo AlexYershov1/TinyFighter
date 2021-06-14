@@ -20,6 +20,7 @@ public:
     const sf::Font& font() const { return m_font; }
 
     const AnimeMap& animationData(CharacterType character) { return m_animationData[int(character)]; }
+    const AnimeMap& animationData(AttackType attack) { return m_animationData[int(attack)]; }
     AnimeMap alexData() const;
     AnimeMap banditData() const;
     ~ResourcesManager();

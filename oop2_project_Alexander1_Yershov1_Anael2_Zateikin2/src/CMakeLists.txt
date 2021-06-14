@@ -10,4 +10,7 @@ target_sources (oop2_project_Alexander1_Yershov1_Anael2_Zateikin2 PRIVATE "main.
 																		  "Utillities.cpp"
 																		  "Arena.cpp"
 																		  "Collision.cpp"
+																		  "SpecialAttack/SpecialAttack.cpp"
+																		  "SpecialAttack/DynamicAttack.cpp"
+																		  "SpecialAttack/StaticAttack.cpp")
 																		  "Menu.cpp")

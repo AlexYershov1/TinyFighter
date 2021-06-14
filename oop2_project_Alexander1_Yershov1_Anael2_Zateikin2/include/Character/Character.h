@@ -13,7 +13,7 @@ public:
 	void setActionType(ActionType);
 	bool facing(const sf::Vector2f*) const;
 	bool facing(const Character&) const;
-
+	Direction getDirection() const;
 	~Character();
 protected:
 	Action m_action;
