@@ -12,6 +12,12 @@ const int TERRAIN_HIGHT = 200;
 const float ICON_SIZE = 512;
 const int SEED = 7;
 
+//menu graphics
+const int HEADER_SIZE = 60;
+const int REG_CHAR_SIZE = 40;
+const float OUTLINE_THICKNESS = 5.0;
+const float BOLD_OUTLINE = 10.0;
+
 
 // animation
 const auto AnimationTime = sf::seconds(0.1f);
@@ -88,6 +94,10 @@ enum class ArenaType
 {
 	//remove the terrain
 	Arena1, Terrain1, Max
+};
+enum class Difficulty
+{
+	Easy, Moderate, Hard
 };
 enum class BackroundAssets
 {

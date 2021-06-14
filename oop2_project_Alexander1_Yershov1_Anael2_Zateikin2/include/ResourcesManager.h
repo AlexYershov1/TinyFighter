@@ -17,6 +17,7 @@ public:
 
     const sf::Texture& texture(CharacterType character) const { return m_textures[int(character)]; }
     const sf::Texture* texture(ArenaType, BackroundAssets) const; 
+    const sf::Font& font() const { return m_font; }
 
     const AnimeMap& animationData(CharacterType character) { return m_animationData[int(character)]; }
     AnimeMap alexData() const;
@@ -28,6 +29,5 @@ private:
     std::vector<sf::Texture> m_textures;
     std::vector<std::vector<sf::Texture>> m_BGtextures; //backgroung textures
     std::vector<AnimeMap> m_animationData;
-
-    
+    sf::Font m_font;
 };
