@@ -9,7 +9,7 @@ if (MSVC)
     add_compile_options (/W4 /permissive- /Zc:externConstexpr /Zc:inline)
 endif ()
 
-add_executable (oop2_project_Alexander1_Yershov1_Anael2_Zateikin2 WIN32 "")
+add_executable (oop2_project_Alexander1_Yershov1_Anael2_Zateikin2  "")
 
 add_subdirectory (include)
 add_subdirectory (src)

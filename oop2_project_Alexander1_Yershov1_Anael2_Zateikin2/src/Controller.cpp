@@ -18,6 +18,7 @@ Controller::~Controller()
 
 void Controller::run() try
 {
+	m_menu.activateMenu(m_gameWindow, m_arena);
 	//create objects
 	auto ply = Player{ sf::Vector2f{40.f, 500.f}, CharacterType::Alex };
 	auto vecLoc = std::vector<const sf::Vector2f*>{ ply.getLocation() };

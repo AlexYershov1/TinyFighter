@@ -129,4 +129,10 @@ ResourcesManager::ResourcesManager()
     }
     m_BGtextures[int(ArenaType::Arena1)].push_back(image);
     
+    //load font
+    
+    if (!m_font.loadFromFile("SundayMorning.ttf"))
+    {
+        throw std::runtime_error("Can't load font");
+    }
 }
