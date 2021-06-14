@@ -19,6 +19,7 @@ public:
     const sf::Texture* texture(ArenaType, BackroundAssets) const; 
 
     const AnimeMap& animationData(CharacterType character) { return m_animationData[int(character)]; }
+    const AnimeMap& animationData(AttackType attack) { return m_animationData[int(attack)]; }
     AnimeMap alexData() const;
     AnimeMap banditData() const;
     ~ResourcesManager();

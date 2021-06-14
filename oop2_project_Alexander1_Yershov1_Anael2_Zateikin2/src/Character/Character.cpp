@@ -19,12 +19,6 @@ void Character::move(const sf::Time& deltaTime)
 
 void Character::update(const sf::Time& deltaTime)
 {
-	/*
-	m_picture.move(convert(m_action.second) * SPEED * deltaTime.asSeconds());
-
-	if (outOfBounds(this->m_picture.getPosition()))
-		m_picture.move(convert(opposite(m_action.second)) * SPEED * deltaTime.asSeconds());
-		*/
 	m_animation.update(deltaTime, m_action);
 }
 
@@ -55,6 +49,11 @@ bool Character::facing(const sf::Vector2f* other) const
 bool Character::facing(const Character& other) const
 {
 	return facing(&other.m_picture.getPosition());
+}
+
+Direction Character::getDirection() const
+{
+	return m_action.second;
 }
 
 float Character::x() const

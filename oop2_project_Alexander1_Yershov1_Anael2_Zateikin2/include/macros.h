@@ -93,3 +93,7 @@ enum class BackroundAssets
 {
 	Background, Ground
 };
+enum class AttackType
+{
+	Fire = int(CharacterType::Max), Ice, Static
+};
