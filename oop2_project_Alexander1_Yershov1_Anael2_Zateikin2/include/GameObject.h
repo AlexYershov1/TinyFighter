@@ -10,6 +10,9 @@ public:
 	virtual ~GameObject() = default;
 	virtual void draw(sf::RenderWindow&) ; 
 	virtual void move(const sf::Time&) = 0;
+	virtual void update(const sf::Time&) = 0;
+
+	bool collidesWith(const GameObject&) const;
 
 protected:
 	sf::Sprite m_picture;

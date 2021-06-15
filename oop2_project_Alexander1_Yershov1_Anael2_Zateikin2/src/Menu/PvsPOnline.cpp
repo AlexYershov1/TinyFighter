@@ -8,9 +8,9 @@ PvsPOnline::~PvsPOnline()
 {
 }
 
-const StageInfo PvsPOnline::execute(sf::RenderWindow& window)
+void PvsPOnline::execute(sf::RenderWindow& window, Arena& arena)
 {
-	StageInfo namesVec;
+	//StageInfo namesVec;
 	//activate ChooseCharacterMenu
-	return namesVec;
+	//return namesVec;
 }

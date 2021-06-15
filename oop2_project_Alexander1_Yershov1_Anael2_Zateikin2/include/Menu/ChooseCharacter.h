@@ -12,11 +12,14 @@ class ChooseCharacter
 public:
 	ChooseCharacter(); //get textures for thumbnails
 	~ChooseCharacter();
-	int activateChooseCharacter(sf::RenderWindow&);
+	void activateChooseCharacter(sf::RenderWindow&, Arena&);
+	void draw(sf::RenderWindow&) const;
 private:
-	std::vector<std::pair<sf::RectangleShape, void(*)()>> m_characterThumbnails;
+	std::vector<std::pair<sf::Sprite, CharacterType(*)()>> m_characterThumbnails;
 
-	void setLocations();
+	void modifySprites();
+	bool handleClick(const sf::Vector2f&, Arena&) const;
+	void handleMove(const sf::Vector2f& location);
 };
-int getAlexName() { return int(CharacterType::Alex); }
-int getAnaelName() { return int(CharacterType::Anael); }
+CharacterType getAlexName() { return CharacterType::Alex; }
+CharacterType getAnaelName() { return CharacterType::Anael; }

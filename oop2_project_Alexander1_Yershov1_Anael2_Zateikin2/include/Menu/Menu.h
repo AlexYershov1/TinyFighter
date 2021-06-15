@@ -13,7 +13,7 @@ public:
 	Menu();
 	~Menu();
 
-	StageInfo activateMenu(sf::RenderWindow&, Arena&) ; //const ?
+	void activateMenu(sf::RenderWindow&, Arena&) ;
 	void draw(sf::RenderWindow&) const;
 	void addCommand(const std::string&, std::unique_ptr<Command>);
 private:
@@ -23,7 +23,7 @@ private:
 	sf::RectangleShape m_background;
 
 	
-	StageInfo handleClick(const sf::Vector2f&, sf::RenderWindow&) const;
+	bool handleClick(const sf::Vector2f&, sf::RenderWindow&, Arena&) const;
 	void handleMove(const sf::Vector2f&);
 	void setButton(sf::Text&,const std::string&, const sf::Vector2f&);
 };

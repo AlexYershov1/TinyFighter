@@ -7,7 +7,7 @@ class PvsPOnline : public Command
 public:
 	PvsPOnline();
 	~PvsPOnline();
-	virtual const StageInfo execute(sf::RenderWindow&);
+	virtual void execute(sf::RenderWindow&, Arena&);
 
 private:
 	//ChooseCharacterMenu

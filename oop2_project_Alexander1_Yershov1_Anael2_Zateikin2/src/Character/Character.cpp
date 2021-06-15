@@ -7,7 +7,8 @@ Character::Character(const sf::Vector2f& location, CharacterType character)
 	  m_mana(0), m_health(0)
 {
 	m_picture.setTexture(ResourcesManager::instance().texture((int)character, 0));
-	m_picture.setOrigin(m_picture.getLocalBounds().height / 2, m_picture.getLocalBounds().width / 2);	// for correct rotation, setting origin at center
+	m_picture.setOrigin(m_picture.getLocalBounds().height / 2, m_picture.getLocalBounds().width / 2);
+	// for correct rotation, setting origin at center
 }
 
 void Character::move(const sf::Time& deltaTime)
