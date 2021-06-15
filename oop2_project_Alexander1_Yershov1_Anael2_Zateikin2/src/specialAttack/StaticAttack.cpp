@@ -1,15 +1,16 @@
 #pragma once
 #include "specialAttack/StaticAttack.h"
-#include "..\..\include\SpecialAttack\StaticAttack.h"
 
 StaticAttack::StaticAttack(const sf::Vector2f& location, AttackType attack, std::shared_ptr<Character> owner)
 	: SpecialAttack(location, attack, owner)
 {
+	m_action = Action(ActionType::hit, Direction::Stay);
 }
 
 void StaticAttack::update(const sf::Time& deltaTime)
 {
-	m_animation.update(deltaTime, Direction::Stay);
+	if(m_animation.update(deltaTime, m_action))
+		StaticAttack::
 }
 
 StaticAttack::~StaticAttack()

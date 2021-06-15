@@ -9,6 +9,5 @@ public:
 	virtual ~DynamicAttack();
 
 private:
-	Direction m_dir;
 	float m_speed;
 };

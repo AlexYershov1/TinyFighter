@@ -15,16 +15,19 @@ Animation::~Animation()
 }
 
 // update for character
-void Animation::update (sf::Time delta, Action action)
+bool Animation::update (sf::Time delta, Action action)
 {
     m_elapsed += delta;
     if (m_elapsed >= AnimationTime)
     {
         m_elapsed -= AnimationTime;
         ++m_index;
+        if (action.first == ActionType::hit && m_index == m_animeMap.m_data.find(action.first)->second.size())
+            return true;
         m_index %= m_animeMap.m_data.find(action.first) ->second.size();
         update(action);
     }
+    return false;
 }
 
 void Animation::update(Action action)

@@ -2,9 +2,10 @@
 #include "specialAttack/DynamicAttack.h"
 
 DynamicAttack::DynamicAttack(const sf::Vector2f& location, AttackType attack, std::shared_ptr<Character> owner)
-	: SpecialAttack(location, attack, owner),
-	  m_dir(owner->getDirection())
+	: SpecialAttack(location, attack, owner)
 {
+	m_action = Action(ActionType::Standing, owner->getDirection());
+
 	switch (attack)
 	{
 	case AttackType::FireDynamic:
@@ -21,12 +22,10 @@ DynamicAttack::DynamicAttack(const sf::Vector2f& location, AttackType attack, st
 
 void DynamicAttack::update(const sf::Time& deltaTime)
 {
-	m_picture.move(convert(m_dir) * SPEED * deltaTime.asSeconds());
+	m_picture.move(convert(m_action.second) * SPEED * deltaTime.asSeconds());
 
-	if (outOfBounds(this->m_picture.getPosition()))
+	if (m_animation.update(deltaTime, m_action) || outOfBounds(this->m_picture.getPosition()))
 		DynamicAttack::~DynamicAttack();
-
-	m_animation.update(deltaTime, m_dir);
 }
 
 DynamicAttack::~DynamicAttack()
