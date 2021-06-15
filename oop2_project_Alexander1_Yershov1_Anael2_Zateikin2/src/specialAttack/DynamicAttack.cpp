@@ -7,10 +7,10 @@ DynamicAttack::DynamicAttack(const sf::Vector2f& location, AttackType attack, st
 {
 	switch (attack)
 	{
-	case AttackType::Fire:
+	case AttackType::FireDynamic:
 		m_speed = 10.f;
 		break;
-	case AttackType::Ice:
+	case AttackType::IceDynamic:
 		m_speed = 5.f;
 		break;
 	default:

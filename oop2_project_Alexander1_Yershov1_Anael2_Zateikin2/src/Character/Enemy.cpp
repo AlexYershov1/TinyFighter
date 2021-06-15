@@ -7,6 +7,9 @@ Enemy::Enemy(std::vector<const sf::Vector2f*>& ply, const sf::Vector2f& location
 	  m_players(ply)
 {
 	m_difficulty = rand() % 3;
+	m_smart = character == CharacterType::Bandit ? false : true;
+	m_specialAttacks = character == CharacterType::Bandit ? 
+		std::make_pair(AttackType::None, AttackType::None) : std::make_pair(AttackType::None, AttackType::None);
 }
 
 void Enemy::move(const sf::Time& deltaTime)
@@ -45,8 +48,8 @@ void Enemy::engageClosestPlayer()
 	{
 		if (distance < collisionDistance)
 			m_action = Action{ ActionType::Punching, Direction::Stay };
-		//else if (abs(res->y - this->y()) < EPSILON)
-			//attemptSpecialAbility(res);
+		else if (abs(res->y - this->y()) < EPSILON && m_smart)
+			attemptSpecialAbility(distance, res);
 		else
 			m_action = Action{ ActionType::Walking, directionToPlayer(res) };
 	}
@@ -86,8 +89,18 @@ bool Enemy::facingPlayer(const sf::Vector2f* player) const
 	return false;
 }
 */
-void Enemy::attemptSpecialAbility(const sf::Vector2f* player)
+void Enemy::attemptSpecialAbility(float distance, const sf::Vector2f* ply)
 {
-	// TO-DO: initiate special ability
-	// m_action = Action{ ActionType::SpecialAbility, Direction::Stay };
+	if (distance < collisionDistance + 30 && enoughMana(ActionType::SpecialStatic))
+	{
+		Factory::create(m_specialAttacks.second);
+		m_action.first = ActionType::SpecialStatic;
+	}
+	else if (enoughMana(ActionType::SpecialDynamic))
+	{
+		Factory::create(m_specialAttacks.second);
+		m_action.first = ActionType::SpecialDynamic;
+	}
+	else
+		m_action = Action{ ActionType::Walking, directionToPlayer(ply) };
 }

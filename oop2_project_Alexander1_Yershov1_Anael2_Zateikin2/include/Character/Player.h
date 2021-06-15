@@ -9,7 +9,7 @@ public:
 	
 	const sf::Vector2f* getLocation() const;
 
-	Action getActionFromKey() const;
+	Action getActionFromKey();
 	virtual ~Player();
 
 private:
