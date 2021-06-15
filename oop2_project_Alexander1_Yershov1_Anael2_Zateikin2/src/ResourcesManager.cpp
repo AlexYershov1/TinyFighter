@@ -12,13 +12,12 @@ const sf::Texture* ResourcesManager::texture(ArenaType arenaType, BackroundAsset
     return &m_BGtextures[int(arenaType)][int(bgAsset)]; 
 }
 
-AnimeMap ResourcesManager::alexData() const
-    {
-
+AnimeMap ResourcesManager::playerData() const
+{
     const auto size = sf::Vector2i(80, 80);
     const auto initSpace = sf::Vector2i(1, 2);
 
-    auto alex = AnimeMap{};
+    auto player = AnimeMap{};
     auto currentStart = initSpace;
 
     auto nextStart = [&]()
@@ -33,23 +32,24 @@ AnimeMap ResourcesManager::alexData() const
         return currentStart;
     };
 
-    alex.m_data[ActionType::Standing].emplace_back(currentStart, size);
-    alex.m_data[ActionType::Standing].emplace_back(nextStart(), size);
-    alex.m_data[ActionType::Standing].emplace_back(nextStart(), size);
-    alex.m_data[ActionType::Standing].emplace_back(nextStart(), size);
-    for (int repeat = 0; repeat < 4; repeat++)  alex.m_data[ActionType::Walking].emplace_back(nextStart(), size);
+    player.m_data[ActionType::Standing].emplace_back(currentStart, size);
+    player.m_data[ActionType::Standing].emplace_back(nextStart(), size);
+    player.m_data[ActionType::Standing].emplace_back(nextStart(), size);
+    player.m_data[ActionType::Standing].emplace_back(nextStart(), size);
+    for (int repeat = 0; repeat < 4; repeat++)  player.m_data[ActionType::Walking].emplace_back(nextStart(), size);
     nextStart();    nextStart();
-    for (int repeat = 0; repeat < 8; repeat++)  alex.m_data[ActionType::Punching].emplace_back(nextStart(), size);
+    for (int repeat = 0; repeat < 8; repeat++)  player.m_data[ActionType::Punching].emplace_back(nextStart(), size);
     nextStart();    nextStart();
-    for (int repeat = 0; repeat < 3; repeat++)  alex.m_data[ActionType::Sprinting].emplace_back(nextStart(), size);
-    for (int repeat = 0; repeat < 24; repeat++) nextStart();
-    for (int repeat = 0; repeat < 3; repeat++)  alex.m_data[ActionType::Smacked].emplace_back(nextStart(), size);
-    //
-    // TO DO - ADD ALL OTHER ACTION TEXTURES
-    //
+    for (int repeat = 0; repeat < 3; repeat++)  player.m_data[ActionType::Sprinting].emplace_back(nextStart(), size);
+    for (int repeat = 0; repeat < 4; repeat++) player.m_data[ActionType::Burning].emplace_back(nextStart(), size);
+    for (int repeat = 0; repeat < 2; repeat++) player.m_data[ActionType::Freezing].emplace_back(nextStart(), size);
+    nextStart();
+    for (int repeat = 0; repeat < 5; repeat++) player.m_data[ActionType::SpecialDynamic].emplace_back(nextStart(), size);
+    for (int repeat = 0; repeat < 5; repeat++) player.m_data[ActionType::SpecialStatic].emplace_back(nextStart(), size);
+    for (int repeat = 0; repeat < 13; repeat++) nextStart();
+    for (int repeat = 0; repeat < 3; repeat++)  player.m_data[ActionType::Smacked].emplace_back(nextStart(), size);
 
-
-    return alex;
+    return player;
 }
 
 AnimeMap ResourcesManager::banditData() const
@@ -76,17 +76,100 @@ AnimeMap ResourcesManager::banditData() const
     bandit.m_data[ActionType::Standing].emplace_back(nextStart(), size);
     bandit.m_data[ActionType::Standing].emplace_back(nextStart(), size);
     for (int repeat = 0; repeat < 4; repeat++)  bandit.m_data[ActionType::Walking].emplace_back(nextStart(), size);
-    nextStart();    nextStart();
+    bandit.m_data[ActionType::Freezing].emplace_back(nextStart(), size);
+    bandit.m_data[ActionType::Freezing].emplace_back(nextStart(), size);
     for (int repeat = 0; repeat < 6; repeat++)  bandit.m_data[ActionType::Punching].emplace_back(nextStart(), size);
-    for (int repeat = 0; repeat < 30; repeat++) nextStart();
-    for (int repeat = 0; repeat < 3; repeat++)  bandit.m_data[ActionType::Smacked].emplace_back(nextStart(), size);
-
-    //
-    // TO DO - ADD ALL OTHER ACTION TEXTURES
-    //
-
+    for (int repeat = 0; repeat < 4; repeat++) bandit.m_data[ActionType::Burning].emplace_back(nextStart(), size);
+    for (int repeat = 0; repeat < 6; repeat++)  bandit.m_data[ActionType::Smacked].emplace_back(nextStart(), size);
 
     return bandit;
+}
+
+AnimeMap ResourcesManager::dynamicData() const
+{
+    const auto size = sf::Vector2i(80, 80);
+    const auto initSpace = sf::Vector2i(1, 2);
+
+    auto dynamicObj = AnimeMap{};
+    auto currentStart = initSpace;
+
+    auto nextStart = [&]()
+    {
+        currentStart.x += size.x;
+        if (currentStart.x > size.x * 10)
+        {
+            currentStart.x %= size.x * 10;
+            currentStart.y += size.y;
+        }
+
+        return currentStart;
+    };
+
+    dynamicObj.m_data[ActionType::Standing].emplace_back(currentStart, size);
+    dynamicObj.m_data[ActionType::Standing].emplace_back(nextStart(), size);
+    dynamicObj.m_data[ActionType::Standing].emplace_back(nextStart(), size);
+    dynamicObj.m_data[ActionType::Standing].emplace_back(nextStart(), size);
+    dynamicObj.m_data[ActionType::Standing].emplace_back(nextStart(), size);
+    dynamicObj.m_data[ActionType::Standing].emplace_back(nextStart(), size);
+    nextStart();    nextStart();
+    dynamicObj.m_data[ActionType::hit].emplace_back(nextStart(), size);
+    dynamicObj.m_data[ActionType::hit].emplace_back(nextStart(), size);
+    dynamicObj.m_data[ActionType::hit].emplace_back(nextStart(), size);
+    dynamicObj.m_data[ActionType::hit].emplace_back(nextStart(), size);
+
+    return dynamicObj;
+}
+
+AnimeMap ResourcesManager::staticFireData() const
+{
+    const auto size = sf::Vector2i(80, 80);
+    const auto initSpace = sf::Vector2i(1, 2);
+
+    auto fireObj = AnimeMap{};
+    auto currentStart = initSpace;
+
+    auto nextStart = [&]()
+    {
+        currentStart.x += size.x;
+        if (currentStart.x > size.x * 10)
+        {
+            currentStart.x %= size.x * 10;
+            currentStart.y += size.y;
+        }
+
+        return currentStart;
+    };
+
+    fireObj.m_data[ActionType::Standing].emplace_back(currentStart, size);
+    for (int repeat = 0; repeat < 7; repeat++)  fireObj.m_data[ActionType::Standing].emplace_back(nextStart(), size);
+
+    return fireObj;
+}
+
+AnimeMap ResourcesManager::staticIceData() const
+{
+    const auto size = sf::Vector2i(80, 80);
+    const auto initSpace = sf::Vector2i(1, 2);
+
+    auto iceObj = AnimeMap{};
+    auto currentStart = initSpace;
+
+    auto nextStart = [&]()
+    {
+        currentStart.x += size.x;
+        if (currentStart.x > size.x * 10)
+        {
+            currentStart.x %= size.x * 10;
+            currentStart.y += size.y;
+        }
+
+        return currentStart;
+    };
+
+    for (int repeat = 0; repeat < 21; repeat++)  nextStart();
+    for (int repeat = 0; repeat < 6; repeat++)  iceObj.m_data[ActionType::Standing].emplace_back(nextStart(), size);
+
+    return iceObj;
 }
 
 ResourcesManager::~ResourcesManager()
@@ -95,28 +178,32 @@ ResourcesManager::~ResourcesManager()
 
 
 ResourcesManager::ResourcesManager()
-    :m_animationData(int(CharacterType::Max)), m_textures(int(CharacterType::Max)),
+    :m_animationData(int(AttackType::Max)), m_textures(int(AttackType::Max)),
     m_BGtextures(int(ArenaType::Max))
 {
     //create characters' animations
-    sf::Texture image;
-    if (!image.loadFromFile("davis_0.png"))
-    {
-        throw std::runtime_error("Can't load file");
-    }
-    m_textures[int(CharacterType::Alex)] = image;
+    loadImage("firen_0.png", int(CharacterType::Alex));
+    loadImage("firen_f.png", int(CharacterType::Alex));
+    loadImage("freeze_0.png", int(CharacterType::Anael));
+    loadImage("freeze_f.png", int(CharacterType::Anael));
+    loadImage("bandit_0.png", int(CharacterType::Bandit));
+    loadImage("firen_ball.png", int(AttackType::FireDynamic));
+    loadImage("freeze_ball.png", int(AttackType::IceDynamic));
+    loadImage("firen_exp.png", int(AttackType::FireStatic));
+    loadImage("freeze_col.png", int(AttackType::IceStatic));
 
-    if (!image.loadFromFile("bandit_0.png"))
-    {
-        throw std::runtime_error("Can't load file");
-    }
-    m_textures[int(CharacterType::Bandit)] = image;
 
-    m_animationData[int(CharacterType::Alex)] = alexData();
+    // cropping the correct animations
+    m_animationData[int(CharacterType::Alex)] = playerData();
+    m_animationData[int(CharacterType::Anael)] = playerData();
     m_animationData[int(CharacterType::Bandit)] = banditData();
+    m_animationData[int(AttackType::FireDynamic)] = dynamicData();
+    m_animationData[int(AttackType::IceDynamic)] = dynamicData();
+    m_animationData[int(AttackType::FireStatic)] = staticFireData();
+    m_animationData[int(AttackType::IceStatic)] = staticIceData();
 
-    //sf::Texture* background = new sf::Texture{}, * ground = new sf::Texture{};
-    //load arena's textures
+
+    sf::Texture image;
     if (!image.loadFromFile("bc2.png"))
     {
         throw std::runtime_error("Can't load file");
@@ -135,4 +222,15 @@ ResourcesManager::ResourcesManager()
     {
         throw std::runtime_error("Can't load font");
     }
+}
+
+void ResourcesManager::loadImage(const std::string& fileName, int character)
+{
+    sf::Texture image;
+    if (!image.loadFromFile(fileName))
+    {
+        throw std::runtime_error("Can't load file");
+    }
+
+    m_textures[character].emplace_back(image);
 }

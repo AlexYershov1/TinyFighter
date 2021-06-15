@@ -23,7 +23,6 @@ Collision& Collision::instance()
 
 namespace
 {
-
     void playerEnemy(GameObject& player, GameObject& enemy)
     {
         
@@ -56,6 +55,7 @@ namespace
     {
         HitMap phm;
         phm[Key(typeid(Player), typeid(Enemy))] = &playerEnemy;
+        phm[Key(typeid(Enemy), typeid(Player))] = &enemyPlayer;
         phm[Key(typeid(Enemy), typeid(Player))] = &enemyPlayer;
 
         //phm[Key(typeid(Character), typeid(SpecialAttack))] = &shipStation;

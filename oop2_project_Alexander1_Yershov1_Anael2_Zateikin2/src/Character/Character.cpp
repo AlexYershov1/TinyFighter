@@ -3,9 +3,10 @@
 
 Character::Character(const sf::Vector2f& location, CharacterType character)
 	: GameObject(location), m_action(ActionType::Standing, Direction::Stay),
-	  m_animation(ResourcesManager::instance().animationData(character), m_picture)
+	  m_animation(ResourcesManager::instance().animationData(character), m_picture),
+	  m_mana(0), m_health(0)
 {
-	m_picture.setTexture(ResourcesManager::instance().texture(character));
+	m_picture.setTexture(ResourcesManager::instance().texture((int)character, 0));
 	m_picture.setOrigin(m_picture.getLocalBounds().height / 2, m_picture.getLocalBounds().width / 2);	// for correct rotation, setting origin at center
 }
 
@@ -19,6 +20,7 @@ void Character::move(const sf::Time& deltaTime)
 
 void Character::update(const sf::Time& deltaTime)
 {
+	// add switch case that defines correct sprite
 	m_animation.update(deltaTime, m_action);
 }
 
@@ -64,6 +66,14 @@ float Character::x() const
 float Character::y() const
 {
 	return m_picture.getPosition().y;
+}
+
+bool Character::enoughMana(ActionType attack) const
+{
+	if (attack == ActionType::SpecialDynamic && m_mana < MAX_MANA / 2 ||
+		attack == ActionType::SpecialStatic && m_mana < MAX_MANA / 4)
+		return false;
+	return true;
 }
 
 Character::~Character()

@@ -19,9 +19,9 @@ Menu::Menu()
 
 	
 	//setButton
-	setButton(m_pVSc, "PVSC", { CENTER.x , CENTER.y - 120.f });
-	setButton(m_pVSp1Keyboard, "PlVSP", { CENTER.x , CENTER.y - 40.f });
-	setButton(m_pVSpOnline, "PVSP(online)", { CENTER.x , CENTER.y + 40.f });
+	setButton(m_pVSc, "PVSC_avavavava", { CENTER.x , CENTER.y - 120.f });
+	setButton(m_pVSp1Keyboard, "PlVSP_abababab", { CENTER.x , CENTER.y - 40.f });
+	setButton(m_pVSpOnline, "PVSP(online)_ababab", { CENTER.x , CENTER.y + 40.f });
 	setButton(m_exit, "Exit", { CENTER.x , CENTER.y + 120.f });
 	
 	/*
@@ -60,8 +60,8 @@ Menu::Menu()
 	m_exit.setString("Exit");
 	m_exit.setOutlineColor(sf::Color::Magenta);
 	m_exit.setOutlineThickness(OUTLINE_THICKNESS);
-
 	*/
+	
 	//CHANGE THIS
 	this->m_background.setSize({ WINDOW_WIDTH, WINDOW_HEIGHT });
 	this->m_background.setTexture(ResourcesManager::instance().texture(ArenaType::Arena1, BackroundAssets::Background));

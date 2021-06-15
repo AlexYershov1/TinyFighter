@@ -13,8 +13,9 @@ private:
 	std::vector<const sf::Vector2f*> m_players;
 	int m_difficulty;
 	sf::Clock m_restTime = {};
+	bool m_smart;
 
 	void engageClosestPlayer();
 	Direction directionToPlayer(const sf::Vector2f*) const;
-	void attemptSpecialAbility(const sf::Vector2f*);
+	void attemptSpecialAbility(float, const sf::Vector2f*);
 };

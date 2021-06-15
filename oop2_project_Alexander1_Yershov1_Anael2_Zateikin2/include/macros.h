@@ -14,7 +14,7 @@ const int SEED = 7;
 
 //menu graphics
 const int HEADER_SIZE = 60;
-const int REG_CHAR_SIZE = 40;
+const int REG_CHAR_SIZE = 35;
 const float OUTLINE_THICKNESS = 5.0;
 const float BOLD_OUTLINE = 10.0;
 
@@ -29,18 +29,32 @@ const auto XAxis = 1;
 const auto collisionDistance = 60.f;
 const auto WaitTime = 0.2;
 
+// game statistics
+const int MAX_MANA = 100;
+const int MAX_HEALTH = 100;
 
 
 enum class ActionType
 {
-	Standing, Walking, Jumping, Punching, Sprinting, Smacked
+	Standing, Walking, Jumping, Punching, Sprinting, Smacked, hit,
+	SpecialStatic, SpecialDynamic, Burning, Freezing
 };
 
 enum class CharacterType
 {
 	Alex,
+	Anael,
 	Bandit,
 	//to be continued
+	Max
+};
+enum class AttackType
+{
+	FireDynamic = int(CharacterType::Max),
+	IceDynamic,
+	FireStatic,
+	IceStatic,
+	None,
 	Max
 };
 
@@ -102,8 +116,4 @@ enum class Difficulty
 enum class BackroundAssets
 {
 	Background, Ground
-};
-enum class AttackType
-{
-	Fire = int(CharacterType::Max), Ice, Static
 };

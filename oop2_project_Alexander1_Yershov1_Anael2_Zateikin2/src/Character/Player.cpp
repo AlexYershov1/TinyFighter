@@ -4,11 +4,14 @@
 Player::Player(const sf::Vector2f& location , CharacterType character)
 	: Character(location, character)
 {
+    m_specialAttacks = character == CharacterType::Alex ?
+        std::make_pair(AttackType::FireDynamic, AttackType::FireStatic) : std::make_pair(AttackType::IceDynamic, AttackType::IceStatic);
 }
 
 void Player::move(const sf::Time& deltaTime)
 {
     m_action = getActionFromKey();
+
     Character::move(deltaTime);
 }
 
@@ -17,7 +20,7 @@ const sf::Vector2f* Player::getLocation() const
     return &(m_picture.getPosition());
 }
 
-Action Player::getActionFromKey() const
+Action Player::getActionFromKey()
 {
     static const
         std::initializer_list<std::pair<sf::Keyboard::Key, Action>>
@@ -28,6 +31,8 @@ Action Player::getActionFromKey() const
         { sf::Keyboard::Up   , Action { ActionType::Walking, Direction::Up } },
         { sf::Keyboard::Down , Action { ActionType::Walking, Direction::Down } },
         { sf::Keyboard::Z    , Action { ActionType::Punching, Direction::Stay } },
+        { sf::Keyboard::X    , Action { ActionType::SpecialDynamic, Direction::Stay } },
+        { sf::Keyboard::C    , Action { ActionType::SpecialStatic, Direction::Stay } },
         //{ sf::Keyboard::Space, Action { ActionType::Jumping, Direction::Stay } },
     };
 
@@ -35,6 +40,18 @@ Action Player::getActionFromKey() const
     {
         if (sf::Keyboard::isKeyPressed(pair.first))
         {
+            // in case special attack is attempted
+
+            if (pair.second.first == ActionType::SpecialDynamic && enoughMana(ActionType::SpecialDynamic))
+            {
+                Factory::create(m_specialAttacks.first);
+                m_action.first = ActionType::SpecialDynamic;
+             }
+            if (pair.second.first == ActionType::SpecialStatic && enoughMana(ActionType::SpecialStatic))
+            {
+                Factory::create(m_specialAttacks.second);
+                m_action.first = ActionType::SpecialStatic;
+            }
             return pair.second;
         }
     }
