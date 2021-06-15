@@ -6,7 +6,7 @@ class Exit: public Command
 public:
 	Exit();
 	~Exit();
-	virtual const StageInfo execute(sf::RenderWindow&);
+	virtual void execute(sf::RenderWindow&, Arena&);
 
 private:
 

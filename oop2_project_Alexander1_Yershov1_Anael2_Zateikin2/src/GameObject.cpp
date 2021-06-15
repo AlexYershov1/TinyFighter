@@ -10,3 +10,8 @@ void GameObject::draw(sf::RenderWindow& window)
 {
 	window.draw(m_picture);
 }
+
+bool GameObject::collidesWith(const GameObject& other) const
+{
+	return m_picture.getGlobalBounds().intersects(other.m_picture.getGlobalBounds());
+}

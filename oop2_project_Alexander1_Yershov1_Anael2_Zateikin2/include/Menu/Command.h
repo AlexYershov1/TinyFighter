@@ -10,7 +10,7 @@ class Command
 public:
 	Command();
 	virtual ~Command() = default;
-	virtual const StageInfo execute(sf::RenderWindow&) = 0;
+	virtual void execute(sf::RenderWindow&, Arena&) = 0;
 
 private:
 	

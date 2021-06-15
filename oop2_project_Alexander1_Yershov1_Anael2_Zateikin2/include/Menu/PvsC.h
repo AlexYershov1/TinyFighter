@@ -9,7 +9,7 @@ public:
 	PvsC();
 	~PvsC();
 
-	virtual const StageInfo execute(sf::RenderWindow&);
+	virtual void execute(sf::RenderWindow&, Arena&);
 private:
 	ChooseCharacter m_chooseCharMenu;
 };

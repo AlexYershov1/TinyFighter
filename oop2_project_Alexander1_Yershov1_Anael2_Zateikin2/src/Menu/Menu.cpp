@@ -3,10 +3,7 @@
 #include "Menu/PvsC.h"
 #include "Menu/Exit.h"
 
-const sf::Vector2f HEADER_POS = { WINDOW_WIDTH / 2 , 60 };
-const sf::Vector2f COMMANDS_POS = { WINDOW_WIDTH / 2 , 110 };
-const sf::Vector2f CENTER = { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 };
-const float VERTICAL_OFFSET = 110.f;
+
 
 Menu::Menu()
 {
@@ -21,13 +18,6 @@ Menu::Menu()
 	m_header.setColor(sf::Color::Magenta);
 	m_header.setOutlineColor(sf::Color::Black);
 	m_header.setOutlineThickness(OUTLINE_THICKNESS);
-
-	
-	//setButton
-	/*setButton(m_pVSc, "PVSC_abcdefdf", { CENTER.x , CENTER.y - 120.f });
-	setButton(m_pVSp1Keyboard, "PlVSP_fgdgddhdhdf", { CENTER.x , CENTER.y - 40.f });
-	setButton(m_pVSpOnline, "PVSP(online)", { CENTER.x , CENTER.y + 40.f });
-	setButton(m_exit, "Exit", { CENTER.x , CENTER.y + 120.f });*/
 	
 	//CHANGE THIS
 	this->m_background.setSize({ WINDOW_WIDTH, WINDOW_HEIGHT });
@@ -46,11 +36,11 @@ Menu::~Menu()
 {
 }
 
-StageInfo Menu::activateMenu(sf::RenderWindow& window, Arena& arena)
+void Menu::activateMenu(sf::RenderWindow& window, Arena& arena)
 {
-	auto stageInfo = StageInfo();
+	//auto stageInfo = StageInfo();
 	//window loop
-	while (window.isOpen() && stageInfo.characterNames.empty())
+	while (window.isOpen()/* && stageInfo.characterNames.empty()*/)
 	{
 		window.clear(sf::Color::White);
 		draw(window);
@@ -67,8 +57,9 @@ StageInfo Menu::activateMenu(sf::RenderWindow& window, Arena& arena)
 			case sf::Event::MouseButtonReleased:
 				Location = window.mapPixelToCoords
 				({ event.mouseButton.x, event.mouseButton.y });
-				//if (handleClick(Location, window)) 
-				stageInfo = handleClick(Location, window);
+				if (handleClick(Location, window, arena))
+					//stageInfo = handleClick(Location, window);
+					return;
 				break;
 			case sf::Event::MouseMoved:
 				Location = (sf::Vector2f)sf::Mouse::getPosition(window);
@@ -78,7 +69,7 @@ StageInfo Menu::activateMenu(sf::RenderWindow& window, Arena& arena)
 		}
 	}
 
-	return stageInfo;
+	//return stageInfo;
 }
 
 void Menu::draw(sf::RenderWindow& window) const
@@ -97,15 +88,18 @@ void Menu::addCommand(const std::string& str, std::unique_ptr<Command> command)
 	m_options.push_back(option(text, std::move(command)));
 }
 
-StageInfo Menu::handleClick(const sf::Vector2f& location, sf::RenderWindow& window /*,arena*/) const
+bool Menu::handleClick(const sf::Vector2f& location, sf::RenderWindow& window ,Arena& arena) const
 {
 	//go over all buttons and check if pressed
 	for (const auto& button : m_options)
 	{
 		if (button.first.getGlobalBounds().contains(location))
-			return button.second->execute(window); //execute command
+		{
+			button.second->execute(window, arena); //execute command
+			return true;
+		}
 	}
-	return StageInfo();
+	return false;
 }
 
 void Menu::handleMove(const sf::Vector2f& location)
@@ -126,27 +120,7 @@ void Menu::handleMove(const sf::Vector2f& location)
 			
 	}
 	
-	//if (this->m_pVSc.getGlobalBounds().contains(location))
-	//{
-	//	this->m_pVSc.setOutlineColor(sf::Color::Red);
-	//	this->m_pVSc.setOutlineThickness(BOLD_OUTLINE);
-	//}
-	//else
-	//{
-	//	this->m_pVSc.setOutlineColor(sf::Color::Magenta);
-	//	this->m_pVSc.setOutlineThickness(OUTLINE_THICKNESS);
-	//}
-	//// mark/unmark exit button
-	//if (this->m_exit.getGlobalBounds().contains(location))
-	//{
-	//	this->m_exit.setOutlineColor(sf::Color::Red);
-	//	this->m_exit.setOutlineThickness(BOLD_OUTLINE);
-	//}
-	//else
-	//{
-	//	this->m_exit.setOutlineColor(sf::Color::Magenta);
-	//	this->m_exit.setOutlineThickness(OUTLINE_THICKNESS);
-	//}
+	
 }
 
 
@@ -161,8 +135,5 @@ void Menu::setButton(sf::Text& button, const std::string& str, const sf::Vector2
 	button.setPosition(location);
 	button.setOutlineColor(sf::Color::Magenta);
 	button.setOutlineThickness(OUTLINE_THICKNESS);
-	/*
-	if (button.getTransform() == sf::Transform())
-		throw("Anaels' computer sucks");
-		*/
+	
 }

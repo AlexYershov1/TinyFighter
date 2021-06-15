@@ -17,7 +17,10 @@ const int HEADER_SIZE = 60;
 const int REG_CHAR_SIZE = 25;
 const float OUTLINE_THICKNESS = 5.0;
 const float BOLD_OUTLINE = 10.0;
-
+const sf::Vector2f HEADER_POS = { WINDOW_WIDTH / 2 , 60 };
+const sf::Vector2f COMMANDS_POS = { WINDOW_WIDTH / 2 , 110 };
+const sf::Vector2f CENTER = { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 };
+const float VERTICAL_OFFSET = 110.f;
 
 // animation
 const auto AnimationTime = sf::seconds(0.1f);
@@ -28,6 +31,7 @@ const auto YAxis = 0;
 const auto XAxis = 1;
 const auto collisionDistance = 60.f;
 const auto WaitTime = 0.2;
+const auto THUMBNAIL = 1;
 
 // game statistics
 const int MAX_MANA = 100;

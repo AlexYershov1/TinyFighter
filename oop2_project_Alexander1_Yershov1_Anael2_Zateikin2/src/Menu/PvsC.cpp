@@ -9,17 +9,15 @@ PvsC::~PvsC()
 {
 }
 
-const StageInfo PvsC::execute(sf::RenderWindow& window)
+void PvsC::execute(sf::RenderWindow& window, Arena& arena)
 {
-	StageInfo info;
+	
 	//activate character selection + add player's name to vector
-	//auto charName = m_chooseCharMenu.activateChooseCharacter(window);
-	//player 1
-	info.characterNames.push_back(m_chooseCharMenu.activateChooseCharacter(window));
-
+	m_chooseCharMenu.activateChooseCharacter(window, arena);		//player 1
+	
 	//choose arena and difficulty
-
+	
 
 	//activate arena selection and difficulty +create Enemies
-	return info;
+	
 }
