@@ -16,7 +16,6 @@ public:
 	Direction getDirection() const;
 	~Character();
 protected:
-	Action m_action;
 	Animation m_animation;
 	std::pair<AttackType, AttackType> m_specialAttacks;
 	int m_health, m_mana;

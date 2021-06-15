@@ -14,7 +14,7 @@ const int SEED = 7;
 
 //menu graphics
 const int HEADER_SIZE = 60;
-const int REG_CHAR_SIZE = 35;
+const int REG_CHAR_SIZE = 25;
 const float OUTLINE_THICKNESS = 5.0;
 const float BOLD_OUTLINE = 10.0;
 

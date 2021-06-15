@@ -8,7 +8,7 @@ public:
 	~Animation();
 	//static Animation& instance();
 
-	void update(sf::Time, Action);
+	bool update(sf::Time, Action);
 	void update(sf::Time, Direction);
 
 private:

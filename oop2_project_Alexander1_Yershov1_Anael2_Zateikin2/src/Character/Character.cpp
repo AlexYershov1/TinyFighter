@@ -2,12 +2,13 @@
 #include "Character/Character.h"
 
 Character::Character(const sf::Vector2f& location, CharacterType character)
-	: GameObject(location), m_action(ActionType::Standing, Direction::Stay),
+	: GameObject(location),
 	  m_animation(ResourcesManager::instance().animationData(character), m_picture),
 	  m_mana(0), m_health(0)
 {
 	m_picture.setTexture(ResourcesManager::instance().texture((int)character, 0));
 	m_picture.setOrigin(m_picture.getLocalBounds().height / 2, m_picture.getLocalBounds().width / 2);	// for correct rotation, setting origin at center
+	m_action = Action(ActionType::Standing, Direction::Stay);
 }
 
 void Character::move(const sf::Time& deltaTime)

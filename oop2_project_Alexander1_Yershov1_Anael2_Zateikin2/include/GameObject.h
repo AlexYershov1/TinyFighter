@@ -13,6 +13,7 @@ public:
 
 protected:
 	sf::Sprite m_picture;
+	Action m_action;
 	//Animation m_animation;
 private:
 
