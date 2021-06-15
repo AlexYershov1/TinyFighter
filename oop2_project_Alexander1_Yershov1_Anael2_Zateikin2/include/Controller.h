@@ -3,7 +3,7 @@
 #include "Collision.h"
 #include "macros.h"
 #include "Arena.h"
-#include "Menu.h"
+#include "Menu/Menu.h"
 
 class Controller
 {
