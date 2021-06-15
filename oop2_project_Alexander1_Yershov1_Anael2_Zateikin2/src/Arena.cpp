@@ -6,8 +6,8 @@ Arena::Arena()
 {
 	//get the backgroung texture
 }
-
-void Arena::createArena(const StageInfo& info)
+/*
+void Arena::createArena()
 {
 	m_background.setTexture( ResourcesManager::instance().texture(info.arenaType, BackroundAssets::Background));
 	m_background.setSize({ float(WINDOW_WIDTH), float(WINDOW_HEIGHT - TERRAIN_HIGHT- CAPTION_HEIGHT) });
@@ -21,17 +21,26 @@ void Arena::createArena(const StageInfo& info)
 	//create factory
 	
 }
-
-void Arena::createPlayer(const sf::Vector2f& location, CharacterType type )
+*/
+void Arena::createPlayer( CharacterType type )
 {
+	auto location = INITIAL_LOC;
+	location.x += LOC_OFFSET * m_gameObjects.size();
 	auto ply = std::make_shared<Player>(location, type);
 	m_gameObjects.push_back(ply);
 	m_playerLocations.push_back(ply->getLocation());
 }
 
-void Arena::createEnemy(const sf::Vector2f& location, CharacterType type)
+void Arena::createEnemy(CharacterType type)
 {
+	auto location = INITIAL_LOC;		////CHANGE TO CORNERS
+	location.x += LOC_OFFSET * m_gameObjects.size();
 	m_gameObjects.emplace_back(std::make_shared<Enemy>(m_playerLocations, location, type));
+}
+
+void Arena::createDynamicSpecialAttack(AttackType attackType, Character* owner)
+{
+	m_gameObjects.emplace_back(std::make_shared<DynamicAttack>(owner->getLocation(), attackType, owner));
 }
 
 void Arena::draw(sf::RenderWindow& window)
@@ -45,7 +54,7 @@ void Arena::draw(sf::RenderWindow& window)
 void Arena::move(const sf::Time& deltaTime)
 {
 	for (auto& object : m_gameObjects)
-		object->move(deltaTime);
+		object->move(deltaTime, *this);
 }
 
 void Arena::update(const sf::Time& deltaTime)

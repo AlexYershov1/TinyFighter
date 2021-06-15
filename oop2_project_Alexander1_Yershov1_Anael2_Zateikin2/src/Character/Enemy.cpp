@@ -1,5 +1,6 @@
 #pragma warning ( disable : 6011)
 #include "Character/Enemy.h"
+#include "Arena.h"
 
 
 Enemy::Enemy(std::vector<const sf::Vector2f*>& ply, const sf::Vector2f& location, CharacterType character)
@@ -12,7 +13,7 @@ Enemy::Enemy(std::vector<const sf::Vector2f*>& ply, const sf::Vector2f& location
 		std::make_pair(AttackType::None, AttackType::None) : std::make_pair(AttackType::None, AttackType::None);
 }
 
-void Enemy::move(const sf::Time& deltaTime)
+void Enemy::move(const sf::Time& deltaTime, Arena& arena)
 {
 	engageClosestPlayer();
 
@@ -24,7 +25,7 @@ void Enemy::move(const sf::Time& deltaTime)
 		m_action = Action(ActionType::Standing, Direction::Stay);
 	}
 
-	Character::move(deltaTime);
+	Character::move(deltaTime, arena);
 }
 
 void Enemy::engageClosestPlayer()

@@ -76,9 +76,7 @@ bool ChooseCharacter::handleClick(const sf::Vector2f& location, Arena& arena) co
 	{
 		if (button.first.getGlobalBounds().contains(location))
 		{
-			//index = button.second(); //get index of character
-			auto character = button.second();
-			arena.
+			arena.createPlayer(button.second());
 			return true;
 		}	
 	}

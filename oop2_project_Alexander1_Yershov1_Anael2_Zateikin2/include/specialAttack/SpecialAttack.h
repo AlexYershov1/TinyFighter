@@ -6,8 +6,9 @@
 class SpecialAttack : public GameObject
 {
 public:
-	SpecialAttack(const sf::Vector2f&, AttackType, std::shared_ptr<Character>);
+	SpecialAttack(const sf::Vector2f&, AttackType, Character*);
 	virtual void update(const sf::Time&) = 0;
+	virtual void move(const sf::Time&, Arena&) {}
 	AttackType getKind() const { return m_kind; }
 	void setHit() { m_action.first = ActionType::hit; }
 	bool isMe(Character* character) const { return m_owner->isMe(character); }
@@ -15,7 +16,7 @@ public:
 
 protected:
 	Animation m_animation;
-	std::shared_ptr<Character> m_owner;
+	Character* m_owner;
 	AttackType m_kind;
 private:
 

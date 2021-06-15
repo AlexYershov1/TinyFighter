@@ -1,7 +1,7 @@
 #pragma once
 #include "specialAttack/DynamicAttack.h"
 
-DynamicAttack::DynamicAttack(const sf::Vector2f& location, AttackType attack, std::shared_ptr<Character> owner)
+DynamicAttack::DynamicAttack(const sf::Vector2f& location, AttackType attack, Character* owner)
 	: SpecialAttack(location, attack, owner)
 {
 	m_action = Action(ActionType::Standing, owner->getDirection());

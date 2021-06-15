@@ -37,6 +37,9 @@ const auto THUMBNAIL = 1;
 const int MAX_MANA = 100;
 const int MAX_HEALTH = 100;
 
+// charecters location
+const sf::Vector2f INITIAL_LOC = { 100.f ,float(WINDOW_HEIGHT - TERRAIN_HIGHT / 2.f )};
+const auto LOC_OFFSET = 500.f;
 
 enum class ActionType
 {

@@ -1,7 +1,7 @@
 #pragma once
 #include "specialAttack/StaticAttack.h"
 
-StaticAttack::StaticAttack(const sf::Vector2f& location, AttackType attack, std::shared_ptr<Character> owner)
+StaticAttack::StaticAttack(const sf::Vector2f& location, AttackType attack, Character* owner)
 	: SpecialAttack(location, attack, owner)
 {
 	m_action = Action(ActionType::hit, Direction::Stay);

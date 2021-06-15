@@ -1,5 +1,6 @@
 #pragma once
 #include "Character/Player.h"
+#include "Arena.h"
 
 Player::Player(const sf::Vector2f& location , CharacterType character)
 	: Character(location, character)
@@ -8,11 +9,11 @@ Player::Player(const sf::Vector2f& location , CharacterType character)
         std::make_pair(AttackType::FireDynamic, AttackType::FireStatic) : std::make_pair(AttackType::IceDynamic, AttackType::IceStatic);
 }
 
-void Player::move(const sf::Time& deltaTime)
+void Player::move(const sf::Time& deltaTime, Arena& arena)
 {
-    m_action = getActionFromKey();
+    m_action = getActionFromKey(arena);
 
-    Character::move(deltaTime);
+    Character::move(deltaTime, arena);
 }
 
 const sf::Vector2f* Player::getLocation() const
@@ -20,7 +21,7 @@ const sf::Vector2f* Player::getLocation() const
     return &(m_picture.getPosition());
 }
 
-Action Player::getActionFromKey()
+Action Player::getActionFromKey(Arena& arena)
 {
     static const
         std::initializer_list<std::pair<sf::Keyboard::Key, Action>>
@@ -44,7 +45,7 @@ Action Player::getActionFromKey()
 
             if (pair.second.first == ActionType::SpecialDynamic && enoughMana(ActionType::SpecialDynamic))
             {
-                Factory::create(m_specialAttacks.first);
+                arena.createSpecialAttack(m_specialAttacks.first, this);
                 m_action.first = ActionType::SpecialDynamic;
              }
             if (pair.second.first == ActionType::SpecialStatic && enoughMana(ActionType::SpecialStatic))

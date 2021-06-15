@@ -4,7 +4,7 @@
 class StaticAttack : public SpecialAttack
 {
 public:
-	StaticAttack(const sf::Vector2f&, AttackType, std::shared_ptr<Character>);
+	StaticAttack(const sf::Vector2f&, AttackType, Character*);
 	virtual void update(const sf::Time&);
 	virtual ~StaticAttack();
 

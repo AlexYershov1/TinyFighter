@@ -6,13 +6,15 @@ class Character : public GameObject
 {
 public:
 	Character(const sf::Vector2f&, CharacterType);
-	virtual void move(const sf::Time&);
+	virtual void move(const sf::Time&, Arena&);
 	void update(const sf::Time&);
 	ActionType getActionType() const;
+	sf::Vector2f getLocation() const;
 	void setAction(Action);
 	void setActionType(ActionType);
 	bool facing(const sf::Vector2f*) const;
 	bool facing(const Character&) const;
+	bool isMe(const Character* other) const { return &(*this) == &(*other); }
 	Direction getDirection() const;
 	~Character();
 protected:

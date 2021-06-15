@@ -9,8 +9,7 @@ Exit::~Exit()
 {
 }
 
-const StageInfo Exit::execute(sf::RenderWindow& window)
+void Exit::execute(sf::RenderWindow& window, Arena&)
 {
 	window.close();
-	return StageInfo();
 }

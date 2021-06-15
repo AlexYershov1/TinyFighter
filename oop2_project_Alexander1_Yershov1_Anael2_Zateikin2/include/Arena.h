@@ -1,11 +1,14 @@
 #pragma once
 #include <vector>
+#include <memory>
 #include <SFML/Graphics.hpp>
 #include "macros.h"
 #include "ResourcesManager.h"
 #include "Utillities.h"
 #include "GameObject.h"
 #include "Collision.h"
+#include "specialAttack/DynamicAttack.h"
+#include "specialAttack/StaticAttack.h"
 
 
 
@@ -19,9 +22,10 @@ public:
 	* objects (characters) to build.
 	*/
 
-	void createArena(const StageInfo&);
-	void createPlayer(const sf::Vector2f&, CharacterType);
-	void createEnemy(const sf::Vector2f&, CharacterType);	//inside get the players locations
+	//void createArena();
+	void createPlayer(CharacterType);
+	void createEnemy( CharacterType);	//inside get the players locations
+	void createDynamicSpecialAttack(AttackType, Character*);
 
 	void draw(sf::RenderWindow&);
 	void move(const sf::Time&);

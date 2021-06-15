@@ -11,7 +11,7 @@ Character::Character(const sf::Vector2f& location, CharacterType character)
 	m_action = Action(ActionType::Standing, Direction::Stay);
 }
 
-void Character::move(const sf::Time& deltaTime)
+void Character::move(const sf::Time& deltaTime, Arena& arena)
 {
 	m_picture.move(convert(m_action.second) * SPEED * deltaTime.asSeconds());
 
@@ -29,6 +29,11 @@ ActionType Character::getActionType() const
 {
 	return m_action.first;
 
+}
+
+sf::Vector2f Character::getLocation() const
+{
+	return m_picture.getPosition();
 }
 
 void Character::setAction(Action action)
