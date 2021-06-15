@@ -1,5 +1,5 @@
 #pragma once
-#include "Command.h"
+//#include "Command.h"
 #include "ChooseCharacter.h"
 
 //Player vs Computer button

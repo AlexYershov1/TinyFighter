@@ -42,15 +42,15 @@ Action Player::getActionFromKey(Arena& arena)
         if (sf::Keyboard::isKeyPressed(pair.first))
         {
             // in case special attack is attempted
-
-            if (pair.second.first == ActionType::SpecialDynamic && enoughMana(ActionType::SpecialDynamic))
+            auto type = pair.second.first;
+            if (type == ActionType::SpecialDynamic && enoughMana(ActionType::SpecialDynamic))
             {
-                arena.createSpecialAttack(m_specialAttacks.first, this);
+                arena.createSpecialAttack(type, m_specialAttacks.first, this);
                 m_action.first = ActionType::SpecialDynamic;
              }
-            if (pair.second.first == ActionType::SpecialStatic && enoughMana(ActionType::SpecialStatic))
+            if (type == ActionType::SpecialStatic && enoughMana(ActionType::SpecialStatic))
             {
-                Factory::create(m_specialAttacks.second);
+                arena.createSpecialAttack(type, m_specialAttacks.first, this);
                 m_action.first = ActionType::SpecialStatic;
             }
             return pair.second;

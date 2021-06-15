@@ -38,9 +38,11 @@ void Arena::createEnemy(CharacterType type)
 	m_gameObjects.emplace_back(std::make_shared<Enemy>(m_playerLocations, location, type));
 }
 
-void Arena::createDynamicSpecialAttack(AttackType attackType, Character* owner)
+void Arena::createSpecialAttack(ActionType actionType, AttackType attackType, Character* owner)
 {
-	m_gameObjects.emplace_back(std::make_shared<DynamicAttack>(owner->getLocation(), attackType, owner));
+	actionType == ActionType::SpecialDynamic ?
+		m_gameObjects.emplace_back(std::make_shared<DynamicAttack>(owner->getLocation(), attackType, owner)) :
+		m_gameObjects.emplace_back(std::make_shared<StaticAttack>(owner->getLocation(), attackType, owner));
 }
 
 void Arena::draw(sf::RenderWindow& window)

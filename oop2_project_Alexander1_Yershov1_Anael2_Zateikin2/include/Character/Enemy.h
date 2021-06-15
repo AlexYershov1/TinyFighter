@@ -15,7 +15,7 @@ private:
 	sf::Clock m_restTime = {};
 	bool m_smart;
 
-	void engageClosestPlayer();
+	void engageClosestPlayer(Arena&);
 	Direction directionToPlayer(const sf::Vector2f*) const;
-	void attemptSpecialAbility(float, const sf::Vector2f*);
+	void attemptSpecialAbility(float, const sf::Vector2f*, Arena&);
 };

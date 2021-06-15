@@ -19,7 +19,7 @@ public:
 	~Character();
 protected:
 	Animation m_animation;
-	std::pair<AttackType, AttackType> m_specialAttacks;
+	std::pair<AttackType, AttackType> m_specialAttacks;	// first is dynamic and second is static
 	int m_health, m_mana;
 
 	float operator-(const sf::Vector2f*) const;

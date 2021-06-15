@@ -1,11 +1,11 @@
 #pragma once
-#include <SFML/Graphics.hpp>
+//#include <SFML/Graphics.hpp>
 #include "ResourcesManager.h"
 #include "Utillities.h"
 #include "Arena.h"
 #include "Command.h"
 #include <string>
-#include <memory>
+//#include <memory>
 
 class ChooseCharacter
 {

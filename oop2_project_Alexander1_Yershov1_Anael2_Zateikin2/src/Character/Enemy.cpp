@@ -15,7 +15,7 @@ Enemy::Enemy(std::vector<const sf::Vector2f*>& ply, const sf::Vector2f& location
 
 void Enemy::move(const sf::Time& deltaTime, Arena& arena)
 {
-	engageClosestPlayer();
+	engageClosestPlayer(arena);
 
 	// makes enemy wait based on difficulity
 	if (m_restTime.getElapsedTime().asSeconds() > m_difficulty)
@@ -28,7 +28,7 @@ void Enemy::move(const sf::Time& deltaTime, Arena& arena)
 	Character::move(deltaTime, arena);
 }
 
-void Enemy::engageClosestPlayer()
+void Enemy::engageClosestPlayer(Arena& arena)
 {
 	const sf::Vector2f* res = nullptr;	// return value
 	auto min = float(INT_MAX);
@@ -50,7 +50,7 @@ void Enemy::engageClosestPlayer()
 		if (distance < collisionDistance)
 			m_action = Action{ ActionType::Punching, Direction::Stay };
 		else if (abs(res->y - this->y()) < EPSILON && m_smart)
-			attemptSpecialAbility(distance, res);
+			attemptSpecialAbility(distance, res, arena);
 		else
 			m_action = Action{ ActionType::Walking, directionToPlayer(res) };
 	}
@@ -81,25 +81,17 @@ Direction Enemy::directionToPlayer(const sf::Vector2f* ply) const
 	}
 	return m_action.second;
 }
-/*
-bool Enemy::facingPlayer(const sf::Vector2f* player) const
-{
-	if ((this->m_picture.getScale().x < 0 && player->x < this->x()) ||
-		 (this->m_picture.getScale().x > 0 && player->x > this->x()))
-		return true;
-	return false;
-}
-*/
-void Enemy::attemptSpecialAbility(float distance, const sf::Vector2f* ply)
+
+void Enemy::attemptSpecialAbility(float distance, const sf::Vector2f* ply, Arena& arena)
 {
 	if (distance < collisionDistance + 30 && enoughMana(ActionType::SpecialStatic))
 	{
-		Factory::create(m_specialAttacks.second);
+		arena.createSpecialAttack(ActionType::SpecialStatic, m_specialAttacks.second, this);
 		m_action.first = ActionType::SpecialStatic;
 	}
 	else if (enoughMana(ActionType::SpecialDynamic))
 	{
-		Factory::create(m_specialAttacks.second);
+		arena.createSpecialAttack(ActionType::SpecialDynamic, m_specialAttacks.first, this);
 		m_action.first = ActionType::SpecialDynamic;
 	}
 	else
