@@ -2,13 +2,14 @@
 #include <vector>
 #include <memory>
 //#include <SFML/Graphics.hpp>
-//#include "macros.h"
+#include "macros.h"
 //#include "ResourcesManager.h"
 //#include "Utillities.h"
 //#include "GameObject.h"
 #include "Collision.h"
 #include "specialAttack/DynamicAttack.h"
 #include "specialAttack/StaticAttack.h"
+#include "specialAttack/SpecialAttack.h"
 
 
 

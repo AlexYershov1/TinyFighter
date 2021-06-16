@@ -1,4 +1,3 @@
-#pragma once
 #include "specialAttack/StaticAttack.h"
 
 StaticAttack::StaticAttack(const sf::Vector2f& location, AttackType attack, Character* owner)
@@ -9,10 +8,16 @@ StaticAttack::StaticAttack(const sf::Vector2f& location, AttackType attack, Char
 
 void StaticAttack::update(const sf::Time& deltaTime)
 {
-	if(m_animation.update(deltaTime, m_action))
-		StaticAttack::
+	if (m_animation.update(deltaTime, m_action))
+		//StaticAttack::
+		return;
 }
 
 StaticAttack::~StaticAttack()
 {
+}
+
+void StaticAttack::setLife()
+{
+	return;
 }

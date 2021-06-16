@@ -3,6 +3,8 @@
 #include <exception>
 #include <memory>
 
+class Arena;
+
 class SpecialAttack : public GameObject
 {
 public:

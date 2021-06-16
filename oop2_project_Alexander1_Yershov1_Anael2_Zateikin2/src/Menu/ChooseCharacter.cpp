@@ -100,3 +100,13 @@ void ChooseCharacter::handleMove(const sf::Vector2f& location)
 		}
 	}
 }
+
+CharacterType getAlexName()
+{
+	return CharacterType::Alex;
+}
+
+CharacterType getAnaelName()
+{
+	return CharacterType::Anael;
+}

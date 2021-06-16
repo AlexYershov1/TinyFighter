@@ -1,5 +1,6 @@
-#include "SpecialAttack\specialAttack.h"
 #pragma once
+#include "SpecialAttack\specialAttack.h"
+#include "Arena.h"
 
 SpecialAttack::SpecialAttack(const sf::Vector2f& location, AttackType attack, Character* owner)
 	: GameObject(location),

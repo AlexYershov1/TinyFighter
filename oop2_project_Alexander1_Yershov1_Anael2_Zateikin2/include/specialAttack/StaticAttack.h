@@ -7,6 +7,6 @@ public:
 	StaticAttack(const sf::Vector2f&, AttackType, Character*);
 	virtual void update(const sf::Time&);
 	virtual ~StaticAttack();
-
+	void setLife();
 private:
 };

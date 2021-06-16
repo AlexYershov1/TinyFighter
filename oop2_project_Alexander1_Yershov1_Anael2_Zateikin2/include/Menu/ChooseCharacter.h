@@ -21,5 +21,5 @@ private:
 	bool handleClick(const sf::Vector2f&, Arena&) const;
 	void handleMove(const sf::Vector2f& location);
 };
-CharacterType getAlexName() { return CharacterType::Alex; }
-CharacterType getAnaelName() { return CharacterType::Anael; }
+CharacterType getAlexName(); //{ return CharacterType::Alex; }
+CharacterType getAnaelName(); //{ return CharacterType::Anael; }
