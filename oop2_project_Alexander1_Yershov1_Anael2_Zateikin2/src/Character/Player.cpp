@@ -43,16 +43,32 @@ Action Player::getActionFromKey(Arena& arena)
         {
             // in case special attack is attempted
             auto type = pair.second.first;
-            if (type == ActionType::SpecialDynamic && enoughMana(ActionType::SpecialDynamic))
+            if (type == ActionType::SpecialDynamic )
             {
-                arena.createSpecialAttack(type, m_specialAttacks.first, this);
-                m_action.first = ActionType::SpecialDynamic;
+                if (enoughMana(ActionType::SpecialDynamic))
+                {
+                    arena.createSpecialAttack(type, m_specialAttacks.first, this);
+                    m_action.first = ActionType::SpecialDynamic;
+                    m_mana -= 30;
+                }
+                else
+                {
+                    m_action.first = ActionType::Standing;
+                }
              }
-            if (type == ActionType::SpecialStatic && enoughMana(ActionType::SpecialStatic))
+            if (type == ActionType::SpecialStatic)
             {
-                arena.createSpecialAttack(type, m_specialAttacks.first, this);
-                m_action.first = ActionType::SpecialStatic;
+                if (enoughMana(ActionType::SpecialStatic))
+                {
+                    arena.createSpecialAttack(type, m_specialAttacks.first, this);
+                    m_action.first = ActionType::SpecialStatic;
+                }
+                else
+                {
+                    m_action.first = ActionType::Standing;
+                }
             }
+                
             return pair.second;
         }
     }

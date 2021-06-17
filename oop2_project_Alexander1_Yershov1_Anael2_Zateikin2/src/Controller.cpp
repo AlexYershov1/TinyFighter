@@ -23,7 +23,7 @@ void Controller::run() try
 	/*auto ply = Player{ sf::Vector2f{40.f, 500.f}, CharacterType::Alex };
 	auto vecLoc = std::vector<const sf::Vector2f*>{ ply.getLocation() };
 	auto enemy = Enemy{ vecLoc, sf::Vector2f{150.f, 500.f}, CharacterType::Bandit };*/
-	//m_arena.createArena(ArenaInfo);
+	m_arena.createArena();
 	// game loop
 
 	while (this->m_gameWindow.isOpen())

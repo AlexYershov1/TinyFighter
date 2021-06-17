@@ -23,7 +23,7 @@ public:
 	* objects (characters) to build.
 	*/
 
-	//void createArena();
+	void createArena();
 	void createPlayer(CharacterType);
 	void createEnemy( CharacterType);	//inside get the players locations
 	void createSpecialAttack(ActionType, AttackType, Character*);

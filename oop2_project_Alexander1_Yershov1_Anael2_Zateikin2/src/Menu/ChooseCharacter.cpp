@@ -66,6 +66,7 @@ void ChooseCharacter::modifySprites()
 		item.first.setOrigin(item.first.getLocalBounds().height / 2,
 							 item.first.getLocalBounds().width / 2);
 		item.first.setPosition({ xOffset * offsetScale, CENTER.y });
+		offsetScale++;
 	}
 }
 
@@ -95,6 +96,7 @@ void ChooseCharacter::handleMove(const sf::Vector2f& location)
 		}
 		else
 		{
+			//button.first.
 			button.first.setColor(sf::Color::Transparent);
 			//button.first.setOutlineThickness(BOLD_OUTLINE);
 		}
