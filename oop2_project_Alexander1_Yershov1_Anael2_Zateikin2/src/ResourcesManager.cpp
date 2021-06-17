@@ -202,8 +202,11 @@ ResourcesManager::ResourcesManager()
     m_animationData[int(AttackType::FireStatic)] = staticFireData();
     m_animationData[int(AttackType::IceStatic)] = staticIceData();
 
+    //load Arenas
+    loadArenaImages("bc2.png","bc5.png", int(ArenaType::Arena1));
 
-    sf::Texture image;
+
+   /* sf::Texture image;
     if (!image.loadFromFile("bc2.png"))
     {
         throw std::runtime_error("Can't load file");
@@ -214,13 +217,17 @@ ResourcesManager::ResourcesManager()
     {
         throw std::runtime_error("Can't load file");
     }
-    m_BGtextures[int(ArenaType::Arena1)].push_back(image);
+    m_BGtextures[int(ArenaType::Arena1)].push_back(image);*/
     
     //load font
-    
     if (!m_font.loadFromFile("SundayMorning.ttf"))
     {
         throw std::runtime_error("Can't load font");
+    }
+    //load Menu background
+    if (!m_MenuBackground.loadFromFile("night_background.png"))
+    {
+        throw std::runtime_error("Can't load file");
     }
 }
 
@@ -233,4 +240,19 @@ void ResourcesManager::loadImage(const std::string& fileName, int character)
     }
 
     m_textures[character].emplace_back(image);
+}
+
+void ResourcesManager::loadArenaImages(const std::string& background, const std::string& ground, int arenaType)
+{
+    sf::Texture image;
+    if (!image.loadFromFile(background))
+    {
+        throw std::runtime_error("Can't load file");
+    }
+    m_BGtextures[arenaType].push_back(image);
+    if (!image.loadFromFile(ground))
+    {
+        throw std::runtime_error("Can't load file");
+    }
+    m_BGtextures[arenaType].push_back(image);
 }

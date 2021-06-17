@@ -12,6 +12,8 @@ ChooseCharacter::ChooseCharacter()
 	m_characterThumbnails.emplace_back(charSprite, getAnaelName);
 	//set locations for rects
 	modifySprites();
+
+
 }
 
 ChooseCharacter::~ChooseCharacter()
@@ -20,10 +22,15 @@ ChooseCharacter::~ChooseCharacter()
 
 void ChooseCharacter::activateChooseCharacter(sf::RenderWindow& window, Arena& arena)
 {
+	//background
+	sf::RectangleShape background;
+	background.setSize({ WINDOW_WIDTH, WINDOW_HEIGHT });
+	background.setTexture(ResourcesManager::instance().menuBGTexture());
 	//window loop
 	while (window.isOpen())
 	{
 		window.clear(sf::Color::White);
+		window.draw(background);
 		draw(window);
 		window.display();
 
@@ -59,7 +66,7 @@ void ChooseCharacter::draw(sf::RenderWindow& window) const
 
 void ChooseCharacter::modifySprites()
 {
-	auto xOffset = WINDOW_WIDTH / 4.f;
+	auto xOffset = WINDOW_WIDTH / 3.f;
 	auto offsetScale = 1;
 	for (auto& item : m_characterThumbnails)
 	{
@@ -91,13 +98,13 @@ void ChooseCharacter::handleMove(const sf::Vector2f& location)
 	{
 		if (button.first.getGlobalBounds().contains(location))
 		{
-			button.first.setColor(sf::Color::Cyan);
+			button.first.setColor(sf::Color(225, 225, 225, 125));
 			//button.first.setOutlineThickness(BOLD_OUTLINE);
 		}
 		else
 		{
 			//button.first.
-			button.first.setColor(sf::Color::Transparent);
+			button.first.setColor(sf::Color(225, 225, 225, 225));
 			//button.first.setOutlineThickness(BOLD_OUTLINE);
 		}
 	}

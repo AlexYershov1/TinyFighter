@@ -19,9 +19,9 @@ Menu::Menu()
 	m_header.setOutlineColor(sf::Color::Black);
 	m_header.setOutlineThickness(OUTLINE_THICKNESS);
 	
-	//CHANGE THIS
+	//background
 	this->m_background.setSize({ WINDOW_WIDTH, WINDOW_HEIGHT });
-	this->m_background.setTexture(ResourcesManager::instance().texture(ArenaType::Arena1, BackroundAssets::Background));
+	this->m_background.setTexture(ResourcesManager::instance().menuBGTexture());
 	
 	//add Commands
 	addCommand("Player VS Computer", std::make_unique<PvsC>());
@@ -38,9 +38,8 @@ Menu::~Menu()
 
 void Menu::activateMenu(sf::RenderWindow& window, Arena& arena)
 {
-	//auto stageInfo = StageInfo();
 	//window loop
-	while (window.isOpen()/* && stageInfo.characterNames.empty()*/)
+	while (window.isOpen())
 	{
 		window.clear(sf::Color::White);
 		draw(window);
@@ -68,8 +67,6 @@ void Menu::activateMenu(sf::RenderWindow& window, Arena& arena)
 			}
 		}
 	}
-
-	//return stageInfo;
 }
 
 void Menu::draw(sf::RenderWindow& window) const

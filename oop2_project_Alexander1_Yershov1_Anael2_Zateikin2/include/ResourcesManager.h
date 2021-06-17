@@ -17,6 +17,7 @@ public:
 
     const sf::Texture& texture(int object, int index) const { return m_textures[object][index]; }
     const sf::Texture* texture(ArenaType, BackroundAssets) const; 
+    const sf::Texture* menuBGTexture() const { return &m_MenuBackground; }
     const sf::Font& font() const { return m_font; }
 
     const AnimeMap& animationData(CharacterType character) { return m_animationData[int(character)]; }
@@ -29,9 +30,11 @@ private:
     std::vector<std::vector<sf::Texture>> m_textures;
     std::vector<std::vector<sf::Texture>> m_BGtextures; //backgroung textures
     std::vector<AnimeMap> m_animationData;
+    sf::Texture m_MenuBackground;
     sf::Font m_font;
 
     void loadImage(const std::string&, int);
+    void loadArenaImages(const std::string&, const std::string&, int);
     AnimeMap playerData() const;
     AnimeMap banditData() const;
     AnimeMap dynamicData() const;
