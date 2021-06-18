@@ -1,5 +1,6 @@
 #pragma once
 #include "Menu/Command.h"
+#include "ChooseCharacter.h"
 
 
 class PvsPOnline : public Command
@@ -10,6 +11,6 @@ public:
 	virtual void execute(sf::RenderWindow&, Arena&);
 
 private:
-	//ChooseCharacterMenu
+	ChooseCharacter m_chooseCharMenu;
 
 };

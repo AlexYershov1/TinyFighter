@@ -36,6 +36,7 @@ const auto THUMBNAIL = 1;
 // game statistics
 const int MAX_MANA = 100;
 const int MAX_HEALTH = 100;
+const auto SPECIAL_DELAY = sf::seconds(1.f);
 
 // charecters location
 const sf::Vector2f INITIAL_LOC = { 100.f ,float(WINDOW_HEIGHT - TERRAIN_HIGHT / 2.f )};

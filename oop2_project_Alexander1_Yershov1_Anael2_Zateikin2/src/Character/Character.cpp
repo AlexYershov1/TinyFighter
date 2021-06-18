@@ -64,6 +64,11 @@ Direction Character::getDirection() const
 	return m_action.second;
 }
 
+Direction Character::getFacingDirection() const
+{
+	return m_picture.getScale().x < 0 ? Direction::Left : Direction::Right;
+}
+
 float Character::x() const
 {
 	return m_picture.getPosition().x;

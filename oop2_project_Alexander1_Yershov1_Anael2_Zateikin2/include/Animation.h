@@ -8,7 +8,7 @@ public:
 	~Animation();
 	//static Animation& instance();
 
-	bool update(sf::Time, Action);
+	bool update(sf::Time, Action); //returns true if finished animation
 	void update(sf::Time, Direction);
 
 private:

@@ -13,12 +13,15 @@ public:
 	virtual void draw(sf::RenderWindow&) ; 
 	virtual void move(const sf::Time&, Arena&) = 0;
 	virtual void update(const sf::Time&) = 0;
+	virtual void correctOwnersPtr() = 0;
+	bool isAlive() const;
 
 	bool collidesWith(const GameObject&) const;
 
 protected:
 	sf::Sprite m_picture;
 	Action m_action;
+	bool m_alive;
 	//Animation m_animation;
 private:
 

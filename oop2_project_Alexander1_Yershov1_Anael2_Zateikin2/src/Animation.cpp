@@ -23,7 +23,11 @@ bool Animation::update (sf::Time delta, Action action)
         m_elapsed -= AnimationTime;
         ++m_index;
         if (action.first == ActionType::hit && m_index == m_animeMap.m_data.find(action.first)->second.size())
+        {
+            //m_alive = false;
             return true;
+        }
+            
         m_index %= m_animeMap.m_data.find(action.first) ->second.size();
         update(action);
     }

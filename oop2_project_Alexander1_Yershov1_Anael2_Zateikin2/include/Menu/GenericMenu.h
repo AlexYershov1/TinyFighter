@@ -10,10 +10,11 @@ class GenericMenu
 public:
 	GenericMenu();
 	~GenericMenu();
-	void activateWindow(sf::RenderWindow& window, Arena&);
+	
 	virtual void draw(sf::RenderWindow&) const = 0;
 	
 protected:
+	void activateWindow(sf::RenderWindow& window, Arena&);
 	void setBackground(sf::Texture*);
 	virtual bool handleClick(const sf::Vector2f&, sf::RenderWindow&, Arena&) = 0;
 	virtual void handleMove(const sf::Vector2f&) = 0;

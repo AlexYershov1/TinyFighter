@@ -9,8 +9,7 @@ StaticAttack::StaticAttack(const sf::Vector2f& location, AttackType attack, Char
 void StaticAttack::update(const sf::Time& deltaTime)
 {
 	if (m_animation.update(deltaTime, m_action))
-		//StaticAttack::
-		return;
+		m_alive = false;
 }
 
 StaticAttack::~StaticAttack()

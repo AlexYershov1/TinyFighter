@@ -10,9 +10,11 @@ class SpecialAttack : public GameObject
 public:
 	SpecialAttack(const sf::Vector2f&, AttackType, Character*);
 	virtual void update(const sf::Time&) = 0;
-	virtual void move(const sf::Time&, Arena&) {}
+	virtual void correctOwnersPtr();
+	
 	AttackType getKind() const { return m_kind; }
-	void setHit() { m_action.first = ActionType::hit; }
+	void setHit(); 
+	bool ownerIsAlive() const;
 	bool isMe(Character* character) const { return m_owner->isMe(character); }
 	virtual ~SpecialAttack();
 

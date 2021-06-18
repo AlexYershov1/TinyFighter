@@ -2,7 +2,7 @@
 
 
 ChooseCharacter::ChooseCharacter()
-	//: m_characterThumbnails(int(CharacterType::Bandit))
+	: GenericMenu()
 {
 	sf::Sprite charSprite;
 	//character.setTexture(ResourcesManager::instance())		//load thumbnail
@@ -12,6 +12,13 @@ ChooseCharacter::ChooseCharacter()
 	m_characterThumbnails.emplace_back(charSprite, getAnaelName);
 	//set locations for rects
 	modifySprites();
+	
+	//header
+	m_header.setCharacterSize(HEADER_SIZE- 20);
+	m_header.setString("Choose your character");
+	sf::FloatRect textRect = m_header.getLocalBounds();
+	m_header.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+	m_header.setPosition(HEADER_POS);
 
 
 }
@@ -23,44 +30,12 @@ ChooseCharacter::~ChooseCharacter()
 void ChooseCharacter::activateChooseCharacter(sf::RenderWindow& window, Arena& arena)
 {
 	GenericMenu::activateWindow(window, arena);
-	//background
-	/*sf::RectangleShape background;
-	background.setSize({ WINDOW_WIDTH, WINDOW_HEIGHT });
-	background.setTexture(ResourcesManager::instance().menuBGTexture());*/
-	//window loop
-	/*while (window.isOpen())
-	{
-		window.clear(sf::Color::White);
-		window.draw(background);
-		draw(window);
-		window.display();
-
-		if (auto event = sf::Event{}; window.waitEvent(event))
-		{
-			sf::Vector2f Location;
-			switch (event.type)
-			{
-			case sf::Event::Closed:
-				window.close();
-				break;
-			case sf::Event::MouseButtonReleased:
-				Location = window.mapPixelToCoords
-				({ event.mouseButton.x, event.mouseButton.y });
-				if (handleClick(Location, arena))
-					return ;
-				break;
-			case sf::Event::MouseMoved:
-				Location = (sf::Vector2f)sf::Mouse::getPosition(window);
-				handleMove(Location);
-				break;
-			}
-		}
-	}*/
-
 }
 
 void ChooseCharacter::draw(sf::RenderWindow& window) const
 {
+	window.draw(m_background);
+	window.draw(m_header);
 	for (const auto& item : m_characterThumbnails)
 		window.draw(item.first);
 }

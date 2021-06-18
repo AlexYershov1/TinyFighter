@@ -10,7 +10,8 @@ PvsPOnline::~PvsPOnline()
 
 void PvsPOnline::execute(sf::RenderWindow& window, Arena& arena)
 {
-	//StageInfo namesVec;
-	//activate ChooseCharacterMenu
-	//return namesVec;
+	//open a socket
+
+	m_chooseCharMenu.activateChooseCharacter(window, arena);
+	
 }

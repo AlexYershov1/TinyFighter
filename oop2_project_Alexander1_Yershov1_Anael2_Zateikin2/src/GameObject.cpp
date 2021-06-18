@@ -3,6 +3,7 @@
 
 
 GameObject::GameObject(const sf::Vector2f& loc)
+	:m_alive(true)
 {
 	m_picture.setPosition(loc);
 }
@@ -10,6 +11,11 @@ GameObject::GameObject(const sf::Vector2f& loc)
 void GameObject::draw(sf::RenderWindow& window)
 {
 	window.draw(m_picture);
+}
+
+bool GameObject::isAlive() const
+{
+	return m_alive;
 }
 
 bool GameObject::collidesWith(const GameObject& other) const

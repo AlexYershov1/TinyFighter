@@ -8,16 +8,16 @@ GenericMenu::GenericMenu()
 	m_background.setTexture(ResourcesManager::instance().menuBGTexture());
 	
 	//header
-	//this->m_header.setFont(ResourcesManager::instance().font());
-	//m_header.setStyle(sf::Text::Style::Bold | sf::Text::Style::Italic);
+	this->m_header.setFont(ResourcesManager::instance().font());
+	m_header.setStyle(sf::Text::Style::Bold | sf::Text::Style::Italic);
 	//m_header.setCharacterSize(HEADER_SIZE);
 	////m_header.setString("Tiny Fighter");
 	//sf::FloatRect textRect = m_header.getLocalBounds();
 	//m_header.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
 	//m_header.setPosition(HEADER_POS);
-	//m_header.setColor(sf::Color::Magenta);
-	//m_header.setOutlineColor(sf::Color::Black);
-	//m_header.setOutlineThickness(OUTLINE_THICKNESS);
+	m_header.setColor(sf::Color::Magenta);
+	m_header.setOutlineColor(sf::Color::Black);
+	m_header.setOutlineThickness(OUTLINE_THICKNESS);
 }
 
 GenericMenu::~GenericMenu()

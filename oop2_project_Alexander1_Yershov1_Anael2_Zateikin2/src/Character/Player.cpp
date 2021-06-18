@@ -45,8 +45,9 @@ Action Player::getActionFromKey(Arena& arena)
             auto type = pair.second.first;
             if (type == ActionType::SpecialDynamic )
             {
-                if (enoughMana(ActionType::SpecialDynamic))
+                if (enoughMana(ActionType::SpecialDynamic) && m_specialAttackClock.getElapsedTime() > SPECIAL_DELAY)
                 {
+                    m_specialAttackClock.restart();
                     arena.createSpecialAttack(type, m_specialAttacks.first, this);
                     m_action.first = ActionType::SpecialDynamic;
                     m_mana -= 30;

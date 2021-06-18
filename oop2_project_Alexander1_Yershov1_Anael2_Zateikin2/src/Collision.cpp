@@ -55,7 +55,7 @@ namespace
         auto& attack = static_cast<DynamicAttack&>(dynamicAttack);
         auto& obj = static_cast<Character&>(character);
 
-        if (attack.isMe(&obj))
+        if (attack.ownerIsAlive() && attack.isMe(&obj))
             return;
         
         attack.getKind() == AttackType::FireDynamic ? obj.setActionType(ActionType::Burning) : obj.setActionType(ActionType::Freezing);

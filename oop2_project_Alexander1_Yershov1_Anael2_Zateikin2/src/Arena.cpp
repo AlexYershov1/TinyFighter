@@ -19,7 +19,7 @@ void Arena::createArena()
 	m_ground.setPosition({ 0,float(WINDOW_HEIGHT - TERRAIN_HIGHT) });
 	
 	//create factory
-	createEnemy(CharacterType::Bandit);
+	//createEnemy(CharacterType::Bandit);
 	
 }
 
@@ -50,6 +50,7 @@ void Arena::draw(sf::RenderWindow& window)
 {
 	window.draw(m_background);
 	window.draw(m_ground);
+	
 	for (const auto& object : m_gameObjects)
 		object->draw(window);
 }
@@ -57,7 +58,11 @@ void Arena::draw(sf::RenderWindow& window)
 void Arena::move(const sf::Time& deltaTime)
 {
 	for (auto& object : m_gameObjects)
-		object->move(deltaTime, *this);
+	{
+		if(object)
+			object->move(deltaTime, *this); //suicides when has three objects in the vector
+	}
+		
 }
 
 void Arena::update(const sf::Time& deltaTime)
@@ -74,6 +79,17 @@ void Arena::collision()
 			if((*firstIt)->collidesWith(*(*secondIt)))
 				Collision::instance().processCollision(**firstIt, **secondIt);
 		}
+	//remove all dead objects
+	for (auto& object : m_gameObjects)
+		object->correctOwnersPtr();
+
+	for (auto it = m_gameObjects.begin(); it != m_gameObjects.end(); )
+	{
+		if (!(*it)->isAlive()) //if dead
+			it = m_gameObjects.erase(it);
+		else
+			++it;
+	}
 }
 
 Arena::~Arena()
