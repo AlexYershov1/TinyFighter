@@ -5,11 +5,12 @@ ChooseCharacter::ChooseCharacter()
 	: GenericMenu()
 {
 	sf::Sprite charSprite;
-	//character.setTexture(ResourcesManager::instance())		//load thumbnail
+	//load thumbnail
 	charSprite.setTexture(ResourcesManager::instance().texture(int(CharacterType::Alex), THUMBNAIL));
 	m_characterThumbnails.emplace_back(charSprite, getAlexName);
 	charSprite.setTexture(ResourcesManager::instance().texture(int(CharacterType::Anael), THUMBNAIL));
 	m_characterThumbnails.emplace_back(charSprite, getAnaelName);
+
 	//set locations for rects
 	modifySprites();
 	
@@ -42,8 +43,8 @@ void ChooseCharacter::draw(sf::RenderWindow& window) const
 
 void ChooseCharacter::modifySprites()
 {
-	auto xOffset = WINDOW_WIDTH / 3.f;
-	auto offsetScale = 1;
+	auto xOffset = WINDOW_WIDTH / float(m_characterThumbnails.size() + 1);
+	auto offsetScale = 1.f;
 	for (auto& item : m_characterThumbnails)
 	{
 		item.first.setOrigin(item.first.getLocalBounds().height / 2,
@@ -75,7 +76,6 @@ void ChooseCharacter::handleMove(const sf::Vector2f& location)
 		if (button.first.getGlobalBounds().contains(location))
 		{
 			button.first.setColor(sf::Color(225, 225, 225, 125));
-			//button.first.setOutlineThickness(BOLD_OUTLINE);
 		}
 		else
 		{

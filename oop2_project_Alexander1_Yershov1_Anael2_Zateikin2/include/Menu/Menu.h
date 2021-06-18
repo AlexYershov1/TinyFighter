@@ -21,8 +21,6 @@ public:
 private:
 	typedef std::pair < sf::Text, std::unique_ptr<Command>> option;
 	std::vector<option> m_options;
-	//sf::Text m_header;
-	//sf::RectangleShape m_background;
 
 	
 	virtual bool handleClick(const sf::Vector2f&, sf::RenderWindow&, Arena&) ;

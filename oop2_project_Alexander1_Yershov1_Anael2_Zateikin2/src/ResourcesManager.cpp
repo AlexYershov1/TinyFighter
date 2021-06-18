@@ -204,21 +204,10 @@ ResourcesManager::ResourcesManager()
 
     //load Arenas
     loadArenaImages("bc2.png","bc5.png", int(ArenaType::Arena1));
+    loadArenaImages("forest1.png","bc5.png", int(ArenaType::Forest));
+    loadArenaImages("volcano1.png","bc5.png", int(ArenaType::Volcano));
 
 
-   /* sf::Texture image;
-    if (!image.loadFromFile("bc2.png"))
-    {
-        throw std::runtime_error("Can't load file");
-    }
-      
-    m_BGtextures[int(ArenaType::Arena1)].push_back(image);
-    if (!image.loadFromFile("bc5.png"))
-    {
-        throw std::runtime_error("Can't load file");
-    }
-    m_BGtextures[int(ArenaType::Arena1)].push_back(image);*/
-    
     //load font
     if (!m_font.loadFromFile("SundayMorning.ttf"))
     {
@@ -226,6 +215,11 @@ ResourcesManager::ResourcesManager()
     }
     //load Menu background
     if (!m_MenuBackground.loadFromFile("night_background.png"))
+    {
+        throw std::runtime_error("Can't load file");
+    }
+    //load arrow
+    if (!m_arrow.loadFromFile("arrow.png"))
     {
         throw std::runtime_error("Can't load file");
     }

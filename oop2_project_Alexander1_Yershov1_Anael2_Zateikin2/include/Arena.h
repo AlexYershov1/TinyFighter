@@ -28,6 +28,8 @@ public:
 	void createEnemy( CharacterType);	//inside get the players locations
 	void createSpecialAttack(ActionType, AttackType, Character*);
 
+	void setArenaBackground(ArenaType);
+
 	void draw(sf::RenderWindow&);
 	void move(const sf::Time&);
 	void update(const sf::Time&);

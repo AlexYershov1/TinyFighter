@@ -9,7 +9,7 @@ class GenericMenu
 {
 public:
 	GenericMenu();
-	~GenericMenu();
+	virtual ~GenericMenu();
 	
 	virtual void draw(sf::RenderWindow&) const = 0;
 	

@@ -20,6 +20,9 @@ const float BOLD_OUTLINE = 10.0;
 const sf::Vector2f HEADER_POS = { WINDOW_WIDTH / 2 , 60 };
 const sf::Vector2f COMMANDS_POS = { WINDOW_WIDTH / 2 , 110 };
 const sf::Vector2f CENTER = { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 };
+const sf::Vector2f RECT_SIZE = { 200.f, 200.f };
+const sf::Vector2f ARROW_SIZE = { 100.f, 50.f };
+
 const float VERTICAL_OFFSET = 110.f;
 
 // animation
@@ -39,8 +42,8 @@ const int MAX_HEALTH = 100;
 const auto SPECIAL_DELAY = sf::seconds(1.f);
 
 // charecters location
-const sf::Vector2f INITIAL_LOC = { 100.f ,float(WINDOW_HEIGHT - TERRAIN_HIGHT / 2.f )};
-const auto LOC_OFFSET = 500.f;
+const sf::Vector2f INITIAL_LOC = { 100.f ,float(WINDOW_HEIGHT - TERRAIN_HIGHT * 0.90f )};
+const auto LOC_OFFSET = 20.f;
 
 enum class ActionType
 {
@@ -115,13 +118,17 @@ using Action = std::pair <ActionType, Direction>;
 enum class ArenaType
 {
 	//remove the terrain
-	Arena1, Terrain1, Max
+	Arena1, Terrain1, Forest, Terrain2 , Volcano, Terrain3, Max
 };
 enum class Difficulty
 {
-	Easy, Moderate, Hard
+	Easy, Normal , Hard
 };
 enum class BackroundAssets
 {
 	Background, Ground
 };
+//enum class MenuAssets
+//{
+//	Background, 
+//};

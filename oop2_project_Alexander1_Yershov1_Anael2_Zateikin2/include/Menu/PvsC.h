@@ -1,6 +1,8 @@
 #pragma once
 //#include "Command.h"
 #include "ChooseCharacter.h"
+#include "ChooseArena.h"
+#include "ChooseDifficulty.h"
 
 //Player vs Computer button
 class PvsC : public Command
@@ -12,4 +14,6 @@ public:
 	virtual void execute(sf::RenderWindow&, Arena&);
 private:
 	ChooseCharacter m_chooseCharMenu;
+	ChooseArena m_chooseArena;
+	ChooseDifficulty m_chooseDifficulty;
 };

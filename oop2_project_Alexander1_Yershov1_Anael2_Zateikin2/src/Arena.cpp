@@ -4,22 +4,11 @@
 
 Arena::Arena()
 {
-	//get the backgroung texture
 }
 
 void Arena::createArena()
 {
-	m_background.setTexture( ResourcesManager::instance().texture(ArenaType::Arena1, BackroundAssets::Background));
-	m_background.setSize({ float(WINDOW_WIDTH), float(WINDOW_HEIGHT - TERRAIN_HIGHT- CAPTION_HEIGHT) });
-	m_background.setPosition({ 0,0+CAPTION_HEIGHT });
 	
-	m_ground.setTexture(ResourcesManager::instance().texture(ArenaType::Arena1, BackroundAssets::Ground));
-
-	m_ground.setSize({ float(WINDOW_WIDTH), float(TERRAIN_HIGHT) });
-	m_ground.setPosition({ 0,float(WINDOW_HEIGHT - TERRAIN_HIGHT) });
-	
-	//create factory
-	//createEnemy(CharacterType::Bandit);
 	
 }
 
@@ -35,7 +24,8 @@ void Arena::createPlayer( CharacterType type )
 void Arena::createEnemy(CharacterType type)
 {
 	auto location = INITIAL_LOC;		////CHANGE TO CORNERS
-	location.x += LOC_OFFSET * m_gameObjects.size();
+	location.x = WINDOW_WIDTH - LOC_OFFSET ;
+	location.y += LOC_OFFSET * (m_gameObjects.size()-1);
 	m_gameObjects.emplace_back(std::make_shared<Enemy>(m_playerLocations, location, type));
 }
 
@@ -44,6 +34,18 @@ void Arena::createSpecialAttack(ActionType actionType, AttackType attackType, Ch
 	actionType == ActionType::SpecialDynamic ?
 		m_gameObjects.emplace_back(std::make_shared<DynamicAttack>(owner->getLocation(), attackType, owner)) :
 		m_gameObjects.emplace_back(std::make_shared<StaticAttack>(owner->getLocation(), attackType, owner));
+}
+
+void Arena::setArenaBackground(ArenaType arenaType)
+{
+	m_background.setTexture(ResourcesManager::instance().texture(arenaType, BackroundAssets::Background));
+	m_background.setSize({ float(WINDOW_WIDTH), float(WINDOW_HEIGHT - TERRAIN_HIGHT - CAPTION_HEIGHT) });
+	m_background.setPosition({ 0,0 + CAPTION_HEIGHT });
+
+	m_ground.setTexture(ResourcesManager::instance().texture(arenaType, BackroundAssets::Ground));
+
+	m_ground.setSize({ float(WINDOW_WIDTH), float(TERRAIN_HIGHT) });
+	m_ground.setPosition({ 0,float(WINDOW_HEIGHT - TERRAIN_HIGHT) });
 }
 
 void Arena::draw(sf::RenderWindow& window)
