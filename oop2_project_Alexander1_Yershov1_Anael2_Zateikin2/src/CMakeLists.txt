@@ -18,4 +18,5 @@ target_sources (oop2_project_Alexander1_Yershov1_Anael2_Zateikin2 PRIVATE "main.
 																		  "Menu/PvsPOnline.cpp"
 																		  "Menu/PvsC.cpp"
 																		  "Menu/Exit.cpp"
-																		  "Menu/ChooseCharacter.cpp")
+																		  "Menu/ChooseCharacter.cpp"
+																		  "Menu/GenericMenu.cpp")

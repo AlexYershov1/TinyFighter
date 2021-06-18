@@ -22,12 +22,13 @@ ChooseCharacter::~ChooseCharacter()
 
 void ChooseCharacter::activateChooseCharacter(sf::RenderWindow& window, Arena& arena)
 {
+	GenericMenu::activateWindow(window, arena);
 	//background
-	sf::RectangleShape background;
+	/*sf::RectangleShape background;
 	background.setSize({ WINDOW_WIDTH, WINDOW_HEIGHT });
-	background.setTexture(ResourcesManager::instance().menuBGTexture());
+	background.setTexture(ResourcesManager::instance().menuBGTexture());*/
 	//window loop
-	while (window.isOpen())
+	/*while (window.isOpen())
 	{
 		window.clear(sf::Color::White);
 		window.draw(background);
@@ -54,7 +55,7 @@ void ChooseCharacter::activateChooseCharacter(sf::RenderWindow& window, Arena& a
 				break;
 			}
 		}
-	}
+	}*/
 
 }
 
@@ -77,7 +78,7 @@ void ChooseCharacter::modifySprites()
 	}
 }
 
-bool ChooseCharacter::handleClick(const sf::Vector2f& location, Arena& arena) const
+bool ChooseCharacter::handleClick(const sf::Vector2f& location, sf::RenderWindow&, Arena& arena)
 {
 	//go over all buttons and check if pressed
 	for (const auto& button : m_characterThumbnails)

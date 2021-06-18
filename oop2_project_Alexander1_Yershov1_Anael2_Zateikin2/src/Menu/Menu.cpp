@@ -39,39 +39,40 @@ Menu::~Menu()
 void Menu::activateMenu(sf::RenderWindow& window, Arena& arena)
 {
 	//window loop
-	while (window.isOpen())
-	{
-		window.clear(sf::Color::White);
-		draw(window);
-		window.display();
+	GenericMenu::activateWindow(window, arena);
+	//while (window.isOpen())
+	//{
+	//	window.clear(sf::Color::White);
+	//	draw(window);
+	//	window.display();
 
-		if (auto event = sf::Event{}; window.waitEvent(event))
-		{
-			sf::Vector2f Location;
-			switch (event.type)
-			{
-			case sf::Event::Closed:
-				window.close();
-				break;
-			case sf::Event::MouseButtonReleased:
-				Location = window.mapPixelToCoords
-				({ event.mouseButton.x, event.mouseButton.y });
-				if (handleClick(Location, window, arena))
-					//stageInfo = handleClick(Location, window);
-					return;
-				break;
-			case sf::Event::MouseMoved:
-				Location = (sf::Vector2f)sf::Mouse::getPosition(window);
-				handleMove(Location);
-				break;
-			}
-		}
-	}
+	//	if (auto event = sf::Event{}; window.waitEvent(event))
+	//	{
+	//		sf::Vector2f Location;
+	//		switch (event.type)
+	//		{
+	//		case sf::Event::Closed:
+	//			window.close();
+	//			break;
+	//		case sf::Event::MouseButtonReleased:
+	//			Location = window.mapPixelToCoords
+	//			({ event.mouseButton.x, event.mouseButton.y });
+	//			if (handleClick(Location, window, arena))
+	//				//stageInfo = handleClick(Location, window);
+	//				return;
+	//			break;
+	//		case sf::Event::MouseMoved:
+	//			Location = (sf::Vector2f)sf::Mouse::getPosition(window);
+	//			handleMove(Location);
+	//			break;
+	//		}
+	//	}
+	//}
 }
 
 void Menu::draw(sf::RenderWindow& window) const
 {
-	window.draw(this->m_background);
+	window.draw(m_background);
 	window.draw(this->m_header);
 	for (const auto& button : m_options)
 		window.draw(button.first);
@@ -85,7 +86,7 @@ void Menu::addCommand(const std::string& str, std::unique_ptr<Command> command)
 	m_options.push_back(option(text, std::move(command)));
 }
 
-bool Menu::handleClick(const sf::Vector2f& location, sf::RenderWindow& window ,Arena& arena) const
+bool Menu::handleClick(const sf::Vector2f& location, sf::RenderWindow& window ,Arena& arena) 
 {
 	//go over all buttons and check if pressed
 	for (const auto& button : m_options)
