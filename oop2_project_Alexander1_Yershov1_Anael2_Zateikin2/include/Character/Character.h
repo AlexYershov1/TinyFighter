@@ -18,6 +18,7 @@ public:
 	bool isMe(const Character* other) const { return &(*this) == &(*other); }
 	Direction getDirection() const;
 	Direction getFacingDirection() const;
+	sf::Vector2f getOrigin();
 	~Character();
 protected:
 	Animation m_animation;

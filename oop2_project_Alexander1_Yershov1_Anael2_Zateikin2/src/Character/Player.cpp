@@ -34,51 +34,47 @@ Action Player::getActionFromKey(Arena& arena)
         { sf::Keyboard::Z    , Action { ActionType::Punching, Direction::Stay } },
         { sf::Keyboard::X    , Action { ActionType::SpecialDynamic, Direction::Stay } },
         { sf::Keyboard::C    , Action { ActionType::SpecialStatic, Direction::Stay } },
-        /*{ sf::Keyboard::Space, Action { ActionType::Sprinting, Direction::Stay } },*/
         { sf::Keyboard::Space, Action { ActionType::Sprinting, Direction::Stay } }
 
     };
 
     for (/*const*/ auto/*&*/ pair : keyToVectorMapping)
     {
+        //m_speed = SPEED;
+        AttackType attackType;  // for special attacks
+
         if (sf::Keyboard::isKeyPressed(pair.first))
         {
-            // in case special attack is attempted
-            auto type = pair.second.first;
-            if (type == ActionType::SpecialDynamic )
+            switch (auto type = pair.second.first)
             {
-                if (enoughMana(ActionType::SpecialDynamic) && m_specialAttackClock.getElapsedTime() > SPECIAL_DELAY)
-                {
-                    m_specialAttackClock.restart();
-                    arena.createSpecialAttack(type, m_specialAttacks.first, this);
-                    m_action.first = ActionType::SpecialDynamic;
-                    m_mana -= 30;
-                }
-                else
-                {
-                    m_action.first = ActionType::Standing;
-                }
-             }
-            if (type == ActionType::SpecialStatic)
-            {
-                if (enoughMana(ActionType::SpecialStatic))
-                {
-                    arena.createSpecialAttack(type, m_specialAttacks.second, this);
-                    m_action.first = ActionType::SpecialStatic;
-                }
-                else
-                {
-                    m_action.first = ActionType::Standing;
-                }
-            }
-            if (type == ActionType::Sprinting)
-            {
+            case ActionType::Sprinting:
                 m_speed = RUN_SPEED;
                 pair.second.second = getFacingDirection();
-            }
-            else
+                break;
+            case ActionType::SpecialDynamic:
+                m_mana -= 10;
+                // continue to fall through to static
+            case ActionType::SpecialStatic:
+                attackType = type == ActionType::SpecialDynamic ? m_specialAttacks.first : m_specialAttacks.second;
+                if (enoughMana(type) && m_specialAttackClock.getElapsedTime() > SPECIAL_DELAY)
+                {
+                    m_specialAttackClock.restart();
+                    arena.createSpecialAttack(type, attackType, this);
+                    m_action.first = type;
+                    m_mana -= 20;
+                }
+                else
+                    pair.second.first = ActionType::Standing;
+                break;
+            case ActionType::Burning:
+                break;
+            case ActionType::Freezing:
+                break;
+            default:
                 m_speed = SPEED;
-            //m_speed = (type == ActionType::Sprinting) ? RUN_SPEED : SPEED;
+                break;
+            }
+            
 
             return pair.second;
         }

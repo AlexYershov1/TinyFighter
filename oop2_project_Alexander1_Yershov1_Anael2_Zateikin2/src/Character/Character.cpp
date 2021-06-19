@@ -69,6 +69,11 @@ Direction Character::getFacingDirection() const
 	return m_picture.getScale().x < 0 ? Direction::Left : Direction::Right;
 }
 
+sf::Vector2f Character::getOrigin()
+{
+	return m_picture.getOrigin();
+}
+
 float Character::x() const
 {
 	return m_picture.getPosition().x;
@@ -81,17 +86,17 @@ float Character::y() const
 
 bool Character::enoughMana(ActionType attack) const
 {
-	if (attack == ActionType::SpecialDynamic && m_mana < MAX_MANA / 2 ||
-		attack == ActionType::SpecialStatic && m_mana < MAX_MANA / 4)
-		return false;
-	return true;
+	if (attack == ActionType::SpecialDynamic && m_mana >= 30 ||
+		attack == ActionType::SpecialStatic && m_mana >= 20)
+		return true;
+	return false;
 }
 
 Character::~Character()
 {
 }
 
-// find find the Euclidean distance between two characters
+// finds the Euclidean distance between two characters
 float Character::operator-(const sf::Vector2f* other) const
 {
 	return std::hypot(this->x() - other->x, this->y() - other->y);

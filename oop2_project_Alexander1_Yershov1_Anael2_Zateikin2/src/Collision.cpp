@@ -74,7 +74,7 @@ namespace
         if (attack.isMe(&obj))
             return;
 
-        attack.getKind() == AttackType::FireDynamic ? obj.setActionType(ActionType::Burning) : obj.setActionType(ActionType::Freezing);
+        attack.getKind() == AttackType::FireStatic ? obj.setActionType(ActionType::Burning) : obj.setActionType(ActionType::Freezing);
     }
     void characterstaticAttack(GameObject& character, GameObject& staticAttack)
     {

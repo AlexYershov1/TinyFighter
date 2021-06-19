@@ -96,9 +96,9 @@ AnimeMap ResourcesManager::dynamicData() const
     auto nextStart = [&]()
     {
         currentStart.x += size.x;
-        if (currentStart.x > size.x * 10)
+        if (currentStart.x > size.x * 4)
         {
-            currentStart.x %= size.x * 10;
+            currentStart.x %= size.x * 4;
             currentStart.y += size.y;
         }
 
@@ -122,7 +122,7 @@ AnimeMap ResourcesManager::dynamicData() const
 
 AnimeMap ResourcesManager::staticFireData() const
 {
-    const auto size = sf::Vector2i(80, 80);
+    const auto size = sf::Vector2i(160, 150);
     const auto initSpace = sf::Vector2i(1, 2);
 
     auto fireObj = AnimeMap{};
@@ -131,9 +131,9 @@ AnimeMap ResourcesManager::staticFireData() const
     auto nextStart = [&]()
     {
         currentStart.x += size.x;
-        if (currentStart.x > size.x * 10)
+        if (currentStart.x > size.x * 5)
         {
-            currentStart.x %= size.x * 10;
+            currentStart.x %= size.x * 5;
             currentStart.y += size.y;
         }
 
@@ -141,7 +141,8 @@ AnimeMap ResourcesManager::staticFireData() const
     };
 
     fireObj.m_data[ActionType::Standing].emplace_back(currentStart, size);
-    for (int repeat = 0; repeat < 7; repeat++)  fireObj.m_data[ActionType::Standing].emplace_back(nextStart(), size);
+    fireObj.m_data[ActionType::hit].emplace_back(currentStart, size);
+    for (int repeat = 0; repeat < 7; repeat++)  fireObj.m_data[ActionType::hit].emplace_back(nextStart(), size);
 
     return fireObj;
 }
@@ -157,9 +158,9 @@ AnimeMap ResourcesManager::staticIceData() const
     auto nextStart = [&]()
     {
         currentStart.x += size.x;
-        if (currentStart.x > size.x * 10)
+        if (currentStart.x > size.x * 5)
         {
-            currentStart.x %= size.x * 10;
+            currentStart.x %= size.x * 5;
             currentStart.y += size.y;
         }
 
@@ -167,7 +168,8 @@ AnimeMap ResourcesManager::staticIceData() const
     };
 
     for (int repeat = 0; repeat < 21; repeat++)  nextStart();
-    for (int repeat = 0; repeat < 6; repeat++)  iceObj.m_data[ActionType::Standing].emplace_back(nextStart(), size);
+    iceObj.m_data[ActionType::Standing].emplace_back(currentStart, size);
+    for (int repeat = 0; repeat < 6; repeat++)  iceObj.m_data[ActionType::hit].emplace_back(nextStart(), size);
 
     return iceObj;
 }

@@ -4,6 +4,7 @@ StaticAttack::StaticAttack(const sf::Vector2f& location, AttackType attack, Char
 	: SpecialAttack(location, attack, owner)
 {
 	m_action = Action(ActionType::hit, Direction::Stay);
+	m_picture.setPosition(location.x - 35, location.y - 70);
 }
 
 void StaticAttack::update(const sf::Time& deltaTime)
