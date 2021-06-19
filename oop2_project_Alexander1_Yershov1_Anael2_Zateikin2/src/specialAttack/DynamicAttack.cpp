@@ -5,6 +5,8 @@ DynamicAttack::DynamicAttack(const sf::Vector2f& location, AttackType attack, Ch
 	: SpecialAttack(location, attack, owner)
 {
 	m_action = Action(ActionType::Standing, owner->getFacingDirection());
+	m_picture.setPosition(location.x + OFFSET_SPECIAL_ATTACK_X * convert(owner->getFacingDirection()).x, location.y - OFFSET_SPECIAL_ATTACK_Y);
+	correctDir(m_picture, owner->getFacingDirection());
 
 	switch (attack)
 	{
@@ -22,10 +24,7 @@ DynamicAttack::DynamicAttack(const sf::Vector2f& location, AttackType attack, Ch
 
 void DynamicAttack::update(const sf::Time& deltaTime)
 {
-	//m_picture.move(convert(m_action.second) * SPEED * deltaTime.asSeconds());
-
 	if (m_animation.update(deltaTime, m_action) || outOfBounds(this->m_picture.getPosition()))
-		//DynamicAttack::~DynamicAttack();
 		m_alive = false;
 }
 
