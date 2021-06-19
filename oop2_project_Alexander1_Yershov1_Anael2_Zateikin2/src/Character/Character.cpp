@@ -13,10 +13,10 @@ Character::Character(const sf::Vector2f& location, CharacterType character)
 
 void Character::move(const sf::Time& deltaTime, Arena& arena)
 {
-	m_picture.move(convert(m_action.second) * SPEED * deltaTime.asSeconds());
+	m_picture.move(convert(m_action.second) * m_speed * deltaTime.asSeconds());
 
 	if (outOfBounds(this->m_picture.getPosition()))
-		m_picture.move(convert(opposite(m_action.second)) * SPEED * deltaTime.asSeconds());
+		m_picture.move(convert(opposite(m_action.second)) * m_speed * deltaTime.asSeconds());
 }
 
 void Character::update(const sf::Time& deltaTime)

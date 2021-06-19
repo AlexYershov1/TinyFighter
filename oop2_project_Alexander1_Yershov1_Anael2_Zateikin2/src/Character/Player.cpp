@@ -34,10 +34,12 @@ Action Player::getActionFromKey(Arena& arena)
         { sf::Keyboard::Z    , Action { ActionType::Punching, Direction::Stay } },
         { sf::Keyboard::X    , Action { ActionType::SpecialDynamic, Direction::Stay } },
         { sf::Keyboard::C    , Action { ActionType::SpecialStatic, Direction::Stay } },
-        { sf::Keyboard::Space, Action { ActionType::Sprinting, Direction::Stay } },
+        /*{ sf::Keyboard::Space, Action { ActionType::Sprinting, Direction::Stay } },*/
+        { sf::Keyboard::Space, Action { ActionType::Sprinting, Direction::Stay } }
+
     };
 
-    for (const auto& pair : keyToVectorMapping)
+    for (/*const*/ auto/*&*/ pair : keyToVectorMapping)
     {
         if (sf::Keyboard::isKeyPressed(pair.first))
         {
@@ -69,7 +71,15 @@ Action Player::getActionFromKey(Arena& arena)
                     m_action.first = ActionType::Standing;
                 }
             }
-                
+            if (type == ActionType::Sprinting)
+            {
+                m_speed = RUN_SPEED;
+                pair.second.second = getFacingDirection();
+            }
+            else
+                m_speed = SPEED;
+            //m_speed = (type == ActionType::Sprinting) ? RUN_SPEED : SPEED;
+
             return pair.second;
         }
     }

@@ -3,7 +3,7 @@
 
 
 GameObject::GameObject(const sf::Vector2f& loc)
-	:m_alive(true)
+	:m_alive(true), m_speed(SPEED)
 {
 	m_picture.setPosition(loc);
 }
