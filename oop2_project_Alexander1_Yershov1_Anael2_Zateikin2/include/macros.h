@@ -27,7 +27,10 @@ const float VERTICAL_OFFSET = 110.f;
 
 // animation
 const auto AnimationTime = sf::seconds(0.1f);
+const auto SlowAnimationTime = sf::seconds(0.25f);
 const auto SPEED = 100.f;
+const auto RUN_SPEED = 180.f;
+
 
 const auto EPSILON = 40.f;
 const auto YAxis = 0;

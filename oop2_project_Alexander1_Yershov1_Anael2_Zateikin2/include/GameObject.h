@@ -22,6 +22,7 @@ protected:
 	sf::Sprite m_picture;
 	Action m_action;
 	bool m_alive;
+	float m_speed;
 	//Animation m_animation;
 private:
 

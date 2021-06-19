@@ -6,7 +6,7 @@
 
 
 Animation::Animation(const AnimeMap& animeMap, sf::Sprite& sprite)
-    :m_animeMap(animeMap), m_sprite(sprite)
+    :m_animeMap(animeMap), m_sprite(sprite), m_animationTime(AnimationTime)
 {
     update(Action { ActionType::Standing, Direction::Right } );
 }
@@ -19,9 +19,9 @@ Animation::~Animation()
 bool Animation::update (sf::Time delta, Action action)
 {
     m_elapsed += delta;
-    if (m_elapsed >= AnimationTime)
+    if (m_elapsed >= m_animationTime)
     {
-        m_elapsed -= AnimationTime;
+        m_elapsed -= m_animationTime;
         ++m_index;
 
         //export to a new update with new parameters (different animationtime)
@@ -51,13 +51,18 @@ void Animation::update(Action action)
 void Animation::update(sf::Time delta, Direction dir)
 {
     m_elapsed += delta;
-    if (m_elapsed >= AnimationTime)
+    if (m_elapsed >= m_animationTime)
     {
-        m_elapsed -= AnimationTime;
+        m_elapsed -= m_animationTime;
         ++m_index;
         m_index %= m_animeMap.m_data.find(ActionType::Standing)->second.size();
         m_sprite.setTextureRect(m_animeMap.m_data.find(ActionType::Standing)->second[m_index]);
 
         correctDir(m_sprite, dir);
     }
+}
+
+void Animation::setAnimationTime(const sf::Time& animationTime)
+{
+    m_animationTime = animationTime;
 }
