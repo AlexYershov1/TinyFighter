@@ -32,8 +32,8 @@ void Arena::createEnemy(CharacterType type)
 void Arena::createSpecialAttack(ActionType actionType, AttackType attackType, Character* owner)
 {
 	actionType == ActionType::SpecialDynamic ?
-		m_gameObjects.emplace_back(std::make_shared<DynamicAttack>(owner->getLocation(), attackType, owner)) :
-		m_gameObjects.emplace_back(std::make_shared<StaticAttack>(owner->getLocation(), attackType, owner));
+		m_tempHolder.emplace_back(std::make_shared<DynamicAttack>(owner->getLocation(), attackType, owner)) :
+		m_tempHolder.emplace_back(std::make_shared<StaticAttack>(owner->getLocation(), attackType, owner));
 }
 
 void Arena::setArenaBackground(ArenaType arenaType)
@@ -59,12 +59,17 @@ void Arena::draw(sf::RenderWindow& window)
 
 void Arena::move(const sf::Time& deltaTime)
 {
+	m_tempHolder.clear();
 	for (auto& object : m_gameObjects)
 	{
 		if(object)
 			object->move(deltaTime, *this); //suicides when has three objects in the vector
 	}
-		
+	//move from tempHolder to main vector
+	for (auto& newObj : m_tempHolder)
+	{
+		m_gameObjects.push_back(std::move(newObj));
+	}
 }
 
 void Arena::update(const sf::Time& deltaTime)

@@ -34,7 +34,7 @@ Action Player::getActionFromKey(Arena& arena)
         { sf::Keyboard::Z    , Action { ActionType::Punching, Direction::Stay } },
         { sf::Keyboard::X    , Action { ActionType::SpecialDynamic, Direction::Stay } },
         { sf::Keyboard::C    , Action { ActionType::SpecialStatic, Direction::Stay } },
-        //{ sf::Keyboard::Space, Action { ActionType::Jumping, Direction::Stay } },
+        { sf::Keyboard::Space, Action { ActionType::Sprinting, Direction::Stay } },
     };
 
     for (const auto& pair : keyToVectorMapping)

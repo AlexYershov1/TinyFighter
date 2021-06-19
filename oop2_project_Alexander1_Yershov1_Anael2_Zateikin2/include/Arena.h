@@ -41,5 +41,6 @@ private:
 	sf::RectangleShape m_ground;
 	
 	std::vector <std::shared_ptr<GameObject>> m_gameObjects;
+	std::vector<std::shared_ptr<GameObject>> m_tempHolder;
 	std::vector<const sf::Vector2f*> m_playerLocations;
 };

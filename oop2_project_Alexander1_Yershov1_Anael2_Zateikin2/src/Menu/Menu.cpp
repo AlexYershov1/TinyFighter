@@ -40,34 +40,7 @@ void Menu::activateMenu(sf::RenderWindow& window, Arena& arena)
 {
 	//window loop
 	GenericMenu::activateWindow(window, arena);
-	//while (window.isOpen())
-	//{
-	//	window.clear(sf::Color::White);
-	//	draw(window);
-	//	window.display();
-
-	//	if (auto event = sf::Event{}; window.waitEvent(event))
-	//	{
-	//		sf::Vector2f Location;
-	//		switch (event.type)
-	//		{
-	//		case sf::Event::Closed:
-	//			window.close();
-	//			break;
-	//		case sf::Event::MouseButtonReleased:
-	//			Location = window.mapPixelToCoords
-	//			({ event.mouseButton.x, event.mouseButton.y });
-	//			if (handleClick(Location, window, arena))
-	//				//stageInfo = handleClick(Location, window);
-	//				return;
-	//			break;
-	//		case sf::Event::MouseMoved:
-	//			Location = (sf::Vector2f)sf::Mouse::getPosition(window);
-	//			handleMove(Location);
-	//			break;
-	//		}
-	//	}
-	//}
+	
 }
 
 void Menu::draw(sf::RenderWindow& window) const
