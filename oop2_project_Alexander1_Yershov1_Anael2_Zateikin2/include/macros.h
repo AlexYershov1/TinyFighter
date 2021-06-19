@@ -38,6 +38,8 @@ const auto XAxis = 1;
 const auto collisionDistance = 60.f;
 const auto WaitTime = 0.2;
 const auto THUMBNAIL = 1;
+const auto OFFSET_SPECIAL_ATTACK_X = 20.f;
+const auto OFFSET_SPECIAL_ATTACK_Y = 40.f;
 
 // game statistics
 const int MAX_MANA = 100;

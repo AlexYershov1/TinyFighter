@@ -63,7 +63,7 @@ Action Player::getActionFromKey(Arena& arena)
             {
                 if (enoughMana(ActionType::SpecialStatic))
                 {
-                    arena.createSpecialAttack(type, m_specialAttacks.first, this);
+                    arena.createSpecialAttack(type, m_specialAttacks.second, this);
                     m_action.first = ActionType::SpecialStatic;
                 }
                 else

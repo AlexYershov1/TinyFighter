@@ -6,7 +6,7 @@
 class Arena;
 
 bool outOfBounds(const sf::Vector2f&);
-
+void correctDir(sf::Sprite&, Direction);
 //A struct that holds the info of a new stage.
 //struct StageInfo
 //{
