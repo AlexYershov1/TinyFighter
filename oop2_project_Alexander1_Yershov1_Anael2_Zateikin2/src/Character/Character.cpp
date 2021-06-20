@@ -98,7 +98,7 @@ bool Character::inDisabledState(const sf::Time& deltaTime)
 	if (m_action.first == ActionType::Burning && m_disabled.getElapsedTime().asSeconds() < 0.5f)
 	{
 		m_picture.move(convert(opposite(m_action.second)) * m_speed * deltaTime.asSeconds());
-		// health.decreaseHealth(deltaTime.asSeconds() * BURNING_DAMAGE);
+		m_manaAndHealth.decreaseHealth(deltaTime.asSeconds() * BURNING_DAMAGE);
 		return true;
 	}
 	if (m_action.first == ActionType::Freezing && m_disabled.getElapsedTime().asSeconds() < 2.f)
