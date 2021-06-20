@@ -3,8 +3,7 @@
 
 Character::Character(const sf::Vector2f& location, CharacterType character)
 	: GameObject(location),
-	  m_animation(ResourcesManager::instance().animationData(character), m_picture)//,
-	  //m_mana(100), m_health(0)
+	  m_animation(ResourcesManager::instance().animationData(character), m_picture)
 {
 	m_picture.setTexture(ResourcesManager::instance().texture((int)character, 0));
 	m_picture.setOrigin(m_picture.getLocalBounds().height / 2, m_picture.getLocalBounds().width / 2);	// for correct rotation, setting origin at center
@@ -23,6 +22,7 @@ void Character::update(const sf::Time& deltaTime)
 {
 	// add switch case that defines correct sprite
 	m_animation.update(deltaTime, m_action);
+	m_manaAndHealth.increaseMana(deltaTime);
 }
 
 ActionType Character::getActionType() const
@@ -34,6 +34,11 @@ ActionType Character::getActionType() const
 sf::Vector2f Character::getLocation() const
 {
 	return m_picture.getPosition();
+}
+
+void Character::decreaseHealth(float value)
+{
+	m_manaAndHealth.decreaseHealth(value);
 }
 
 void Character::setAction(Action action)
@@ -106,6 +111,13 @@ bool Character::inDisabledState(const sf::Time& deltaTime)
 	if ((m_action.first == ActionType::SpecialDynamic || m_action.first == ActionType::SpecialStatic) &&
 		m_disabled.getElapsedTime().asSeconds() < 0.3)
 		return true;
+
+	if (m_action.first == ActionType::Punching && m_disabled.getElapsedTime().asSeconds() < 5.f)
+	{
+		m_action.first == ActionType::Standing;
+		return true;
+	}
+
 	return false;
 }
 

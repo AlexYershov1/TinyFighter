@@ -15,6 +15,7 @@ public:
 	void increaseMana(const sf::Time&);
 	//void increaseMana(const sf::Time&);
 	void decreaseMana(float);
+	void decreaseMana(ActionType);
 	void decreaseHealth(float);
 
 	void setLocation(int); //sets location according to player number

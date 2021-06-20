@@ -12,6 +12,8 @@ public:
 	void update(const sf::Time&);
 	ActionType getActionType() const;
 	sf::Vector2f getLocation() const;
+
+	void decreaseHealth(float);
 	void setAction(Action);
 	void setActionType(ActionType);
 	bool facing(const sf::Vector2f*) const;
