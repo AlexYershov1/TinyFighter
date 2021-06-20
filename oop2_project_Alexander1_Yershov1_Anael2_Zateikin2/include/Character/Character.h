@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "ManaAndHealth.h"
 #include <cmath>
 
 class Character : public GameObject
@@ -24,9 +25,10 @@ public:
 protected:
 	Animation m_animation;
 	std::pair<AttackType, AttackType> m_specialAttacks;	// first is dynamic and second is static
-	int m_health, m_mana;
+	//int m_health, m_mana;
 	sf::Clock m_specialAttackClock;
 	sf::Clock m_disabled;
+	ManaAndHealth m_manaAndHealth;
 
 	float operator-(const sf::Vector2f*) const;
 	float x() const;

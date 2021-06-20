@@ -30,6 +30,7 @@ void Controller::run() try
 	{
 		//clear, draw , display
 		this->m_gameWindow.clear(sf::Color::White);
+		//m_states.draw(m_gameWindow);
 		m_arena.draw(m_gameWindow);
 		/*ply.draw(m_gameWindow);
 		enemy.draw(m_gameWindow);*/

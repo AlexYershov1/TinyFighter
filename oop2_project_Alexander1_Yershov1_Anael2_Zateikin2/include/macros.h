@@ -56,6 +56,8 @@ const float BAR_HEIGHT = 20.f;
 const float MAX_HEALTH = 100.f;
 const float MAX_MANA = 100.f;
 const float SHADOW_THICKNESS = 1.f;
+const float INNER_VERT_SPACE = 20.f;
+const float INNER_HORIZ_SPACE = 40.f; //horizontal space
 
 
 enum class ActionType
@@ -70,6 +72,12 @@ enum class CharacterType
 	Anael,
 	Bandit,
 	//to be continued
+	Max
+};
+enum class PlayerNum
+{
+	Player1,
+	Player2,
 	Max
 };
 enum class AttackType
@@ -141,7 +149,9 @@ enum class BackroundAssets
 {
 	Background, Ground
 };
-//enum class MenuAssets
-//{
-//	Background, 
-//};
+enum class CharacterAssets
+{
+	SpriteSheet,
+	Thumbnail,
+	SmallIcon
+};
