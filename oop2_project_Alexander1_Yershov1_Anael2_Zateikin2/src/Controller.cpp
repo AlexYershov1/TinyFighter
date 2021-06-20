@@ -20,6 +20,7 @@ void Controller::run() try
 {
 	m_menu.activateMenu(m_gameWindow, m_arena); //create objects
 	m_arena.createArena();
+
 	// game loop
 
 	while (this->m_gameWindow.isOpen())

@@ -78,9 +78,18 @@ Action Player::getActionFromKey(Arena& arena)
                 if (enoughMana(type) && m_specialAttackClock.getElapsedTime() > SPECIAL_DELAY)
                 {
                     m_specialAttackClock.restart();
+                    m_disabled.restart();
                     arena.createSpecialAttack(type, attackType, this);
                     m_action.first = type;
                     m_manaAndHealth.decreaseMana(type);
+                }
+                else
+                    pair.second.first = ActionType::Standing;
+                break;
+            case ActionType::Punching:
+                if (m_punchingClock.getElapsedTime() > SPECIAL_DELAY && m_disabled.getElapsedTime().asSeconds() > PUNCHING_DELAY + 0.5f)
+                {
+                    m_punchingClock.restart();
                     m_disabled.restart();
                 }
                 else

@@ -9,13 +9,12 @@ public:
 	//static Animation& instance();
 
 	bool update(sf::Time, Action); //returns true if finished animation
-	void update(sf::Time, Direction);
 
 	void setAnimationTime(const sf::Time&);
 
 private:
 	void update(Action);
-	void burnigFreezingCase(Action);
+	void burningFreezingCase(Action);
 	const AnimeMap& m_animeMap;
 	sf::Time m_elapsed = {};
 	sf::Time m_animationTime;

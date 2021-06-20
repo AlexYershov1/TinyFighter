@@ -77,7 +77,7 @@ void ManaAndHealth::setLocation(int plynum)
 	sf::Vector2f pos = { float(plynum) * sectionWidth,float(plynum / 4)*BAR_HEIGHT };
 	m_charIcon.setPosition(pos);
 	m_healthBar.rectangles.first.setPosition({pos.x + m_charIcon.getGlobalBounds().width, pos.y });
-	m_healthBar.rectangles.second.setPosition(pos.x + m_charIcon.getGlobalBounds().width + 100, pos.y);
+	m_healthBar.rectangles.second.setPosition(pos.x + m_charIcon.getGlobalBounds().width, pos.y);
 	m_manaBar.rectangles.first.setPosition(pos.x + m_charIcon.getGlobalBounds().width, pos.y+BAR_HEIGHT);
 	m_manaBar.rectangles.second.setPosition(pos.x + m_charIcon.getGlobalBounds().width, pos.y + BAR_HEIGHT);
 

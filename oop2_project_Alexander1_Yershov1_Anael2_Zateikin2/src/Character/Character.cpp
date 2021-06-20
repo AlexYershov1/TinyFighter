@@ -3,7 +3,8 @@
 
 Character::Character(const sf::Vector2f& location, CharacterType character)
 	: GameObject(location),
-	  m_animation(ResourcesManager::instance().animationData(character), m_picture)
+	  m_animation(ResourcesManager::instance().animationData(character), m_picture),
+	  m_punchingDelayed(false)
 {
 	m_picture.setTexture(ResourcesManager::instance().texture((int)character, 0));
 	m_picture.setOrigin(m_picture.getLocalBounds().height / 2, m_picture.getLocalBounds().width / 2);	// for correct rotation, setting origin at center
@@ -20,8 +21,13 @@ void Character::move(const sf::Time& deltaTime, Arena& arena)
 
 void Character::update(const sf::Time& deltaTime)
 {
-	// add switch case that defines correct sprite
-	m_animation.update(deltaTime, m_action);
+	if (m_action.first == ActionType::Standing && m_punchingClock.getElapsedTime().asSeconds() < PUNCHING_DELAY)
+		m_animation.update(deltaTime, Action{ ActionType::Punching, m_action.second });
+	else
+	{
+		m_animation.update(deltaTime, m_action);
+		m_punchingDelayed = false;
+	}
 	m_manaAndHealth.increaseMana(deltaTime);
 }
 
@@ -48,7 +54,8 @@ void Character::setAction(Action action)
 
 void Character::setActionType(ActionType actType)
 {
-	m_disabled.restart();	// make disabled
+	if (actType == ActionType::Burning || actType == ActionType::Freezing)
+		m_disabled.restart();	// make disabled
 	m_action.first = actType;
 }
 
@@ -85,6 +92,11 @@ sf::FloatRect Character::getBoundingRectangle() const
 	return m_picture.getGlobalBounds();
 }
 
+bool Character::punchDelayed() const
+{
+	return m_punchingDelayed;
+}
+
 float Character::x() const
 {
 	return m_picture.getPosition().x;
@@ -112,12 +124,16 @@ bool Character::inDisabledState(const sf::Time& deltaTime)
 		m_disabled.getElapsedTime().asSeconds() < 0.3)
 		return true;
 
-	if (m_action.first == ActionType::Punching && m_disabled.getElapsedTime().asSeconds() < 5.f)
+	if (m_action.first == ActionType::Punching && m_disabled.getElapsedTime().asSeconds() < PUNCHING_DELAY)
 	{
-		m_action.first == ActionType::Standing;
+		m_punchingDelayed = true;
+  		m_action.first = ActionType::Standing;
 		return true;
 	}
-
+	//else
+	//{
+	//	m_disabled.restart();
+	//}
 	return false;
 }
 

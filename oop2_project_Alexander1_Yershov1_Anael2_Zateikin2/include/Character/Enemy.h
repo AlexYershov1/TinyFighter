@@ -7,6 +7,7 @@ class Enemy : public Character
 public:
 	Enemy(std::vector<const sf::Vector2f*>&, const sf::Vector2f&, CharacterType);
 	void move(const sf::Time&, Arena&);
+	//virtual void update(const sf::Time&);
 	virtual ~Enemy() = default;
 
 private:

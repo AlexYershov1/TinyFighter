@@ -43,6 +43,7 @@ const auto OFFSET_SPECIAL_ATTACK_Y = 40.f;
 
 // game statistics
 const auto SPECIAL_DELAY = sf::seconds(1.f);
+const auto PUNCHING_DELAY = 1.f;
 const auto BURNING_DAMAGE = 10.f;
 const auto PUNCH_DAMAGE = 10.f;
 const auto SPECIAL_DINAM_DAMAGE = 20.f;
