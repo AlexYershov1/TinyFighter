@@ -27,7 +27,8 @@ namespace
 {
     void playerEnemy(GameObject& player, GameObject& enemy)
     {
-        
+        static sf::Sound effect;
+        effect.setBuffer(ResourcesManager::instance().getSound((int)ActionType::Smacked));
         auto& ply = static_cast<Player&>(player);
         auto& enm = static_cast<Enemy&>(enemy);
 
@@ -37,12 +38,13 @@ namespace
             //check if facing enemy
             //for later - change to take damage and move to Character
             enm.setActionType(ActionType::Smacked);
+            effect.play();
             enm.decreaseHealth(PUNCH_DAMAGE);
-
         }
         else if ((enm.getActionType() == ActionType::Punching) && (enm.facing(ply)))
         {
             ply.setActionType(ActionType::Smacked);
+            effect.play();
             ply.decreaseHealth(PUNCH_DAMAGE);
         }
         
