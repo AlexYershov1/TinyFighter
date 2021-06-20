@@ -43,6 +43,7 @@ void Character::setAction(Action action)
 
 void Character::setActionType(ActionType actType)
 {
+	m_disabled.restart();	// make disabled
 	m_action.first = actType;
 }
 
