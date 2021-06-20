@@ -4,6 +4,7 @@
 #include "macros.h"
 #include "Arena.h"
 #include "Menu/Menu.h"
+#include "StatesSection.h"
 
 class Controller
 {
@@ -17,4 +18,5 @@ private:
 	sf::RenderWindow m_gameWindow;
 	sf::Clock m_elapsed = {};
 	Arena m_arena;
+	StatesSection m_states;
 };

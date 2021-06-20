@@ -24,6 +24,11 @@ ManaAndHealth::ManaAndHealth()
 	m_manaBar.rectangles.first.setOutlineThickness(SHADOW_THICKNESS); //shdow
 	m_manaBar.rectangles.second.setFillColor(sf::Color(0, 225, 0, 255));
 }
+//
+//ManaAndHealth::ManaAndHealth(CharacterType character)
+//{
+//	//m_charIcon.setTexture(ResourcesManager::instance().)
+//}
 
 ManaAndHealth::~ManaAndHealth()
 {
@@ -56,6 +61,25 @@ void ManaAndHealth::decreaseHealth(float value)
 	m_healthBar.update(-value, MAX_HEALTH);
 }
 
+void ManaAndHealth::setLocation(int plynum)
+{
+	static  float sectionWidth = m_charIcon.getGlobalBounds().width + BAR_WIDTH;//+ INNER_VERT_SPACE;
+	m_charIcon.setPosition({ float(plynum) * sectionWidth + INNER_VERT_SPACE,
+							INNER_HORIZ_SPACE * (plynum/4 +1) });
+}
+void ManaAndHealth::setIcon(CharacterType character)
+{
+	m_charIcon.setTexture(ResourcesManager::instance().texture(int(character), int(CharacterAssets::SmallIcon)));
+}
+float ManaAndHealth::getMana() const
+{
+	return m_manaBar.value;
+}
+float ManaAndHealth::getHealth() const
+{
+	return m_healthBar.value;
+}
+//
 //void ManaAndHealth::decrease(float& bar,float value) 
 //{
 //	bar -= value;
