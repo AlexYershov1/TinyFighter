@@ -209,6 +209,27 @@ ResourcesManager::ResourcesManager()
     m_animationData[int(AttackType::FireStatic)] = staticFireData();
     m_animationData[int(AttackType::IceStatic)] = staticIceData();
 
+    // loading audio
+    sf::SoundBuffer audio;
+
+    audio.loadFromFile("burning.wav");
+    m_audio.emplace((int)ActionType::Burning, audio);
+
+    audio.loadFromFile("freeze-hit.wav");
+    m_audio.emplace((int)ActionType::Freezing, audio);
+
+    audio.loadFromFile("punch-hit.wav");
+    m_audio.emplace((int)ActionType::Smacked, audio);
+
+    audio.loadFromFile("freeze_dynamic.wav");
+    m_audio.emplace((int)AttackType::IceDynamic, audio);
+
+    audio.loadFromFile("firen-dynamic.wav");
+    m_audio.emplace((int)AttackType::FireDynamic, audio);
+
+    audio.loadFromFile("firen-static.wav");
+    m_audio.emplace((int)AttackType::FireStatic, audio);
+
     //load Arenas
     loadArenaImages("bc2.png","bc5.png", int(ArenaType::Arena1));
     loadArenaImages("forest1.png","bc5.png", int(ArenaType::Forest));

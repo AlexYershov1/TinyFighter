@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <vector>
 #include "AnimationData.h"
 #include "macros.h"
@@ -20,6 +21,7 @@ public:
     const sf::Texture* menuBGTexture() const { return &m_MenuBackground; }
     const sf::Texture* arrowTexture() const { return &m_arrow; }
     const sf::Font& font() const { return m_font; }
+    const sf::SoundBuffer& getSound(int choice) const { return m_audio.at(choice); }
 
     const AnimeMap& animationData(CharacterType character) { return m_animationData[int(character)]; }
     const AnimeMap& animationData(AttackType attack) { return m_animationData[int(attack)]; }
@@ -30,6 +32,7 @@ private:
 	ResourcesManager();
     std::vector<std::vector<sf::Texture>> m_textures;
     std::vector<std::vector<sf::Texture>> m_BGtextures; //backgroung textures
+    std::unordered_map<int, sf::SoundBuffer> m_audio;
     std::vector<AnimeMap> m_animationData;
     sf::Texture m_MenuBackground;
     sf::Texture m_arrow;
