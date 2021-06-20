@@ -21,4 +21,5 @@ target_sources (oop2_project_Alexander1_Yershov1_Anael2_Zateikin2 PRIVATE "main.
 																		  "Menu/ChooseCharacter.cpp"
 																		  "Menu/GenericMenu.cpp"
 																		  "Menu/ChooseArena.cpp"
-																		  "Menu/ChooseDifficulty.cpp")
+																		  "Menu/ChooseDifficulty.cpp"
+																		  "Character/ManaAndHealth.cpp")

@@ -48,7 +48,7 @@ void Arena::setArenaBackground(ArenaType arenaType)
 	m_ground.setPosition({ 0,float(WINDOW_HEIGHT - TERRAIN_HIGHT) });
 }
 
-void Arena::draw(sf::RenderWindow& window)
+void Arena::draw(sf::RenderWindow& window) const
 {
 	window.draw(m_background);
 	window.draw(m_ground);

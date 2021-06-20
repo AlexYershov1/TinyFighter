@@ -10,7 +10,7 @@ class GameObject
 public:
 	GameObject(const sf::Vector2f&);
 	virtual ~GameObject() = default;
-	virtual void draw(sf::RenderWindow&) ; 
+	virtual void draw(sf::RenderWindow&) const ; 
 	virtual void move(const sf::Time&, Arena&) = 0;
 	virtual void update(const sf::Time&) = 0;
 	virtual void correctOwnersPtr() = 0;

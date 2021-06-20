@@ -42,13 +42,21 @@ const auto OFFSET_SPECIAL_ATTACK_X = 20.f;
 const auto OFFSET_SPECIAL_ATTACK_Y = 40.f;
 
 // game statistics
-const int MAX_MANA = 100;
-const int MAX_HEALTH = 100;
+//const int MAX_MANA = 100;
+//const int MAX_HEALTH = 100;
 const auto SPECIAL_DELAY = sf::seconds(1.f);
 
 // charecters location
 const sf::Vector2f INITIAL_LOC = { 100.f ,float(WINDOW_HEIGHT - TERRAIN_HIGHT * 0.90f )};
 const auto LOC_OFFSET = 20.f;
+
+//Mana and Helath
+const float BAR_WIDTH = 100.f;
+const float BAR_HEIGHT = 20.f;
+const float MAX_HEALTH = 100.f;
+const float MAX_MANA = 100.f;
+const float SHADOW_THICKNESS = 1.f;
+
 
 enum class ActionType
 {

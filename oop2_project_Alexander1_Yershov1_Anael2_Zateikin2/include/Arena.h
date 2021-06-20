@@ -30,7 +30,7 @@ public:
 
 	void setArenaBackground(ArenaType);
 
-	void draw(sf::RenderWindow&);
+	void draw(sf::RenderWindow&) const;
 	void move(const sf::Time&);
 	void update(const sf::Time&);
 	void collision();

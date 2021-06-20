@@ -8,7 +8,7 @@ GameObject::GameObject(const sf::Vector2f& loc)
 	m_picture.setPosition(loc);
 }
 
-void GameObject::draw(sf::RenderWindow& window)
+void GameObject::draw(sf::RenderWindow& window) const
 {
 	window.draw(m_picture);
 }

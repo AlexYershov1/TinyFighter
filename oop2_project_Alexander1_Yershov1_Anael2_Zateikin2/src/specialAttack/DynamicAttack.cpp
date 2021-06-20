@@ -26,7 +26,7 @@ void DynamicAttack::update(const sf::Time& deltaTime)
 {
 	if (m_action.first == ActionType::hit)
 	{
-		m_animation.setAnimationTime(SlowAnimationTime);
+		//m_animation.setAnimationTime(SlowAnimationTime);
 		m_speed = 0;
 	}
 	
