@@ -30,7 +30,7 @@ public:
 
 	void setArenaBackground(ArenaType);
 
-	void draw(sf::RenderWindow&) const;
+	void draw(sf::RenderWindow&);
 	void move(const sf::Time&);
 	void update(const sf::Time&);
 	void collision();
@@ -40,7 +40,7 @@ private:
 	sf::RectangleShape m_background;
 	sf::RectangleShape m_ground;
 	
-	std::vector <std::shared_ptr<GameObject>> m_gameObjects;
-	std::vector<std::shared_ptr<GameObject>> m_tempHolder;
+	std::vector <std::unique_ptr<GameObject>> m_gameObjects;
+	std::vector<std::unique_ptr<GameObject>> m_tempHolder;
 	std::vector<const sf::Vector2f*> m_playerLocations;
 };

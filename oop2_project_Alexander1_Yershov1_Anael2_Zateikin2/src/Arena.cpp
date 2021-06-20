@@ -17,9 +17,9 @@ void Arena::createPlayer( CharacterType type )
 {
 	auto location = INITIAL_LOC;
 	location.x += LOC_OFFSET * m_gameObjects.size();
-	auto ply = std::make_shared<Player>(location, type);
-	m_gameObjects.push_back(ply);
+	auto ply = std::make_unique<Player>(location, type);
 	m_playerLocations.push_back(ply->getLocation());
+	m_gameObjects.push_back(std::move(ply));
 }
 
 void Arena::createEnemy(CharacterType type)
@@ -27,14 +27,14 @@ void Arena::createEnemy(CharacterType type)
 	auto location = INITIAL_LOC;		////CHANGE TO CORNERS
 	location.x = WINDOW_WIDTH - LOC_OFFSET ;
 	location.y += LOC_OFFSET * (m_gameObjects.size()-1);
-	m_gameObjects.emplace_back(std::make_shared<Enemy>(m_playerLocations, location, type));
+	m_gameObjects.emplace_back(std::make_unique<Enemy>(m_playerLocations, location, type));
 }
 
 void Arena::createSpecialAttack(ActionType actionType, AttackType attackType, Character* owner)
 {
 	actionType == ActionType::SpecialDynamic ?
-		m_tempHolder.emplace_back(std::make_shared<DynamicAttack>(owner->getLocation(), attackType, owner)) :
-		m_tempHolder.emplace_back(std::make_shared<StaticAttack>(owner->getLocation(), attackType, owner));
+		m_tempHolder.emplace_back(std::make_unique<DynamicAttack>(owner->getLocation(), attackType, owner)) :
+		m_tempHolder.emplace_back(std::make_unique<StaticAttack>(owner->getLocation(), attackType, owner));
 }
 
 void Arena::setArenaBackground(ArenaType arenaType)
@@ -49,14 +49,13 @@ void Arena::setArenaBackground(ArenaType arenaType)
 	m_ground.setPosition({ 0,float(WINDOW_HEIGHT - TERRAIN_HIGHT) });
 }
 
-bool sortingByLocation(GameObject* first, GameObject* second) { return first->y() < second->y(); }
-
-void Arena::draw(sf::RenderWindow& window) const
+void Arena::draw(sf::RenderWindow& window)
 {
 	window.draw(m_background);
 	window.draw(m_ground);
 	
-	std::sort(m_gameObjects.begin(), m_gameObjects.end(), sortingByLocation);
+	std::sort(m_gameObjects.begin(), m_gameObjects.end(), 
+				[](const std::unique_ptr<GameObject>& first, const std::unique_ptr<GameObject>& second) { return first->y() < second->y(); });
 
 	for (const auto& object : m_gameObjects)
 		object->draw(window);
