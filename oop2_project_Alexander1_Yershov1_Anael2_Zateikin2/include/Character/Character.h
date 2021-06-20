@@ -25,6 +25,7 @@ protected:
 	std::pair<AttackType, AttackType> m_specialAttacks;	// first is dynamic and second is static
 	int m_health, m_mana;
 	sf::Clock m_specialAttackClock;
+	sf::Clock m_disabled;
 
 	float operator-(const sf::Vector2f*) const;
 	float x() const;

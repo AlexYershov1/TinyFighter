@@ -11,6 +11,8 @@ Player::Player(const sf::Vector2f& location , CharacterType character)
 
 void Player::move(const sf::Time& deltaTime, Arena& arena)
 {
+    if (inDisabledState(m_action.first, m_disabled.getElapsedTime()))
+        return;
     m_action = getActionFromKey(arena);
 
     Character::move(deltaTime, arena);
@@ -23,6 +25,9 @@ const sf::Vector2f* Player::getLocation() const
 
 Action Player::getActionFromKey(Arena& arena)
 {
+    /*if (inDisabledState(m_action.first, m_disabled.getElapsedTime()))
+        return m_action;*/
+
     static const
         std::initializer_list<std::pair<sf::Keyboard::Key, Action>>
         keyToVectorMapping =
@@ -52,7 +57,7 @@ Action Player::getActionFromKey(Arena& arena)
                 pair.second.second = getFacingDirection();
                 break;
             case ActionType::SpecialDynamic:
-                m_mana -= 10;
+                //m_mana -= 10;
                 // continue to fall through to static
             case ActionType::SpecialStatic:
                 attackType = type == ActionType::SpecialDynamic ? m_specialAttacks.first : m_specialAttacks.second;
@@ -61,14 +66,11 @@ Action Player::getActionFromKey(Arena& arena)
                     m_specialAttackClock.restart();
                     arena.createSpecialAttack(type, attackType, this);
                     m_action.first = type;
-                    m_mana -= 20;
+                    //m_mana -= 20;
+                    m_disabled.restart();
                 }
                 else
                     pair.second.first = ActionType::Standing;
-                break;
-            case ActionType::Burning:
-                break;
-            case ActionType::Freezing:
                 break;
             default:
                 m_speed = SPEED;

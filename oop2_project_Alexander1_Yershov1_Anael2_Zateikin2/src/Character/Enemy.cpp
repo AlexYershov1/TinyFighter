@@ -15,6 +15,8 @@ Enemy::Enemy(std::vector<const sf::Vector2f*>& ply, const sf::Vector2f& location
 
 void Enemy::move(const sf::Time& deltaTime, Arena& arena)
 {
+	if (inDisabledState(m_action.first, m_disabled.getElapsedTime()))
+		return;
 	engageClosestPlayer(arena);
 
 	// makes enemy wait based on difficulity
