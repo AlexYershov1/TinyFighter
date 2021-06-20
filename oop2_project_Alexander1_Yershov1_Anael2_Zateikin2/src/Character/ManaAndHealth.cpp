@@ -1,6 +1,6 @@
 #include "Character/ManaAndHealth.h"
 
-const float INCREASE_RATE = 10.f;
+const float INCREASE_RATE = 60.f;
 
 ManaAndHealth::ManaAndHealth()
 {
@@ -19,10 +19,10 @@ ManaAndHealth::ManaAndHealth()
 	m_healthBar.rectangles.first.setOutlineThickness(SHADOW_THICKNESS); //shdow
 	m_healthBar.rectangles.second.setFillColor(sf::Color(225, 0, 0, 255));
 
-	m_manaBar.rectangles.first.setFillColor(sf::Color(20, 225, 0, 220));
+	m_manaBar.rectangles.first.setFillColor(sf::Color(20, 0, 225, 220));
 	m_manaBar.rectangles.first.setOutlineColor(sf::Color(0, 0, 0, 100)); //shdow
 	m_manaBar.rectangles.first.setOutlineThickness(SHADOW_THICKNESS); //shdow
-	m_manaBar.rectangles.second.setFillColor(sf::Color(0, 225, 0, 255));
+	m_manaBar.rectangles.second.setFillColor(sf::Color(20, 150, 150, 255));
 }
 //
 //ManaAndHealth::ManaAndHealth(CharacterType character)
@@ -36,6 +36,7 @@ ManaAndHealth::~ManaAndHealth()
 
 void ManaAndHealth::draw(sf::RenderWindow& window) const
 {
+	window.draw(m_charIcon);
 	window.draw(m_healthBar.rectangles.first);
 	window.draw(m_healthBar.rectangles.second);
 	window.draw(m_manaBar.rectangles.first);
@@ -63,9 +64,15 @@ void ManaAndHealth::decreaseHealth(float value)
 
 void ManaAndHealth::setLocation(int plynum)
 {
-	static  float sectionWidth = m_charIcon.getGlobalBounds().width + BAR_WIDTH;//+ INNER_VERT_SPACE;
-	m_charIcon.setPosition({ float(plynum) * sectionWidth + INNER_VERT_SPACE,
-							INNER_HORIZ_SPACE * (plynum/4 +1) });
+	static  float sectionWidth = m_charIcon.getGlobalBounds().width + BAR_WIDTH + INNER_VERT_SPACE;
+	
+	sf::Vector2f pos = { float(plynum) * sectionWidth,float(plynum / 4)*BAR_HEIGHT };
+	m_charIcon.setPosition(pos);
+	m_healthBar.rectangles.first.setPosition({pos.x + m_charIcon.getGlobalBounds().width, pos.y });
+	m_healthBar.rectangles.second.setPosition(pos.x + m_charIcon.getGlobalBounds().width, pos.y);
+	m_manaBar.rectangles.first.setPosition(pos.x + m_charIcon.getGlobalBounds().width, pos.y+BAR_HEIGHT);
+	m_manaBar.rectangles.second.setPosition(pos.x + m_charIcon.getGlobalBounds().width, pos.y + BAR_HEIGHT);
+
 }
 void ManaAndHealth::setIcon(CharacterType character)
 {

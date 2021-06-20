@@ -17,7 +17,9 @@ Player::Player(const sf::Vector2f& location , CharacterType character, int plyNu
         std::make_pair(AttackType::FireDynamic, AttackType::FireStatic) : 
         std::make_pair(AttackType::IceDynamic, AttackType::IceStatic);
 
+    m_manaAndHealth.setIcon(character);
     m_manaAndHealth.setLocation(plyNum);
+    
     ++m_count;
 }
 
@@ -69,7 +71,7 @@ Action Player::getActionFromKey(Arena& arena)
                 pair.second.second = getFacingDirection();
                 break;
             case ActionType::SpecialDynamic:
-                //m_mana -= 10;
+                m_manaAndHealth.decreaseMana(10);
                 // continue to fall through to static
             case ActionType::SpecialStatic:
                 attackType = type == ActionType::SpecialDynamic ? m_specialAttacks.first : m_specialAttacks.second;
@@ -78,7 +80,7 @@ Action Player::getActionFromKey(Arena& arena)
                     m_specialAttackClock.restart();
                     arena.createSpecialAttack(type, attackType, this);
                     m_action.first = type;
-                    //m_mana -= 20;
+                    m_manaAndHealth.decreaseMana(20);
                     m_disabled.restart();
                 }
                 else
@@ -99,5 +101,11 @@ Action Player::getActionFromKey(Arena& arena)
 
 Player::~Player()
 {
+}
+
+void Player::draw(sf::RenderWindow& window) const
+{
+    m_manaAndHealth.draw(window);
+    GameObject::draw(window);
 }
 

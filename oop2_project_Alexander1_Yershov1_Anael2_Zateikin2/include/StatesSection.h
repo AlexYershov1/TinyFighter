@@ -10,7 +10,7 @@ class StatesSection
 public:
 	StatesSection();
 	~StatesSection();
-
+	void draw(sf::RenderWindow&) const;
 
 private:
 	sf::RectangleShape m_template;

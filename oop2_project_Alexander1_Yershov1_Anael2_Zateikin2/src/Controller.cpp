@@ -19,10 +19,6 @@ Controller::~Controller()
 void Controller::run() try
 {
 	m_menu.activateMenu(m_gameWindow, m_arena); //create objects
-	
-	/*auto ply = Player{ sf::Vector2f{40.f, 500.f}, CharacterType::Alex };
-	auto vecLoc = std::vector<const sf::Vector2f*>{ ply.getLocation() };
-	auto enemy = Enemy{ vecLoc, sf::Vector2f{150.f, 500.f}, CharacterType::Bandit };*/
 	m_arena.createArena();
 	// game loop
 
@@ -30,7 +26,7 @@ void Controller::run() try
 	{
 		//clear, draw , display
 		this->m_gameWindow.clear(sf::Color::White);
-		//m_states.draw(m_gameWindow);
+		m_states.draw(m_gameWindow);
 		m_arena.draw(m_gameWindow);
 		/*ply.draw(m_gameWindow);
 		enemy.draw(m_gameWindow);*/
