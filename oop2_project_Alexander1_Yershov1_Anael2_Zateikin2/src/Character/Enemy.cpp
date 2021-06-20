@@ -15,7 +15,7 @@ Enemy::Enemy(std::vector<const sf::Vector2f*>& ply, const sf::Vector2f& location
 
 void Enemy::move(const sf::Time& deltaTime, Arena& arena)
 {
-	if (inDisabledState(m_action.first, m_disabled.getElapsedTime()))
+	if (inDisabledState(deltaTime))
 		return;
 	engageClosestPlayer(arena);
 

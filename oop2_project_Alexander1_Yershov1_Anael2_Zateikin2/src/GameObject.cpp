@@ -22,3 +22,8 @@ bool GameObject::collidesWith(const GameObject& other) const
 {
 	return m_picture.getGlobalBounds().intersects(other.m_picture.getGlobalBounds());
 }
+
+float GameObject::y() const
+{
+	return m_picture.getPosition().y;
+}

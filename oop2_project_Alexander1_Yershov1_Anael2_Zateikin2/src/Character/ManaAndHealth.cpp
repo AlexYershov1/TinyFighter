@@ -56,9 +56,9 @@ void ManaAndHealth::decreaseHealth(float value)
 	m_healthBar.update(-value, MAX_HEALTH);
 }
 
-void ManaAndHealth::decrease(float& bar,float value) 
-{
-	bar -= value;
-	if (bar < 0)
-		bar = 0;	//set to zero
-}
+//void ManaAndHealth::decrease(float& bar,float value) 
+//{
+//	bar -= value;
+//	if (bar < 0)
+//		bar = 0;	//set to zero
+//}

@@ -15,7 +15,7 @@ public:
 
 private:
 	void update(Action);
-
+	void burnigFreezingCase(Action);
 	const AnimeMap& m_animeMap;
 	sf::Time m_elapsed = {};
 	sf::Time m_animationTime;

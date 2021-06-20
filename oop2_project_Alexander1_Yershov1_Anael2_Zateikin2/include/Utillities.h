@@ -7,4 +7,3 @@ class Arena;
 
 bool outOfBounds(const sf::Vector2f&);
 void correctDir(sf::Sprite&, Direction);
-bool inDisabledState(ActionType, sf::Time);
