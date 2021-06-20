@@ -10,15 +10,15 @@ int Player::getCount()
     return m_count;
 }
 
-Player::Player(const sf::Vector2f& location , CharacterType character, int plyNum)
-	: Character(location, character), m_playerNum(plyNum)//, m_manaAndHealth(character)
+Player::Player(const sf::Vector2f& location , CharacterType character)
+	: Character(location, character), m_playerNum(m_count)//, m_manaAndHealth(character)
 {
     m_specialAttacks = character == CharacterType::Alex ?
         std::make_pair(AttackType::FireDynamic, AttackType::FireStatic) : 
         std::make_pair(AttackType::IceDynamic, AttackType::IceStatic);
 
     m_manaAndHealth.setIcon(character);
-    m_manaAndHealth.setLocation(plyNum);
+    m_manaAndHealth.setLocation(m_playerNum);
     
     ++m_count;
 }

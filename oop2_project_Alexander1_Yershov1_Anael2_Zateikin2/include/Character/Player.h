@@ -5,7 +5,7 @@
 class Player : public Character
 {
 public:
-	Player(const sf::Vector2f&, CharacterType, int);
+	Player(const sf::Vector2f&, CharacterType);
 	void move(const sf::Time&, Arena&);
 	
 	const sf::Vector2f* getLocation() const;
