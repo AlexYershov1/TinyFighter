@@ -1,6 +1,6 @@
 #include "Character/ManaAndHealth.h"
 
-const float INCREASE_RATE = 60.f;
+const float INCREASE_RATE = 10.f;
 
 ManaAndHealth::ManaAndHealth()
 {
@@ -14,7 +14,7 @@ ManaAndHealth::ManaAndHealth()
 	m_manaBar.rectangles.first.setSize({ BAR_WIDTH, BAR_HEIGHT });
 	m_manaBar.rectangles.second.setSize({ BAR_WIDTH, BAR_HEIGHT });
 	//colors
-	m_healthBar.rectangles.first.setFillColor(sf::Color(225, 20, 0, 220));
+	m_healthBar.rectangles.first.setFillColor(sf::Color(168, 65, 65, 220));
 	m_healthBar.rectangles.first.setOutlineColor(sf::Color(0, 0, 0, 100)); //shdow
 	m_healthBar.rectangles.first.setOutlineThickness(SHADOW_THICKNESS); //shdow
 	m_healthBar.rectangles.second.setFillColor(sf::Color(225, 0, 0, 255));
@@ -56,6 +56,14 @@ void ManaAndHealth::decreaseMana(float value)
 	
 }
 
+void ManaAndHealth::decreaseMana(ActionType type)
+{
+	if (type == ActionType::SpecialDynamic)
+		decreaseMana(SPECIAL_DINAM_MANA);
+	else if (type == ActionType::SpecialStatic)
+		decreaseMana(SPECIAL_STATIC_MANA);
+}
+
 void ManaAndHealth::decreaseHealth(float value)
 {
 	//decrease(m_healthBar.value, value);
@@ -69,7 +77,7 @@ void ManaAndHealth::setLocation(int plynum)
 	sf::Vector2f pos = { float(plynum) * sectionWidth,float(plynum / 4)*BAR_HEIGHT };
 	m_charIcon.setPosition(pos);
 	m_healthBar.rectangles.first.setPosition({pos.x + m_charIcon.getGlobalBounds().width, pos.y });
-	m_healthBar.rectangles.second.setPosition(pos.x + m_charIcon.getGlobalBounds().width, pos.y);
+	m_healthBar.rectangles.second.setPosition(pos.x + m_charIcon.getGlobalBounds().width + 100, pos.y);
 	m_manaBar.rectangles.first.setPosition(pos.x + m_charIcon.getGlobalBounds().width, pos.y+BAR_HEIGHT);
 	m_manaBar.rectangles.second.setPosition(pos.x + m_charIcon.getGlobalBounds().width, pos.y + BAR_HEIGHT);
 

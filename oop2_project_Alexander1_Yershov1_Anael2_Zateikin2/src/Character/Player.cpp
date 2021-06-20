@@ -71,7 +71,7 @@ Action Player::getActionFromKey(Arena& arena)
                 pair.second.second = getFacingDirection();
                 break;
             case ActionType::SpecialDynamic:
-                m_manaAndHealth.decreaseMana(10);
+                //m_manaAndHealth.decreaseMana(10);
                 // continue to fall through to static
             case ActionType::SpecialStatic:
                 attackType = type == ActionType::SpecialDynamic ? m_specialAttacks.first : m_specialAttacks.second;
@@ -80,7 +80,7 @@ Action Player::getActionFromKey(Arena& arena)
                     m_specialAttackClock.restart();
                     arena.createSpecialAttack(type, attackType, this);
                     m_action.first = type;
-                    m_manaAndHealth.decreaseMana(20);
+                    m_manaAndHealth.decreaseMana(type);
                     m_disabled.restart();
                 }
                 else

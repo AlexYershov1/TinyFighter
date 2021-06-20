@@ -39,12 +39,13 @@ namespace
             //for later - change to take damage and move to Character
             enm.setActionType(ActionType::Smacked);
             effect.play();
-
+            enm.decreaseHealth(PUNCH_DAMAGE);
         }
         else if ((enm.getActionType() == ActionType::Punching) && (enm.facing(ply)))
         {
             ply.setActionType(ActionType::Smacked);
             effect.play();
+            ply.decreaseHealth(PUNCH_DAMAGE);
         }
         
     }
@@ -62,6 +63,7 @@ namespace
             return;
         
         attack.getKind() == AttackType::FireDynamic ? obj.setActionType(ActionType::Burning) : obj.setActionType(ActionType::Freezing);
+        obj.decreaseHealth(SPECIAL_DINAM_DAMAGE);
         attack.setHit();
     }
     void characterDynamicAttack(GameObject& character, GameObject& dynamicAttack)
@@ -78,6 +80,7 @@ namespace
             return;
 
         attack.getKind() == AttackType::FireStatic ? obj.setActionType(ActionType::Burning) : obj.setActionType(ActionType::Freezing);
+        obj.decreaseHealth(SPECIAL_STATIC_DAMAGE);
     }
     void characterstaticAttack(GameObject& character, GameObject& staticAttack)
     {

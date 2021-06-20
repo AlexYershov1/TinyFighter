@@ -16,7 +16,11 @@ Enemy::Enemy(std::vector<const sf::Vector2f*>& ply, const sf::Vector2f& location
 void Enemy::move(const sf::Time& deltaTime, Arena& arena)
 {
 	if (inDisabledState(deltaTime))
+	{
+		//Action(ActionType::Standing, Direction::Stay);
 		return;
+	}
+		
 	engageClosestPlayer(arena);
 
 	// makes enemy wait based on difficulity
@@ -50,7 +54,10 @@ void Enemy::engageClosestPlayer(Arena& arena)
 	if (facing(res))
 	{
 		if (distance < collisionDistance)
+		{
 			m_action = Action{ ActionType::Punching, Direction::Stay };
+			m_disabled.restart();
+		}
 		else if (abs(res->y - this->y()) < EPSILON && m_smart)
 			attemptSpecialAbility(distance, res, arena);
 		else
@@ -89,11 +96,13 @@ void Enemy::attemptSpecialAbility(float distance, const sf::Vector2f* ply, Arena
 	if (distance < collisionDistance + 30 && enoughMana(ActionType::SpecialStatic))
 	{
 		arena.createSpecialAttack(ActionType::SpecialStatic, m_specialAttacks.second, this);
+		m_disabled.restart();
 		m_action.first = ActionType::SpecialStatic;
 	}
 	else if (enoughMana(ActionType::SpecialDynamic))
 	{
 		arena.createSpecialAttack(ActionType::SpecialDynamic, m_specialAttacks.first, this);
+		m_disabled.restart();
 		m_action.first = ActionType::SpecialDynamic;
 	}
 	else
