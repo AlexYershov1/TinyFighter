@@ -17,7 +17,7 @@ public:
 	bool isAlive() const;
 
 	bool collidesWith(const GameObject&) const;
-
+	float y() const;
 protected:
 	sf::Sprite m_picture;
 	Action m_action;

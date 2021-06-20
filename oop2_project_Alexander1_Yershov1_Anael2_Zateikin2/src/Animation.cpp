@@ -19,16 +19,17 @@ Animation::~Animation()
 bool Animation::update (sf::Time delta, Action action)
 {
     m_elapsed += delta;
-    auto x = 0;
+    
     if (m_elapsed >= m_animationTime)
     {
         m_elapsed -= m_animationTime;
         ++m_index;
 
-        //export to a new update with new parameters (different animationtime)
+        // case special attack completed a hit
         if (action.first == ActionType::hit && m_index == m_animeMap.m_data.find(action.first)->second.size())
             return true;
-            
+        burnigFreezingCase(action);
+
         m_index %= m_animeMap.m_data.find(action.first) ->second.size();
         update(action);
     }
@@ -43,6 +44,17 @@ void Animation::update(Action action)
     //if ((action.second == Direction::Left && m_sprite.getScale().x > 0) ||
     //    (action.second == Direction::Right && m_sprite.getScale().x < 0))
     //    m_sprite.scale(-1, 1);
+}
+
+void Animation::burnigFreezingCase(Action action)
+{
+    // case character is burning or freezing
+    if ((action.first == ActionType::Freezing || action.first == ActionType::Burning)
+        && m_index == m_animeMap.m_data.find(action.first)->second.size() - 1)
+    {
+        update(action);
+        m_index--;
+    }
 }
 
 // update animation for special dynamic attack

@@ -20,6 +20,7 @@ public:
 	Direction getDirection() const;
 	Direction getFacingDirection() const;
 	sf::Vector2f getOrigin();
+	sf::FloatRect getBoundingRectangle() const;
 	~Character();
 protected:
 	Animation m_animation;
@@ -31,8 +32,8 @@ protected:
 
 	float operator-(const sf::Vector2f*) const;
 	float x() const;
-	float y() const;
 	bool enoughMana(ActionType) const;
+	bool inDisabledState(const sf::Time&);
 private:
 
 };

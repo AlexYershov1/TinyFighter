@@ -23,7 +23,7 @@ Player::Player(const sf::Vector2f& location , CharacterType character, int plyNu
 
 void Player::move(const sf::Time& deltaTime, Arena& arena)
 {
-    if (inDisabledState(m_action.first, m_disabled.getElapsedTime()))
+    if (inDisabledState(deltaTime))
         return;
     m_action = getActionFromKey(arena);
 

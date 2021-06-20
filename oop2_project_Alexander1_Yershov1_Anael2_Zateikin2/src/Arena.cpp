@@ -1,6 +1,7 @@
 #include "Arena.h"
 #include "Character/Player.h"
 #include "Character/Enemy.h"
+#include <algorithm>
 
 Arena::Arena()
 {
@@ -48,11 +49,15 @@ void Arena::setArenaBackground(ArenaType arenaType)
 	m_ground.setPosition({ 0,float(WINDOW_HEIGHT - TERRAIN_HIGHT) });
 }
 
+bool sortingByLocation(GameObject* first, GameObject* second) { return first->y() < second->y(); }
+
 void Arena::draw(sf::RenderWindow& window) const
 {
 	window.draw(m_background);
 	window.draw(m_ground);
 	
+	std::sort(m_gameObjects.begin(), m_gameObjects.end(), sortingByLocation);
+
 	for (const auto& object : m_gameObjects)
 		object->draw(window);
 }

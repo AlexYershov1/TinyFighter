@@ -17,14 +17,3 @@ void correctDir(sf::Sprite& pic, Direction dir)
 		(dir == Direction::Right && pic.getScale().x < 0))
 		pic.scale(-1, 1);
 }
-
-bool inDisabledState(ActionType state, sf::Time timePassed)
-{
-	if ((state == ActionType::Burning || state == ActionType::Freezing) &&
-		timePassed.asSeconds() < 1.f)
-		return true;
-	if ((state == ActionType::SpecialDynamic || state == ActionType::SpecialStatic) &&
-		timePassed.asSeconds() < 0.3)
-		return true;
-	return false;
-}

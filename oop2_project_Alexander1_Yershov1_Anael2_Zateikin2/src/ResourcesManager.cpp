@@ -149,27 +149,28 @@ AnimeMap ResourcesManager::staticFireData() const
 
 AnimeMap ResourcesManager::staticIceData() const
 {
-    const auto size = sf::Vector2i(80, 80);
-    const auto initSpace = sf::Vector2i(1, 2);
+    const auto size = sf::Vector2i(125, 120);
+    const auto initSpace = sf::Vector2i(7, 2);
 
     auto iceObj = AnimeMap{};
-    auto currentStart = initSpace;
+    auto currentStart = sf::Vector2i(0, 0);
 
     auto nextStart = [&]()
     {
         currentStart.x += size.x;
-        if (currentStart.x > size.x * 5)
+        currentStart.x += initSpace.x;
+        if (currentStart.x > size.x * 6)
         {
-            currentStart.x %= size.x * 5;
+            currentStart.x %= size.x * 6;
             currentStart.y += size.y;
         }
 
         return currentStart;
     };
 
-    for (int repeat = 0; repeat < 21; repeat++)  nextStart();
     iceObj.m_data[ActionType::Standing].emplace_back(currentStart, size);
-    for (int repeat = 0; repeat < 6; repeat++)  iceObj.m_data[ActionType::hit].emplace_back(nextStart(), size);
+    iceObj.m_data[ActionType::hit].emplace_back(currentStart, size);
+    for (int repeat = 0; repeat < 5; repeat++)  iceObj.m_data[ActionType::hit].emplace_back(nextStart(), size);
 
     return iceObj;
 }

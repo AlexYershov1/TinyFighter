@@ -60,6 +60,7 @@ void ManaAndHealth::decreaseHealth(float value)
 	//decrease(m_healthBar.value, value);
 	m_healthBar.update(-value, MAX_HEALTH);
 }
+
 void ManaAndHealth::setLocation(int plynum)
 {
 	static  float sectionWidth = m_charIcon.getGlobalBounds().width + BAR_WIDTH;//+ INNER_VERT_SPACE;
