@@ -12,6 +12,7 @@ public:
 
 	Action getActionFromKey(Arena&);
 	virtual ~Player();
+	virtual void draw(sf::RenderWindow&) const;
 
 	static int getCount();
 private:
