@@ -16,7 +16,7 @@ void Arena::createPlayer( CharacterType type )
 {
 	auto location = INITIAL_LOC;
 	location.x += LOC_OFFSET * m_gameObjects.size();
-	auto ply = std::make_shared<Player>(location, type);
+	auto ply = std::make_shared<Player>(location, type, Player::getCount());
 	m_gameObjects.push_back(ply);
 	m_playerLocations.push_back(ply->getLocation());
 }

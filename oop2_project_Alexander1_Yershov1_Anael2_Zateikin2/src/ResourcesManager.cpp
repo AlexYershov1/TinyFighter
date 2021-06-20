@@ -184,10 +184,14 @@ ResourcesManager::ResourcesManager()
     m_BGtextures(int(ArenaType::Max))
 {
     //create characters' animations
-    loadImage("firen_0.png", int(CharacterType::Alex));
-    loadImage("firen_f.png", int(CharacterType::Alex));
+    loadImage("firen_0.png", int(CharacterType::Alex)); //sprite sheet
+    loadImage("firen_f.png", int(CharacterType::Alex)); //thumbnail
+    loadImage("firen_s.png", int(CharacterType::Alex)); //small Icon
+    
     loadImage("freeze_0.png", int(CharacterType::Anael));
     loadImage("freeze_f.png", int(CharacterType::Anael));
+    loadImage("freeze_s.png", int(CharacterType::Anael)); 
+    
     loadImage("bandit_0.png", int(CharacterType::Bandit));
     loadImage("firen_ball.png", int(AttackType::FireDynamic));
     loadImage("freeze_ball.png", int(AttackType::IceDynamic));

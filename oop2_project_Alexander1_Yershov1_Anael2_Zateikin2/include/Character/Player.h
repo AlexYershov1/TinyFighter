@@ -5,7 +5,7 @@
 class Player : public Character
 {
 public:
-	Player(const sf::Vector2f&, CharacterType);
+	Player(const sf::Vector2f&, CharacterType, int);
 	void move(const sf::Time&, Arena&);
 	
 	const sf::Vector2f* getLocation() const;
@@ -13,5 +13,8 @@ public:
 	Action getActionFromKey(Arena&);
 	virtual ~Player();
 
+	static int getCount();
 private:
+	int m_playerNum;
+	static int m_count;
 };

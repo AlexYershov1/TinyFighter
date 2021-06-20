@@ -3,8 +3,8 @@
 
 Character::Character(const sf::Vector2f& location, CharacterType character)
 	: GameObject(location),
-	  m_animation(ResourcesManager::instance().animationData(character), m_picture),
-	  m_mana(100), m_health(0)
+	  m_animation(ResourcesManager::instance().animationData(character), m_picture)//,
+	  //m_mana(100), m_health(0)
 {
 	m_picture.setTexture(ResourcesManager::instance().texture((int)character, 0));
 	m_picture.setOrigin(m_picture.getLocalBounds().height / 2, m_picture.getLocalBounds().width / 2);	// for correct rotation, setting origin at center
@@ -87,8 +87,8 @@ float Character::y() const
 
 bool Character::enoughMana(ActionType attack) const
 {
-	if (attack == ActionType::SpecialDynamic && m_mana >= 30 ||
-		attack == ActionType::SpecialStatic && m_mana >= 20)
+	if (attack == ActionType::SpecialDynamic && m_manaAndHealth.getMana() >= 30 ||
+		attack == ActionType::SpecialStatic && m_manaAndHealth.getMana() >= 20)
 		return true;
 	return false;
 }

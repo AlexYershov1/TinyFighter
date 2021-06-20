@@ -2,11 +2,23 @@
 #include "Character/Player.h"
 #include "Arena.h"
 
-Player::Player(const sf::Vector2f& location , CharacterType character)
-	: Character(location, character)
+int Player::m_count = 0;
+
+
+int Player::getCount()
+{
+    return m_count;
+}
+
+Player::Player(const sf::Vector2f& location , CharacterType character, int plyNum)
+	: Character(location, character), m_playerNum(plyNum)//, m_manaAndHealth(character)
 {
     m_specialAttacks = character == CharacterType::Alex ?
-        std::make_pair(AttackType::FireDynamic, AttackType::FireStatic) : std::make_pair(AttackType::IceDynamic, AttackType::IceStatic);
+        std::make_pair(AttackType::FireDynamic, AttackType::FireStatic) : 
+        std::make_pair(AttackType::IceDynamic, AttackType::IceStatic);
+
+    m_manaAndHealth.setLocation(plyNum);
+    ++m_count;
 }
 
 void Player::move(const sf::Time& deltaTime, Arena& arena)
@@ -88,3 +100,4 @@ Action Player::getActionFromKey(Arena& arena)
 Player::~Player()
 {
 }
+
