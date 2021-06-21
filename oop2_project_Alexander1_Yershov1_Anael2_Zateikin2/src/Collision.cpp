@@ -27,39 +27,11 @@ namespace
 {
     void playerEnemy(GameObject& player, GameObject& enemy)
     {
-        static sf::Sound effect;
-        effect.setBuffer(ResourcesManager::instance().getSound((int)ActionType::Smacked));
-        effect.setVolume(100);
-        auto& ply = static_cast<Player&>(player);
-        auto& enm = static_cast<Enemy&>(enemy);
+        auto& ply = static_cast<Character&>(player);
+        auto& enm = static_cast<Character&>(enemy);
 
-        //check if someone is punching
-        if ((ply.getActionType() == ActionType::Punching || ply.punchDelayed()) && (ply.facing(enm)))
-        {
-            //check if facing enemy
-            //for later - change to take damage and move to Character
-            enm.setActionType(ActionType::Smacked);
-            if (!ply.punchDelayed())
-            {
-                effect.play();
-                enm.decreaseHealth(PUNCH_DAMAGE);
-            }
-        }
-        else if ((enm.getActionType() == ActionType::Punching || enm.punchDelayed()) && (enm.facing(ply)))
-        {
-            ply.setActionType(ActionType::Smacked);
-            
-            if (!enm.punchDelayed())
-            {
-                effect.play();
-                ply.decreaseHealth(PUNCH_DAMAGE);
-            }
-        }
-        
-    }
-    void enemyPlayer(GameObject& enemy, GameObject& player)
-    {
-        playerEnemy(player, enemy);
+        twoCharactersCollision(ply, enm);
+        twoCharactersCollision(enm, ply);
     }
 
     void dynamicAttackCharacter(GameObject& dynamicAttack, GameObject& character)
@@ -104,7 +76,7 @@ namespace
     {
         HitMap phm;
         phm[Key(typeid(Player), typeid(Enemy))] = &playerEnemy;
-        phm[Key(typeid(Enemy), typeid(Player))] = &enemyPlayer;
+        phm[Key(typeid(Enemy), typeid(Player))] = &playerEnemy;
         phm[Key(typeid(DynamicAttack), typeid(Player))] = &dynamicAttackCharacter;
         phm[Key(typeid(Player), typeid(DynamicAttack))] = &characterDynamicAttack;
         phm[Key(typeid(DynamicAttack), typeid(Enemy))] = &dynamicAttackCharacter;

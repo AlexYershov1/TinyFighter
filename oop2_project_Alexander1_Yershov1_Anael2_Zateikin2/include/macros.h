@@ -14,6 +14,9 @@ const int TERRAIN_HIGHT = 200;
 const float ICON_SIZE = 512;
 const int SEED = 7;
 
+// sounds
+const auto VOLUME = 10.f;
+
 //menu graphics
 const int HEADER_SIZE = 60;
 const int REG_CHAR_SIZE = 25;
