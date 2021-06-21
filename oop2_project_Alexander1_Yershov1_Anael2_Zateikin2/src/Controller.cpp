@@ -9,6 +9,9 @@ Controller::Controller()
 	: m_gameWindow(sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Game Window",
 		sf::Style::Titlebar | sf::Style::Close))
 {
+	//auto view = sf::View(sf::FloatRect(0,0,WINDOW_WIDTH,WINDOW_HEIGHT));
+	//auto view = sf::View(sf::Vector2f(0,0),sf::Vector2f(WINDOW_WIDTH,WINDOW_HEIGHT));
+	//m_gameWindow.setView(view);
 	srand(SEED);
 }
 

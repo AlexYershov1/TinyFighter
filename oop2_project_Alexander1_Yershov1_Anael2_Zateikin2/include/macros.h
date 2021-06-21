@@ -7,6 +7,8 @@
 //grapics
 const int WINDOW_WIDTH = 800;
 const int WINDOW_HEIGHT = 600;
+const float FULL_WINDOW_W = 1200;
+
 const int CAPTION_HEIGHT = 100;
 const int TERRAIN_HIGHT = 200;
 const float ICON_SIZE = 512;

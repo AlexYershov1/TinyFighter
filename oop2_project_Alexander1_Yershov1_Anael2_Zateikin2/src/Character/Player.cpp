@@ -37,15 +37,13 @@ const sf::Vector2f* Player::getLocation() const
     return &(m_picture.getPosition());
 }
 
-Action Player::getActionFromKey(Arena& arena)
+Action Player::getActionFromKey(Arena& arena) //auto vecOfPAirs = {{}}
 {
-    /*if (inDisabledState(m_action.first, m_disabled.getElapsedTime()))
-        return m_action;*/
-
     static const
-        std::initializer_list<std::pair<sf::Keyboard::Key, Action>>
+       std::initializer_list<std::initializer_list<std::pair<sf::Keyboard::Key, Action>>>
         keyToVectorMapping =
-    {
+    { 
+        {
         { sf::Keyboard::Right, Action { ActionType::Walking, Direction::Right } },
         { sf::Keyboard::Left , Action { ActionType::Walking, Direction::Left } },
         { sf::Keyboard::Up   , Action { ActionType::Walking, Direction::Up } },
@@ -54,55 +52,66 @@ Action Player::getActionFromKey(Arena& arena)
         { sf::Keyboard::X    , Action { ActionType::SpecialDynamic, Direction::Stay } },
         { sf::Keyboard::C    , Action { ActionType::SpecialStatic, Direction::Stay } },
         { sf::Keyboard::Space, Action { ActionType::Sprinting, Direction::Stay } }
-
+      },
+      {
+        { sf::Keyboard::L    , Action { ActionType::Walking, Direction::Right } },
+        { sf::Keyboard::J    , Action { ActionType::Walking, Direction::Left } },
+        { sf::Keyboard::I    , Action { ActionType::Walking, Direction::Up } },
+        { sf::Keyboard::K    , Action { ActionType::Walking, Direction::Down } },
+        { sf::Keyboard::R    , Action { ActionType::Punching, Direction::Stay } },
+        { sf::Keyboard::T    , Action { ActionType::SpecialDynamic, Direction::Stay } },
+        { sf::Keyboard::Y    , Action { ActionType::SpecialStatic, Direction::Stay } },
+        { sf::Keyboard::H    , Action { ActionType::Sprinting, Direction::Stay } }
+      }
     };
-
-    for (/*const*/ auto/*&*/ pair : keyToVectorMapping)
+    //auto playerNumMap = keyToVectorMapping.at(m_playerNum)
+    int i = 0;
+    for (const auto& playerMap : keyToVectorMapping)
     {
-        //m_speed = SPEED;
-        AttackType attackType;  // for special attacks
-
-        if (sf::Keyboard::isKeyPressed(pair.first))
+        if (i == m_playerNum)
         {
-            switch (auto type = pair.second.first)
+            for (const auto& pair : playerMap)
             {
-            case ActionType::Sprinting:
-                m_speed = RUN_SPEED;
-                pair.second.second = getFacingDirection();
-                break;
-            case ActionType::SpecialDynamic:
-                //m_manaAndHealth.decreaseMana(10);
-                // continue to fall through to static
-            case ActionType::SpecialStatic:
-                attackType = type == ActionType::SpecialDynamic ? m_specialAttacks.first : m_specialAttacks.second;
-                if (enoughMana(type) && m_specialAttackClock.getElapsedTime() > SPECIAL_DELAY)
-                {
-                    m_specialAttackClock.restart();
-                    m_disabled.restart();
-                    arena.createSpecialAttack(type, attackType, this);
-                    m_action.first = type;
-                    m_manaAndHealth.decreaseMana(type);
-                }
-                else
-                    pair.second.first = ActionType::Standing;
-                break;
-            case ActionType::Punching:
-                if (m_punchingClock.getElapsedTime() > SPECIAL_DELAY && m_disabled.getElapsedTime().asSeconds() > PUNCHING_DELAY + 0.5f)
-                {
-                    m_punchingClock.restart();
-                    m_disabled.restart();
-                }
-                else
-                    pair.second.first = ActionType::Standing;
-                break;
-            default:
-                m_speed = SPEED;
-                break;
-            }
-            
+                //m_speed = SPEED;
+                AttackType attackType;  // for special attacks
 
-            return pair.second;
+                if (sf::Keyboard::isKeyPressed(pair.first))
+                {
+                    switch (auto type = pair.second.first)
+                    {
+                    case ActionType::Sprinting:
+                        m_speed = RUN_SPEED;
+                        //pair.second.second = getFacingDirection();
+                        return Action{ pair.second.first,getFacingDirection() };
+                        break;
+                    case ActionType::SpecialDynamic:
+                        //m_manaAndHealth.decreaseMana(10);
+                        // continue to fall through to static
+                    case ActionType::SpecialStatic:
+                        attackType = type == ActionType::SpecialDynamic ? m_specialAttacks.first : m_specialAttacks.second;
+                        if (enoughMana(type) && m_specialAttackClock.getElapsedTime() > SPECIAL_DELAY)
+                        {
+                            m_specialAttackClock.restart();
+                            arena.createSpecialAttack(type, attackType, this);
+                            m_action.first = type;
+                            m_manaAndHealth.decreaseMana(type);
+                            m_disabled.restart();
+                        }
+                        else
+                            //pair.second.first = ActionType::Standing;
+                            return Action{ ActionType::Standing,pair.second.second };
+                        break;
+                    default:
+                        m_speed = SPEED;
+                        break;
+                    }
+
+
+                    return pair.second;
+                }
+            }
         }
+        i++;
     }
 
     return Action{ ActionType::Standing, Direction::Stay };
