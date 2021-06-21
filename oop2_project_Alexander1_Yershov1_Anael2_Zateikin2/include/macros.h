@@ -75,6 +75,10 @@ const float SHADOW_THICKNESS = 1.f;
 const float INNER_VERT_SPACE = 20.f;
 const float INNER_HORIZ_SPACE = 40.f; //horizontal space
 
+enum class Mode
+{
+	Server, Client, None
+};
 
 enum class ActionType
 {

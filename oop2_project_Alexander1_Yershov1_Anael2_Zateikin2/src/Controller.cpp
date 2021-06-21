@@ -22,7 +22,7 @@ Controller::~Controller()
 void Controller::run() try
 {
 	m_menu.activateMenu(m_gameWindow, m_arena); //create objects
-	m_arena.createArena();
+	//m_arena.createArena();
 
 	// game loop
 
