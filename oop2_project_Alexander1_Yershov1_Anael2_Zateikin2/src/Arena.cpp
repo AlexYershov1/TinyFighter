@@ -10,7 +10,6 @@ Arena::Arena()
 void Arena::createArena()
 {
 	
-	
 }
 
 void Arena::createPlayer( CharacterType type )

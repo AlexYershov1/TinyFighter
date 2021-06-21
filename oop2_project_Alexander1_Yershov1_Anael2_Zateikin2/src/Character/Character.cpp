@@ -112,14 +112,22 @@ bool Character::enoughMana(ActionType attack) const
 
 bool Character::inDisabledState(const sf::Time& deltaTime)
 {
+	static Effect burningEffect{ActionType::Burning}, freezingEffect{ActionType::Freezing};
+
 	if (m_action.first == ActionType::Burning && m_disabled.getElapsedTime().asSeconds() < 0.5f)
 	{
+		if (burningEffect.getStatus() != sf::Sound::Playing)
+			burningEffect.play();
 		m_picture.move(convert(opposite(m_action.second)) * m_speed * deltaTime.asSeconds());
 		m_manaAndHealth.decreaseHealth(deltaTime.asSeconds() * BURNING_DAMAGE);
 		return true;
 	}
 	if (m_action.first == ActionType::Freezing && m_disabled.getElapsedTime().asSeconds() < 2.f)
+	{
+		if (freezingEffect.getStatus() != sf::Sound::Playing)
+			freezingEffect.play();
 		return true;
+	}
 	if ((m_action.first == ActionType::SpecialDynamic || m_action.first == ActionType::SpecialStatic) &&
 		m_disabled.getElapsedTime().asSeconds() < 0.3)
 		return true;
@@ -130,10 +138,6 @@ bool Character::inDisabledState(const sf::Time& deltaTime)
   		m_action.first = ActionType::Standing;
 		return true;
 	}
-	//else
-	//{
-	//	m_disabled.restart();
-	//}
 	return false;
 }
 
