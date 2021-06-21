@@ -21,7 +21,7 @@ void correctDir(sf::Sprite& pic, Direction dir)
 
 void twoCharactersCollision(Character& first, Character& second)
 {
-	static Effect effect {ActionType::Smacked};	// sound effect
+	static Effect effect {(int)ActionType::Smacked};	// sound effect
 
 	//check if someone is punching
 	if ((first.getActionType() == ActionType::Punching || first.punchDelayed()) && (first.facing(second)))

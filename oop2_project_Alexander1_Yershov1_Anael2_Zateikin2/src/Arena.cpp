@@ -31,6 +31,13 @@ void Arena::createEnemy(CharacterType type)
 
 void Arena::createSpecialAttack(ActionType actionType, AttackType attackType, Character* owner)
 {
+	static Effect effect;
+	if (actionType == ActionType::SpecialDynamic)
+	{
+		effect.setSound(attackType);
+		effect.play();
+	}
+
 	actionType == ActionType::SpecialDynamic ?
 		m_tempHolder.emplace_back(std::make_unique<DynamicAttack>(owner->getLocation(), attackType, owner)) :
 		m_tempHolder.emplace_back(std::make_unique<StaticAttack>(owner->getLocation(), attackType, owner));

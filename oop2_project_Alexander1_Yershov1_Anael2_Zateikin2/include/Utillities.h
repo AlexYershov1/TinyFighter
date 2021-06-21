@@ -11,12 +11,17 @@ class Arena;
 struct Effect
 {
 	Effect() {}
-	Effect(ActionType type)
+	Effect(int type)
 	{
-		m_data.setBuffer(ResourcesManager::instance().getSound((int)type));
+		m_data.setBuffer(ResourcesManager::instance().getSound(type));
 		m_data.setVolume(VOLUME);
 	}
 	sf::Sound m_data;
+
+	void setSound(AttackType type)
+	{
+		m_data.setBuffer(ResourcesManager::instance().getSound((int)type));
+	}
 
 	void play() { m_data.play(); }
 	sf::SoundSource::Status getStatus() { return m_data.getStatus(); }

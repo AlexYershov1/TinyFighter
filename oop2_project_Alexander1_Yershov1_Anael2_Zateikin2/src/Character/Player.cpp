@@ -39,6 +39,10 @@ const sf::Vector2f* Player::getLocation() const
 
 Action Player::getActionFromKey(Arena& arena) //auto vecOfPAirs = {{}}
 {
+    //static Effect fireEffect{ (int)AttackType::FireDynamic },
+    //              freezingEffect{ (int)AttackType::IceDynamic },
+    //              explosionEffect{ (int)AttackType::FireStatic };
+
     static const
        std::initializer_list<std::initializer_list<std::pair<sf::Keyboard::Key, Action>>>
         keyToVectorMapping =

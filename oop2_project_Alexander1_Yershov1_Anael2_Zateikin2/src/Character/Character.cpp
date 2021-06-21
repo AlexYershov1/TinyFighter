@@ -112,7 +112,7 @@ bool Character::enoughMana(ActionType attack) const
 
 bool Character::inDisabledState(const sf::Time& deltaTime)
 {
-	static Effect burningEffect{ActionType::Burning}, freezingEffect{ActionType::Freezing};
+	static Effect burningEffect{(int)ActionType::Burning}, freezingEffect{(int)ActionType::Freezing};
 
 	if (m_action.first == ActionType::Burning && m_disabled.getElapsedTime().asSeconds() < 0.5f)
 	{
