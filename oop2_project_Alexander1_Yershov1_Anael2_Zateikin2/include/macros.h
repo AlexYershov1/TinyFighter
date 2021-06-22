@@ -35,6 +35,7 @@ const auto AnimationTime = sf::seconds(0.1f);
 const auto SlowAnimationTime = sf::seconds(0.25f);
 const auto SPEED = 100.f;
 const auto RUN_SPEED = 180.f;
+const auto FADING_TIME = sf::seconds(5.f);
 
 
 const auto EPSILON = 40.f;
@@ -84,7 +85,7 @@ enum class Mode
 enum class ActionType
 {
 	Standing, Walking, Jumping, Punching, Sprinting, Smacked, hit,
-	SpecialStatic, SpecialDynamic, Burning, Freezing
+	SpecialStatic, SpecialDynamic, Burning, Freezing, Fading,
 };
 
 enum class CharacterType
@@ -175,4 +176,11 @@ enum class CharacterAssets
 	SpriteSheet,
 	Thumbnail,
 	SmallIcon
+};
+
+struct InitialServerInfo
+{
+	ArenaType m_arena;
+	CharacterType m_character;
+	Difficulty m_difficulty;
 };

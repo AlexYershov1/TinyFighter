@@ -7,6 +7,8 @@
 #include "specialAttack/DynamicAttack.h"
 #include "specialAttack/StaticAttack.h"
 #include "specialAttack/SpecialAttack.h"
+#include "Menu/ConclusionWindow.h"
+#include "Network.h"
 
 
 
@@ -20,7 +22,7 @@ public:
 	* objects (characters) to build.
 	*/
 
-	void createArena();
+	void clear();
 	void createPlayer(CharacterType);
 	void createEnemy( CharacterType);	//inside get the players locations
 	void createSpecialAttack(ActionType, AttackType, Character*);
@@ -31,8 +33,11 @@ public:
 	void draw(sf::RenderWindow&);
 	void move(const sf::Time&);
 	void update(const sf::Time&);
-	void collision();
+	void collision(sf::RenderWindow&);
 	sf::Vector2f getFirstPlayerPos() const;
+
+	// online
+	void createSocket();
 	~Arena();
 
 private:
@@ -43,4 +48,9 @@ private:
 	std::vector <std::unique_ptr<GameObject>> m_gameObjects;
 	std::vector<std::unique_ptr<GameObject>> m_tempHolder;
 	std::vector<const sf::Vector2f*> m_playerLocations;
+
+	void* m_socket;
+
+	void activateConclusionWindow(bool, sf::RenderWindow&);
+	bool isWon() const;
 };

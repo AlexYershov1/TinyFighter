@@ -15,6 +15,7 @@ public:
 	virtual void update(const sf::Time&) = 0;
 	virtual void correctOwnersPtr() = 0;
 	bool isAlive() const;
+	virtual bool isFaded() = 0;
 
 	bool collidesWith(const GameObject&) const;
 	float y() const;

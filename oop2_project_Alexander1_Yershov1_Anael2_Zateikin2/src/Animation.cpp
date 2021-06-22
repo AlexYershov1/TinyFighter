@@ -46,7 +46,7 @@ void Animation::update(Action action)
 void Animation::burningFreezingCase(Action action)
 {
     // case character is burning or freezing
-    if ((action.first == ActionType::Freezing || action.first == ActionType::Burning)
+    if ((action.first == ActionType::Freezing || action.first == ActionType::Burning || action.first == ActionType::Fading)
         && m_index == m_animeMap.m_data.find(action.first)->second.size() - 1)
     {
         update(action);

@@ -70,10 +70,17 @@ void ManaAndHealth::decreaseMana(ActionType type)
 		decreaseMana(SPECIAL_STATIC_MANA);
 }
 
-void ManaAndHealth::decreaseHealth(float value)
+bool ManaAndHealth::decreaseHealth(float value)
 {
 	//decrease(m_healthBar.value, value);
 	m_healthBar.update(-value, MAX_HEALTH);
+	if (m_healthBar.value <= 0)
+	{
+		if (m_fading.getElapsedTime() > FADING_TIME + SPECIAL_DELAY)
+			m_fading.restart();
+		return false; // dead
+	}
+	return true; // still alive
 }
 
 void ManaAndHealth::setLocation(int plynum)
@@ -101,6 +108,10 @@ float ManaAndHealth::getMana() const
 float ManaAndHealth::getHealth() const
 {
 	return m_healthBar.value;
+}
+bool ManaAndHealth::isFaded() const
+{
+	return m_fading.getElapsedTime() > FADING_TIME;
 }
 void ManaAndHealth::setPositions()
 {

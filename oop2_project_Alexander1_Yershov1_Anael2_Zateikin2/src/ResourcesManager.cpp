@@ -46,8 +46,10 @@ AnimeMap ResourcesManager::playerData() const
     nextStart();
     for (int repeat = 0; repeat < 5; repeat++) player.m_data[ActionType::SpecialDynamic].emplace_back(nextStart(), size);
     for (int repeat = 0; repeat < 5; repeat++) player.m_data[ActionType::SpecialStatic].emplace_back(nextStart(), size);
-    for (int repeat = 0; repeat < 13; repeat++) nextStart();
+    for (int repeat = 0; repeat < 5; repeat++) player.m_data[ActionType::Fading].emplace_back(nextStart(), size);
+    for (int repeat = 0; repeat < 8; repeat++) nextStart();
     for (int repeat = 0; repeat < 3; repeat++)  player.m_data[ActionType::Smacked].emplace_back(nextStart(), size);
+
 
     return player;
 }
@@ -80,8 +82,9 @@ AnimeMap ResourcesManager::banditData() const
     bandit.m_data[ActionType::Freezing].emplace_back(nextStart(), size);
     for (int repeat = 0; repeat < 6; repeat++)  bandit.m_data[ActionType::Punching].emplace_back(nextStart(), size);
     for (int repeat = 0; repeat < 4; repeat++) bandit.m_data[ActionType::Burning].emplace_back(nextStart(), size);
-    for (int repeat = 0; repeat < 6; repeat++)  bandit.m_data[ActionType::Smacked].emplace_back(nextStart(), size);
-
+    for (int repeat = 0; repeat < 7; repeat++)  bandit.m_data[ActionType::Smacked].emplace_back(nextStart(), size);
+    for (int repeat = 0; repeat < 3; repeat++) nextStart();
+    for (int repeat = 0; repeat < 5; repeat++)  bandit.m_data[ActionType::Fading].emplace_back(nextStart(), size);
     return bandit;
 }
 

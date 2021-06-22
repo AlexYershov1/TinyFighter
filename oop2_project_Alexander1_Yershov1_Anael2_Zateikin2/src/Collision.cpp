@@ -42,8 +42,10 @@ namespace
         if (attack.ownerIsAlive() && attack.isMe(&obj))
             return;
         
+        if (obj.getActionType() != ActionType::Burning && obj.getActionType() != ActionType::Freezing)
+            obj.decreaseHealth(SPECIAL_DINAM_DAMAGE);
         attack.getKind() == AttackType::FireDynamic ? obj.setActionType(ActionType::Burning) : obj.setActionType(ActionType::Freezing);
-        obj.decreaseHealth(SPECIAL_DINAM_DAMAGE);
+        
         attack.setHit();
     }
     void characterDynamicAttack(GameObject& character, GameObject& dynamicAttack)
@@ -59,8 +61,9 @@ namespace
         if (attack.isMe(&obj))
             return;
 
+        if (obj.getActionType() != ActionType::Burning && obj.getActionType() != ActionType::Freezing)
+            obj.decreaseHealth(SPECIAL_STATIC_DAMAGE);
         attack.getKind() == AttackType::FireStatic ? obj.setActionType(ActionType::Burning) : obj.setActionType(ActionType::Freezing);
-        obj.decreaseHealth(SPECIAL_STATIC_DAMAGE);
     }
     void characterstaticAttack(GameObject& character, GameObject& staticAttack)
     {

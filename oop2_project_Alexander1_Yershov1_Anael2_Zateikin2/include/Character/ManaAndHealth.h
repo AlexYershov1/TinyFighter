@@ -18,12 +18,14 @@ public:
 	//void increaseMana(const sf::Time&);
 	void decreaseMana(float);
 	void decreaseMana(ActionType);
-	void decreaseHealth(float);
+	bool decreaseHealth(float);
 
 	void setLocation(int); //sets location according to player number
 	void setIcon(CharacterType);
 	float getMana() const;
 	float getHealth() const;
+
+	bool isFaded() const;
 private:
 	void setPositions();
 
@@ -48,5 +50,5 @@ private:
 	Bar m_healthBar;
 	sf::Sprite m_charIcon;
 	sf::Vector2f m_blockOffset;
-
+	sf::Clock m_fading;
 };

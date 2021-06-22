@@ -3,6 +3,7 @@
 #include "Character/Player.h"
 #include "Character/Enemy.h"
 #include "Utillities.h"
+#include "RestartExc.h"
 #include <iostream>
 
 Controller::Controller()
@@ -14,6 +15,15 @@ Controller::Controller()
 
 Controller::~Controller()
 {
+}
+
+void Controller::restart()
+{
+	do
+	{
+		run();
+		m_arena.clear();
+	} while (this->m_gameWindow.isOpen());
 }
 
 void Controller::run() try
@@ -52,7 +62,7 @@ void Controller::run() try
 		m_states.move(); //keep the states sction on screen
 		
 		//check collisions
-		m_arena.collision();
+		m_arena.collision(m_gameWindow);
 		//Collision::instance().processCollision(ply, enemy);
 
 		m_arena.update(time);
@@ -63,6 +73,10 @@ void Controller::run() try
 	}
 }
 
+catch (RestartExc& ex)
+{
+	return;
+}
 catch (std::exception& ex)
 {
 	std::cerr << "problem: " << ex.what() << '\n';

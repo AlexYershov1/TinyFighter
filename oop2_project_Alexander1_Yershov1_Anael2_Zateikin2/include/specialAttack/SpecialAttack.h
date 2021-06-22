@@ -15,6 +15,7 @@ public:
 	AttackType getKind() const { return m_kind; }
 	void setHit(); 
 	bool ownerIsAlive() const;
+	virtual bool isFaded() { return true; }
 	bool isMe(Character* character) const { return m_owner->isMe(character); }
 	virtual ~SpecialAttack();
 

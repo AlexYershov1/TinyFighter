@@ -11,6 +11,7 @@ class Controller
 public:
 	Controller();
 	~Controller();
+	void restart();
 	void run();
 private:
 	void alignView();
