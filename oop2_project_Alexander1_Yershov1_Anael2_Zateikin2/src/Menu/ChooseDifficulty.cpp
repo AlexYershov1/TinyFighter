@@ -68,7 +68,7 @@ bool ChooseDifficulty::handleClick(const sf::Vector2f& location, sf::RenderWindo
 	{
 		if (text.getGlobalBounds().contains(location))
 		{
-			for (int i = 0; i < difficulty; i++)
+			for (int i = 0; i < difficulty * ENEM_DIFFICULTY_CORR; i++)
 				arena.createEnemy(CharacterType::Bandit);
 			return true;
 		}

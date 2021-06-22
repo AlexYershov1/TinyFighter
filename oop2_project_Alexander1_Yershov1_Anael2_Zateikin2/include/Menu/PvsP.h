@@ -1,7 +1,8 @@
 #pragma once
 #include "ChooseCharacter.h"
 #include "ChooseArena.h"
-#include "ChooseDifficulty.h"
+#include "EnemyChoice.h"
+//#include "ChooseDifficulty.h"
 
 class PvsP : public Command
 {
@@ -13,5 +14,6 @@ public:
 private:
 	ChooseCharacter m_chooseCharMenu;
 	ChooseArena m_chooseArena;
-	ChooseDifficulty m_chooseDifficulty;
+	//EnemyChoice m_enemyChoice;
+	//ChooseDifficulty m_chooseDifficulty;
 };

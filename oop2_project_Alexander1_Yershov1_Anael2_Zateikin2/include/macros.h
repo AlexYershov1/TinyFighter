@@ -55,6 +55,7 @@ const auto SPECIAL_DINAM_DAMAGE = 20.f;
 const auto SPECIAL_DINAM_MANA = 30.f;
 const auto SPECIAL_STATIC_DAMAGE = 30.f;
 const auto SPECIAL_STATIC_MANA = 20.f;
+const auto ENEM_DIFFICULTY_CORR = 2;
 
 //const auto SNOW_BALL_DAMAGE = 20.f;
 //const auto EXPLOSION_DAMAGE = 30.f;
