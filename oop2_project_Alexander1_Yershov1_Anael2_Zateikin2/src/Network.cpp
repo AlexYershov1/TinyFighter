@@ -2,6 +2,7 @@
 
 #define WIN32_LEAN_AND_MEAN
 
+#include "network.h"
 #include <windows.h>
 #include <winsock2.h>
 #include <ws2tcpip.h>
@@ -15,8 +16,6 @@
 
 #define DEFAULT_BUFLEN 512
 #define DEFAULT_PORT "55001"
-
-#include "network.h"
 
 //--------------------------------------------//
 void init_socket_library() {
@@ -150,6 +149,41 @@ void* client_connect_to_server() {
     }
 
     return (void*)ConnectSocket;
+}
+
+void initialSocketSendServer(InitialServerInfo& info)
+{
+    // Send an initial buffer
+    SOCKET s = (SOCKET)socket;
+    void* buff = &info;
+    int iResult = send(s, (char*)buff, sizeof(InitialServerInfo), 0);
+
+    if (iResult == SOCKET_ERROR) {
+        printf("send failed with error: %d\n", WSAGetLastError());
+        closesocket(s);
+        WSACleanup();
+        exit(-1);
+    }
+}
+InitialServerInfo initialSocketReceiveClient()
+{
+    int updated_buff;
+    char buffer[sizeof(InitialServerInfo) + 1];
+    int iResult = recv((SOCKET)socket, buffer, sizeof(InitialServerInfo), 0);
+    buffer[sizeof(InitialServerInfo)] = '\0';
+
+    if (iResult == 0)
+        throw std::exception("Connection closed\n");
+
+    if (iResult < 0)
+        throw std::exception("recv failed with error: %d\n", WSAGetLastError());
+
+    void* info = buffer;
+    auto translatedInfo = (InitialServerInfo*)info;
+    return *translatedInfo;
+}
+void initialSocketSendClient()
+{
 }
 //--------------------------------------------//
 void socket_send(void* socket, const int buffer) {

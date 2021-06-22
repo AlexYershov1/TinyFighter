@@ -10,6 +10,11 @@ int Player::getCount()
     return m_count;
 }
 
+void Player::resetCount()
+{
+    m_count = 0;
+}
+
 Player::Player(const sf::Vector2f& location , CharacterType character)
 	: Character(location, character), m_playerNum(m_count)//, m_manaAndHealth(character)
 {
@@ -40,10 +45,6 @@ const sf::Vector2f* Player::getLocation() const
 
 Action Player::getActionFromKey(Arena& arena) //auto vecOfPAirs = {{}}
 {
-    //static Effect fireEffect{ (int)AttackType::FireDynamic },
-    //              freezingEffect{ (int)AttackType::IceDynamic },
-    //              explosionEffect{ (int)AttackType::FireStatic };
-
     static const
        std::initializer_list<std::initializer_list<std::pair<sf::Keyboard::Key, Action>>>
         keyToVectorMapping =
@@ -103,6 +104,15 @@ Action Player::getActionFromKey(Arena& arena) //auto vecOfPAirs = {{}}
                         }
                         else
                             //pair.second.first = ActionType::Standing;
+                            return Action{ ActionType::Standing,pair.second.second };
+                        break;
+                    case ActionType::Punching:
+                        if (m_punchingClock.getElapsedTime() > SPECIAL_DELAY && m_disabled.getElapsedTime().asSeconds() > PUNCHING_DELAY + 0.5f)
+                        {
+                            m_punchingClock.restart();
+                            m_disabled.restart();
+                        }
+                        else
                             return Action{ ActionType::Standing,pair.second.second };
                         break;
                     default:

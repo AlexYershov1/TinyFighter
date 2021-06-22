@@ -3,6 +3,6 @@
 int main()
 {
 	Controller A;
-	A.run();
+	A.restart();
 	return 0;
 }

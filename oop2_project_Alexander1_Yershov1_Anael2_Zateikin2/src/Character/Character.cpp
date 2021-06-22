@@ -13,6 +13,12 @@ Character::Character(const sf::Vector2f& location, CharacterType character)
 
 void Character::move(const sf::Time& deltaTime, Arena& arena)
 {
+
+	if (m_alive == false)
+	{
+		m_action = Action{ ActionType::Fading, Direction::Stay };
+		return;
+	}
 	m_picture.move(convert(m_action.second) * m_speed * deltaTime.asSeconds());
 
 	if (outOfBounds(this->m_picture.getPosition()))
@@ -36,6 +42,10 @@ ActionType Character::getActionType() const
 	return m_action.first;
 
 }
+void Character::setAlive(bool isAlive)
+{
+	m_alive = isAlive;
+}
 //
 //sf::Vector2f Character::getLocation() const
 //{
@@ -44,7 +54,7 @@ ActionType Character::getActionType() const
 
 void Character::decreaseHealth(float value)
 {
-	m_manaAndHealth.decreaseHealth(value);
+	m_alive = m_manaAndHealth.decreaseHealth(value);
 }
 
 void Character::setAction(Action action)
@@ -70,6 +80,11 @@ bool Character::facing(const sf::Vector2f* other) const
 bool Character::facing(const Character& other) const
 {
 	return facing(&other.m_picture.getPosition());
+}
+
+bool Character::isFaded()
+{
+	return m_manaAndHealth.isFaded();
 }
 
 Direction Character::getDirection() const

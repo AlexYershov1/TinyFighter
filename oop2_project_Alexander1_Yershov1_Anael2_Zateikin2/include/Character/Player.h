@@ -15,6 +15,7 @@ public:
 	virtual void draw(sf::RenderWindow&) const;
 
 	static int getCount();
+	void resetCount();
 private:
 	int m_playerNum;
 	static int m_count;

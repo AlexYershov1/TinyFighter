@@ -11,6 +11,7 @@ public:
 	virtual void correctOwnersPtr() {}
 	virtual void update(const sf::Time&);
 	ActionType getActionType() const;
+	void setAlive(bool);
 	//sf::Vector2f getLocation() const;
 
 	void decreaseHealth(float);
@@ -19,6 +20,7 @@ public:
 	bool facing(const sf::Vector2f*) const;
 	bool facing(const Character&) const;
 	bool isMe(const Character* other) const { return &(*this) == &(*other); }
+	virtual bool isFaded();
 	Direction getDirection() const;
 	Direction getFacingDirection() const;
 	sf::Vector2f getOrigin();

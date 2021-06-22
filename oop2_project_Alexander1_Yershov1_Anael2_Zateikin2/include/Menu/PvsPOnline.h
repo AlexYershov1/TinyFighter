@@ -18,4 +18,5 @@ private:
 	ChooseArena m_chooseArena;
 	ChooseDifficulty m_chooseDifficulty;
 
+	void waitForOtherPlayer(sf::RenderWindow&);
 };

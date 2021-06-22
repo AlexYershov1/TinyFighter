@@ -7,9 +7,17 @@ Arena::Arena()
 {
 }
 
-void Arena::createArena()
+void Arena::clear()
 {
-	
+	for (auto& obj : m_gameObjects)
+	{
+		if (auto ply = dynamic_cast<Player*>(obj.get()))
+			ply->resetCount();
+	}
+
+	m_gameObjects.clear();
+	m_mode = Mode::None;
+	m_playerLocations.clear();
 }
 
 void Arena::createPlayer( CharacterType type )
@@ -98,7 +106,7 @@ void Arena::update(const sf::Time& deltaTime)
 		object->update(deltaTime);
 }
 
-void Arena::collision()
+void Arena::collision(sf::RenderWindow& window)
 {
 	for (auto firstIt = m_gameObjects.begin(); firstIt != m_gameObjects.end(); firstIt++)
 		for (auto secondIt = firstIt+1; secondIt != m_gameObjects.end(); secondIt++)
@@ -112,11 +120,18 @@ void Arena::collision()
 
 	for (auto it = m_gameObjects.begin(); it != m_gameObjects.end(); )
 	{
-		if (!(*it)->isAlive()) //if dead
+		if (!(*it)->isAlive() && (*it)->isFaded()) //if dead
+		{
+			if (typeid((*it)) == typeid(Player*))
+				activateConclusionWindow(false, window);
+
 			it = m_gameObjects.erase(it);
+		}
 		else
 			++it;
 	}
+	if (isWon())
+		activateConclusionWindow(true, window);
 }
 
 sf::Vector2f Arena::getFirstPlayerPos() const
@@ -128,6 +143,27 @@ sf::Vector2f Arena::getFirstPlayerPos() const
 	return **(m_playerLocations.begin());
 }
 
+void Arena::createSocket()
+{
+	init_socket_library();
+	if (m_mode == Mode::Server) 
+		m_socket = server_wait_for_client();
+	if (m_mode == Mode::Client)
+		m_socket = client_connect_to_server();
+}
+
 Arena::~Arena()
 {
+}
+
+void Arena::activateConclusionWindow(bool isWon, sf::RenderWindow& window)
+{
+	ConclusionWindow con{ isWon };
+	con.activateConclusionWindow(window, *this);
+}
+
+bool Arena::isWon() const
+{
+	return !std::count_if(m_gameObjects.begin(), m_gameObjects.end(), 
+		[](const std::unique_ptr<GameObject>& obj) { return dynamic_cast<Enemy*>(obj.get()); });
 }
