@@ -56,12 +56,12 @@ Mode Arena::getMode() const
 void Arena::setArenaBackground(ArenaType arenaType)
 {
 	m_background.setTexture(ResourcesManager::instance().texture(arenaType, BackroundAssets::Background));
-	m_background.setSize({ float(WINDOW_WIDTH), float(WINDOW_HEIGHT - TERRAIN_HIGHT - CAPTION_HEIGHT) });
+	m_background.setSize({ float(FULL_WINDOW_W), float(WINDOW_HEIGHT - TERRAIN_HIGHT - CAPTION_HEIGHT) });
 	m_background.setPosition({ 0,0 + CAPTION_HEIGHT });
 
 	m_ground.setTexture(ResourcesManager::instance().texture(arenaType, BackroundAssets::Ground));
 
-	m_ground.setSize({ float(WINDOW_WIDTH), float(TERRAIN_HIGHT) });
+	m_ground.setSize({ float(FULL_WINDOW_W), float(TERRAIN_HIGHT) });
 	m_ground.setPosition({ 0,float(WINDOW_HEIGHT - TERRAIN_HIGHT) });
 }
 
@@ -117,6 +117,15 @@ void Arena::collision()
 		else
 			++it;
 	}
+}
+
+sf::Vector2f Arena::getFirstPlayerPos() const
+{
+	if (m_gameObjects.empty())
+		throw std::runtime_error("no gameObjects");
+	
+	
+	return **(m_playerLocations.begin());
 }
 
 Arena::~Arena()

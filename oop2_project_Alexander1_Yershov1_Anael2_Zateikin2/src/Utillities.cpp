@@ -4,7 +4,7 @@
 
 bool outOfBounds(const sf::Vector2f& location)
 {
-	if (location.x < 0 || location.x > WINDOW_WIDTH ||
+	if (location.x < 0 || location.x > FULL_WINDOW_W ||
 		location.y < WINDOW_HEIGHT - TERRAIN_HIGHT - 30 ||
 		location.y > WINDOW_HEIGHT - 35)
 		return true;

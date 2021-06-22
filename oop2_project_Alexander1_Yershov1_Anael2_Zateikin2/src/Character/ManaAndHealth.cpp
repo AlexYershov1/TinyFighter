@@ -1,4 +1,5 @@
 #include "Character/ManaAndHealth.h"
+#include "StatesSection.h"
 
 const float INCREASE_RATE = 10.f;
 
@@ -43,6 +44,11 @@ void ManaAndHealth::draw(sf::RenderWindow& window) const
 	window.draw(m_manaBar.rectangles.second);
 }
 
+void ManaAndHealth::move()
+{
+	setPositions();
+}
+
 void ManaAndHealth::increaseMana(const sf::Time& deltaTime)
 {
 	//m_manaBar.value += deltaTime.asSeconds() * INCREASE_RATE;
@@ -73,13 +79,15 @@ void ManaAndHealth::decreaseHealth(float value)
 void ManaAndHealth::setLocation(int plynum)
 {
 	static  float sectionWidth = m_charIcon.getGlobalBounds().width + BAR_WIDTH + INNER_VERT_SPACE;
-	
-	sf::Vector2f pos = { float(plynum) * sectionWidth,float(plynum / 4)*BAR_HEIGHT };
-	m_charIcon.setPosition(pos);
-	m_healthBar.rectangles.first.setPosition({pos.x + m_charIcon.getGlobalBounds().width, pos.y });
-	m_healthBar.rectangles.second.setPosition(pos.x + m_charIcon.getGlobalBounds().width, pos.y);
-	m_manaBar.rectangles.first.setPosition(pos.x + m_charIcon.getGlobalBounds().width, pos.y+BAR_HEIGHT);
-	m_manaBar.rectangles.second.setPosition(pos.x + m_charIcon.getGlobalBounds().width, pos.y + BAR_HEIGHT);
+	m_blockOffset = { float(plynum) * sectionWidth,float(plynum / 4) * BAR_HEIGHT };
+	//sf::Vector2f pos = 
+
+	setPositions(); //set The inner rectangles positions
+	//m_charIcon.setPosition(pos);
+	//m_healthBar.rectangles.first.setPosition({pos.x + m_charIcon.getGlobalBounds().width, pos.y });
+	//m_healthBar.rectangles.second.setPosition(pos.x + m_charIcon.getGlobalBounds().width, pos.y);
+	//m_manaBar.rectangles.first.setPosition(pos.x + m_charIcon.getGlobalBounds().width, pos.y+BAR_HEIGHT);
+	//m_manaBar.rectangles.second.setPosition(pos.x + m_charIcon.getGlobalBounds().width, pos.y + BAR_HEIGHT);
 
 }
 void ManaAndHealth::setIcon(CharacterType character)
@@ -93,6 +101,18 @@ float ManaAndHealth::getMana() const
 float ManaAndHealth::getHealth() const
 {
 	return m_healthBar.value;
+}
+void ManaAndHealth::setPositions()
+{
+	auto viewOffset = StatesSection::getRlativeStart();
+	auto iconWidth = m_charIcon.getGlobalBounds().width;
+	auto xBarsPos = m_blockOffset.x + iconWidth + viewOffset.x;
+
+	m_charIcon.setPosition(m_blockOffset + viewOffset);
+	m_healthBar.rectangles.first.setPosition(xBarsPos, m_blockOffset.y + viewOffset.y);
+	m_healthBar.rectangles.second.setPosition(xBarsPos, m_blockOffset.y + viewOffset.y);
+	m_manaBar.rectangles.first.setPosition(xBarsPos, m_blockOffset.y+BAR_HEIGHT + viewOffset.y);
+	m_manaBar.rectangles.second.setPosition(xBarsPos, m_blockOffset.y + BAR_HEIGHT + viewOffset.y);
 }
 //
 //void ManaAndHealth::decrease(float& bar,float value) 

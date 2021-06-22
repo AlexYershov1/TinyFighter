@@ -3,9 +3,6 @@
 #include <memory>
 //#include <SFML/Graphics.hpp>
 #include "macros.h"
-//#include "ResourcesManager.h"
-//#include "Utillities.h"
-//#include "GameObject.h"
 #include "Collision.h"
 #include "specialAttack/DynamicAttack.h"
 #include "specialAttack/StaticAttack.h"
@@ -35,6 +32,7 @@ public:
 	void move(const sf::Time&);
 	void update(const sf::Time&);
 	void collision();
+	sf::Vector2f getFirstPlayerPos() const;
 	~Arena();
 
 private:

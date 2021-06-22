@@ -18,6 +18,7 @@ public:
 
 	bool collidesWith(const GameObject&) const;
 	float y() const;
+	sf::Vector2f getLocation() const;
 protected:
 	sf::Sprite m_picture;
 	Action m_action;

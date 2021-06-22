@@ -12,6 +12,8 @@ public:
 
 	~ManaAndHealth();
 	void draw(sf::RenderWindow&) const;
+	void move(); //move with the view and stay on the screen
+
 	void increaseMana(const sf::Time&);
 	//void increaseMana(const sf::Time&);
 	void decreaseMana(float);
@@ -23,6 +25,8 @@ public:
 	float getMana() const;
 	float getHealth() const;
 private:
+	void setPositions();
+
 	struct Bar
 	{
 		float value;
@@ -43,7 +47,6 @@ private:
 	Bar m_manaBar;
 	Bar m_healthBar;
 	sf::Sprite m_charIcon;
+	sf::Vector2f m_blockOffset;
 
-
-	//void decrease(float &, float) ;
 };
