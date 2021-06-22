@@ -11,7 +11,7 @@ public:
 	virtual void correctOwnersPtr() {}
 	virtual void update(const sf::Time&);
 	ActionType getActionType() const;
-	sf::Vector2f getLocation() const;
+	//sf::Vector2f getLocation() const;
 
 	void decreaseHealth(float);
 	void setAction(Action);

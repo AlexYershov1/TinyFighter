@@ -30,6 +30,7 @@ void Player::move(const sf::Time& deltaTime, Arena& arena)
     m_action = getActionFromKey(arena);
 
     Character::move(deltaTime, arena);
+    m_manaAndHealth.move(); //move the health and mana bars
 }
 
 const sf::Vector2f* Player::getLocation() const
@@ -72,11 +73,10 @@ Action Player::getActionFromKey(Arena& arena) //auto vecOfPAirs = {{}}
     int i = 0;
     for (const auto& playerMap : keyToVectorMapping)
     {
-        if (i == m_playerNum)
+        if (i == m_playerNum) //use the keys according to the player number
         {
             for (const auto& pair : playerMap)
             {
-                //m_speed = SPEED;
                 AttackType attackType;  // for special attacks
 
                 if (sf::Keyboard::isKeyPressed(pair.first))
@@ -106,10 +106,9 @@ Action Player::getActionFromKey(Arena& arena) //auto vecOfPAirs = {{}}
                             return Action{ ActionType::Standing,pair.second.second };
                         break;
                     default:
-                        m_speed = SPEED;
+                        m_speed = SPEED; //change to regular speed
                         break;
                     }
-
 
                     return pair.second;
                 }
@@ -118,7 +117,7 @@ Action Player::getActionFromKey(Arena& arena) //auto vecOfPAirs = {{}}
         i++;
     }
 
-    return Action{ ActionType::Standing, Direction::Stay };
+    return Action{ ActionType::Standing, Direction::Stay }; //default return
 }
 
 Player::~Player()
@@ -127,7 +126,7 @@ Player::~Player()
 
 void Player::draw(sf::RenderWindow& window) const
 {
-    m_manaAndHealth.draw(window);
+    m_manaAndHealth.draw(window); //draw health and mana bars
     GameObject::draw(window);
 }
 

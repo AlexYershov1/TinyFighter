@@ -36,11 +36,11 @@ ActionType Character::getActionType() const
 	return m_action.first;
 
 }
-
-sf::Vector2f Character::getLocation() const
-{
-	return m_picture.getPosition();
-}
+//
+//sf::Vector2f Character::getLocation() const
+//{
+//	return m_picture.getPosition();
+//}
 
 void Character::decreaseHealth(float value)
 {

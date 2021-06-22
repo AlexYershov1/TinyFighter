@@ -27,3 +27,8 @@ float GameObject::y() const
 {
 	return m_picture.getPosition().y;
 }
+
+sf::Vector2f GameObject::getLocation() const
+{
+	return m_picture.getPosition();
+}
