@@ -24,7 +24,8 @@ public:
 	void createPlayer(CharacterType);
 	void createEnemy( CharacterType);	//inside get the players locations
 	void createSpecialAttack(ActionType, AttackType, Character*);
-
+	void setMode(Mode);
+	Mode getMode() const;
 	void setArenaBackground(ArenaType);
 
 	void draw(sf::RenderWindow&);
@@ -37,6 +38,7 @@ public:
 private:
 	sf::RectangleShape m_background;
 	sf::RectangleShape m_ground;
+	Mode m_mode;
 	
 	std::vector <std::unique_ptr<GameObject>> m_gameObjects;
 	std::vector<std::unique_ptr<GameObject>> m_tempHolder;

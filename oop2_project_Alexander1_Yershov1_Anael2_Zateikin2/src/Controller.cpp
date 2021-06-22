@@ -19,12 +19,7 @@ Controller::~Controller()
 void Controller::run() try
 {
 	m_menu.activateMenu(m_gameWindow, m_arena); //create objects
-	m_arena.createArena();
-	
-	//defaultview
-	//auto view = sf::View(sf::FloatRect(0, 0, float(WINDOW_WIDTH), float(WINDOW_HEIGHT)));
-	//m_gameWindow.setView(view);
-	
+
 	// game loop
 	while (this->m_gameWindow.isOpen())
 	{

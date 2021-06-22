@@ -1,6 +1,8 @@
 #pragma once
-#include "Menu/Command.h"
 #include "ChooseCharacter.h"
+#include "ChooseMode.h"
+#include "ChooseArena.h"
+#include "ChooseDifficulty.h"
 
 
 class PvsPOnline : public Command
@@ -11,6 +13,9 @@ public:
 	virtual void execute(sf::RenderWindow&, Arena&);
 
 private:
+	ChooseMode m_chooseModeMenu;
 	ChooseCharacter m_chooseCharMenu;
+	ChooseArena m_chooseArena;
+	ChooseDifficulty m_chooseDifficulty;
 
 };

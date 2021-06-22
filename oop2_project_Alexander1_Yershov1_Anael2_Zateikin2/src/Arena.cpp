@@ -43,6 +43,16 @@ void Arena::createSpecialAttack(ActionType actionType, AttackType attackType, Ch
 		m_tempHolder.emplace_back(std::make_unique<StaticAttack>(owner->getLocation(), attackType, owner));
 }
 
+void Arena::setMode(Mode mode = Mode::None)
+{
+	m_mode = mode;
+}
+
+Mode Arena::getMode() const
+{
+	return m_mode;
+}
+
 void Arena::setArenaBackground(ArenaType arenaType)
 {
 	m_background.setTexture(ResourcesManager::instance().texture(arenaType, BackroundAssets::Background));
