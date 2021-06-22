@@ -16,11 +16,13 @@ void PvsPOnline::execute(sf::RenderWindow& window, Arena& arena)
 	if (arena.getMode() == Mode::Server)
 	{
 		//open a socket TO_DO
+		// arena.openSocket();
 		//choose arena 
 		m_chooseArena.activateChooseArena(window, arena);
 
 		//activate arena selection and difficulty +create Enemies
 		m_chooseDifficulty.activateChooseDifficulty(window, arena);
 	}
-	
+	//else
+		// arena.connectToSocket();
 }

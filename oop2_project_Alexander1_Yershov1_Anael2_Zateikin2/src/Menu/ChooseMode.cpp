@@ -1,5 +1,6 @@
 #include "Menu/ChooseMode.h"
 #include "Arena.h"
+#include "RestartExc.h"
 
 
 ChooseMode::ChooseMode()
@@ -72,7 +73,7 @@ bool ChooseMode::handleClick(const sf::Vector2f& location, sf::RenderWindow& win
 			if (text.getString() == "Join Game")
 				arena.setMode(Mode::Client);
 			if (text.getString() == "Back To Menu")
-				arena.setMode(Mode::None);
+				throw RestartExc{ true };
 			return true;
 		}
 	}
