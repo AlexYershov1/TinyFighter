@@ -24,11 +24,11 @@ void PvsPOnline::execute(sf::RenderWindow& window, Arena& arena)
 		m_chooseArena.activateChooseArena(window, arena);
 
 		//activate arena selection and difficulty +create Enemies
-		m_chooseDifficulty.activateChooseDifficulty(window, arena);
+		//m_chooseDifficulty.activateChooseDifficulty(window, arena);
 
 		serverInfo.m_arena = m_chooseArena.getChoice();
 		serverInfo.m_character = m_chooseCharMenu.getChoice();
-		serverInfo.m_difficulty = m_chooseDifficulty.getChoice();
+		//serverInfo.m_difficulty = m_chooseDifficulty.getChoice();
 
 		waitForOtherPlayer(window);
 	}
@@ -39,7 +39,6 @@ void PvsPOnline::execute(sf::RenderWindow& window, Arena& arena)
 		sending(serverInfo);
 		clientInfo = receive<CharacterType>();
 		arena.createPlayer(clientInfo, true);
-		//arena.correctPlayersLocations();
 	}
 
 	if (arena.getMode() == Mode::Client)
@@ -52,8 +51,8 @@ void PvsPOnline::execute(sf::RenderWindow& window, Arena& arena)
 		sending(clientInfo);
 		
 		arena.setArenaBackground(serverInfo.m_arena);
-		for (int i = 0; i < serverInfo.m_difficulty; i++)
-			arena.createEnemy(CharacterType::Bandit);
+		/*for (int i = 0; i < serverInfo.m_difficulty; i++)
+			arena.createEnemy(CharacterType::Bandit);*/
 	}
 
 	

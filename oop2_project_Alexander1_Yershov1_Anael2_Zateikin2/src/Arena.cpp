@@ -5,7 +5,8 @@
 
 void* Arena::m_socket;
 
-Arena::Arena()
+Arena::Arena() 
+	: m_mode(Mode::Offline)
 {
 }
 
@@ -18,7 +19,7 @@ void Arena::clear()
 	}
 	//add setview
 	m_gameObjects.clear();
-	m_mode = Mode::None;
+	m_mode = Mode::Offline;
 	m_playerLocations.clear();
 }
 
@@ -33,10 +34,10 @@ void Arena::createPlayer(CharacterType type, bool isPuppet = false)
 
 void Arena::createEnemy(CharacterType type)
 {
-	auto location = INITIAL_LOC;		////CHANGE TO CORNERS
-	location.x = WINDOW_WIDTH - LOC_OFFSET ;
-	location.y += LOC_OFFSET * (m_gameObjects.size()-1);
-	m_gameObjects.emplace_back(std::make_unique<Enemy>(m_playerLocations, location, type));
+	float xLoc = rand() % (int(FULL_WINDOW_W));
+	float yLoc = WINDOW_HEIGHT - EPSILON - rand() % (TERRAIN_HIGHT - int(EPSILON));
+
+	m_gameObjects.emplace_back(std::make_unique<Enemy>(m_playerLocations, sf::Vector2f{xLoc, yLoc}, type));
 }
 
 void Arena::createSpecialAttack(ActionType actionType, AttackType attackType, Character* owner)
@@ -53,7 +54,7 @@ void Arena::createSpecialAttack(ActionType actionType, AttackType attackType, Ch
 		m_tempHolder.emplace_back(std::make_unique<StaticAttack>(owner->getLocation(), attackType, owner));
 }
 
-void Arena::setMode(Mode mode = Mode::None)
+void Arena::setMode(Mode mode = Mode::Offline)
 {
 	m_mode = mode;
 }
@@ -73,12 +74,6 @@ void Arena::setArenaBackground(ArenaType arenaType)
 
 	m_ground.setSize({ float(FULL_WINDOW_W), float(TERRAIN_HIGHT) });
 	m_ground.setPosition({ 0,float(WINDOW_HEIGHT - TERRAIN_HIGHT) });
-}
-
-void Arena::correctPlayersLocations()
-{
-	std::swap(*m_playerLocations.begin(), *(m_playerLocations.begin() + 1));
-	//m_gameObjects.begin()->get()->switchPic((m_gameObjects.begin() + 1)->get());
 }
 
 void Arena::draw(sf::RenderWindow& window)
@@ -137,8 +132,8 @@ void Arena::collision(sf::RenderWindow& window)
 	{
 		if (!(*it)->isAlive() && (*it)->isFaded()) //if dead
 		{
-			if (dynamic_cast<Player*>(it->get()))
-				activateConclusionWindow(false, window);
+			if (auto ply = dynamic_cast<Player*>(it->get()))
+				activateConclusionWindow(false, window, ply->getPlayerNum());
 
 			it = m_gameObjects.erase(it);
 		}
@@ -171,12 +166,12 @@ Arena::~Arena()
 {
 }
 
-void Arena::activateConclusionWindow(bool isWon, sf::RenderWindow& window)
+void Arena::activateConclusionWindow(bool isWon, sf::RenderWindow& window, int plyNum)
 {
 	ConclusionWindow con{ isWon };
 	auto view = sf::View(sf::FloatRect(sf::FloatRect(0, 0, float(WINDOW_WIDTH), float(WINDOW_HEIGHT))));
 	window.setView(view);
-	con.activateConclusionWindow(window, *this);
+	con.activateConclusionWindow(window, *this, plyNum);
 }
 
 bool Arena::isWon() const

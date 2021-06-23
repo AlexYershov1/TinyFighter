@@ -7,7 +7,7 @@ public:
 	ConclusionWindow(bool);
 	~ConclusionWindow();
 
-	void activateConclusionWindow(sf::RenderWindow&, Arena&);
+	void activateConclusionWindow(sf::RenderWindow&, Arena&, int);
 	void addText(const std::string&);
 	virtual void draw(sf::RenderWindow&) const;
 private:

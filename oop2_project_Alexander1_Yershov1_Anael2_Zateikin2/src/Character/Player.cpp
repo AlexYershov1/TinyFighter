@@ -10,6 +10,11 @@ int Player::getCount()
     return m_count;
 }
 
+int Player::getPlayerNum() const
+{
+    return m_playerNum;
+}
+
 void Player::resetCount()
 {
     m_count = 0;
@@ -35,7 +40,7 @@ void Player::move(const sf::Time& deltaTime, Arena& arena)
     if (inDisabledState(deltaTime))
         return;
     m_action = getActionFromKey(arena);
-    if (!m_puppet)
+    if (!m_puppet && arena.getMode() != Mode::Offline) //if in online mode and not a puppet
         sending(m_action);
     Character::move(deltaTime, arena);
     m_manaAndHealth.move(); //move the health and mana bars
@@ -48,7 +53,7 @@ const sf::Vector2f* Player::getLocation() const
 
 Action Player::getActionFromKey(Arena& arena) //auto vecOfPAirs = {{}}
 {
-    if (m_puppet)
+    if (m_puppet && arena.getMode() != Mode::Offline) //if online and a puppet
     {
         return receive<Action>();
     }
@@ -62,27 +67,27 @@ Action Player::getActionFromKey(Arena& arena) //auto vecOfPAirs = {{}}
         { sf::Keyboard::Left , Action { ActionType::Walking, Direction::Left } },
         { sf::Keyboard::Up   , Action { ActionType::Walking, Direction::Up } },
         { sf::Keyboard::Down , Action { ActionType::Walking, Direction::Down } },
-        { sf::Keyboard::Z    , Action { ActionType::Punching, Direction::Stay } },
-        { sf::Keyboard::X    , Action { ActionType::SpecialDynamic, Direction::Stay } },
-        { sf::Keyboard::C    , Action { ActionType::SpecialStatic, Direction::Stay } },
-        { sf::Keyboard::Space, Action { ActionType::Sprinting, Direction::Stay } }
+        { sf::Keyboard::I    , Action { ActionType::Punching, Direction::Stay } },
+        { sf::Keyboard::O    , Action { ActionType::SpecialDynamic, Direction::Stay } },
+        { sf::Keyboard::P    , Action { ActionType::SpecialStatic, Direction::Stay } },
+        { sf::Keyboard::RShift, Action { ActionType::Sprinting, Direction::Stay } }
       },
       {
-        { sf::Keyboard::L    , Action { ActionType::Walking, Direction::Right } },
-        { sf::Keyboard::J    , Action { ActionType::Walking, Direction::Left } },
-        { sf::Keyboard::I    , Action { ActionType::Walking, Direction::Up } },
-        { sf::Keyboard::K    , Action { ActionType::Walking, Direction::Down } },
-        { sf::Keyboard::R    , Action { ActionType::Punching, Direction::Stay } },
-        { sf::Keyboard::T    , Action { ActionType::SpecialDynamic, Direction::Stay } },
-        { sf::Keyboard::Y    , Action { ActionType::SpecialStatic, Direction::Stay } },
-        { sf::Keyboard::H    , Action { ActionType::Sprinting, Direction::Stay } }
+        { sf::Keyboard::D    , Action { ActionType::Walking, Direction::Right } },
+        { sf::Keyboard::A    , Action { ActionType::Walking, Direction::Left } },
+        { sf::Keyboard::W    , Action { ActionType::Walking, Direction::Up } },
+        { sf::Keyboard::S    , Action { ActionType::Walking, Direction::Down } },
+        { sf::Keyboard::C    , Action { ActionType::Punching, Direction::Stay } },
+        { sf::Keyboard::V    , Action { ActionType::SpecialDynamic, Direction::Stay } },
+        { sf::Keyboard::B    , Action { ActionType::SpecialStatic, Direction::Stay } },
+        { sf::Keyboard::Space    , Action { ActionType::Sprinting, Direction::Stay } }
       }
     };
     //auto playerNumMap = keyToVectorMapping.at(m_playerNum)
     int i = 0;
     for (const auto& playerMap : keyToVectorMapping)
     {
-        if (i == m_playerNum || arena.getMode() != Mode::None) //use the keys according to the player number
+        if (i == m_playerNum || arena.getMode() != Mode::Offline) //use the keys according to the player number
         {
             for (const auto& pair : playerMap)
             {

@@ -16,13 +16,6 @@ ChooseCharacter::ChooseCharacter()
 	
 	//header
 	setHeader("Choose your character", HEADER_SIZE - 20);
-	/*m_header.setCharacterSize(HEADER_SIZE- 20);
-	m_header.setString("Choose your character");
-	sf::FloatRect textRect = m_header.getLocalBounds();
-	m_header.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
-	m_header.setPosition(HEADER_POS);*/
-
-
 }
 
 ChooseCharacter::~ChooseCharacter()
@@ -34,6 +27,26 @@ CharacterType ChooseCharacter::getChoice() const
 	return m_choice;
 }
 
+void ChooseCharacter::addSecondHeader(const std::string& str)
+{
+	m_secondHeader.setFont(ResourcesManager::instance().font());
+	m_secondHeader.setStyle(sf::Text::Style::Bold | sf::Text::Style::Italic);
+	m_secondHeader.setColor(sf::Color::Magenta);
+	m_secondHeader.setOutlineColor(sf::Color::Black);
+	m_secondHeader.setOutlineThickness(OUTLINE_THICKNESS);
+	m_secondHeader.setCharacterSize(REG_CHAR_SIZE);
+	m_secondHeader.setString(str);
+	sf::FloatRect textRect = m_secondHeader.getLocalBounds();
+	m_secondHeader.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+	m_secondHeader.setPosition({ HEADER_POS.x, HEADER_POS.y + HEADER_SIZE });
+
+}
+
+void ChooseCharacter::setSecondHeader(const std::string& str)
+{
+	m_secondHeader.setString(str);
+}
+
 void ChooseCharacter::activateChooseCharacter(sf::RenderWindow& window, Arena& arena)
 {
 	GenericMenu::activateWindow(window, arena);
@@ -43,6 +56,7 @@ void ChooseCharacter::draw(sf::RenderWindow& window) const
 {
 	window.draw(m_background);
 	window.draw(m_header);
+	window.draw(m_secondHeader);
 	for (const auto& item : m_characterThumbnails)
 		window.draw(item.first);
 }

@@ -80,12 +80,12 @@ const float INNER_HORIZ_SPACE = 40.f; //horizontal space
 
 enum class Mode
 {
-	Server, Client, None
+	Server, Client, Offline
 };
 
 enum class ActionType
 {
-	Standing, Walking, Jumping, Punching, Sprinting, Smacked, hit,
+	Standing, Walking, Punching, Sprinting, Smacked, hit,
 	SpecialStatic, SpecialDynamic, Burning, Freezing, Fading,
 };
 
@@ -106,8 +106,8 @@ enum class PlayerNum
 enum class AttackType
 {
 	FireDynamic = int(CharacterType::Max),
-	IceDynamic,
 	None,
+	IceDynamic,
 	FireStatic,
 	IceStatic,
 	Max
@@ -183,5 +183,5 @@ struct InitialServerInfo
 {
 	ArenaType m_arena;
 	CharacterType m_character;
-	int m_difficulty;
+	//int m_difficulty;
 };

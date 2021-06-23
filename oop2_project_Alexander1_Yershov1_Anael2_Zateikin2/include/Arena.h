@@ -24,7 +24,6 @@ public:
 	void setMode(Mode);					//for online game
 	Mode getMode() const;
 	void setArenaBackground(ArenaType);
-	void correctPlayersLocations();
 
 	void draw(sf::RenderWindow&);
 	void move(const sf::Time&);
@@ -46,6 +45,6 @@ private:
 	std::vector<std::unique_ptr<GameObject>> m_tempHolder;	//for new objects to be inserted in vector
 	std::vector<const sf::Vector2f*> m_playerLocations;		//for enemies
 
-	void activateConclusionWindow(bool, sf::RenderWindow&);
+	void activateConclusionWindow(bool, sf::RenderWindow&, int = -1);
 	bool isWon() const;
 };

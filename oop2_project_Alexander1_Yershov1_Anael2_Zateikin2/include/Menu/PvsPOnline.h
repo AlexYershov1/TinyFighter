@@ -16,7 +16,7 @@ private:
 	ChooseMode m_chooseModeMenu;
 	ChooseCharacter m_chooseCharMenu;
 	ChooseArena m_chooseArena;
-	ChooseDifficulty m_chooseDifficulty;
+	//ChooseDifficulty m_chooseDifficulty;
 
 	void waitForOtherPlayer(sf::RenderWindow&);
 };

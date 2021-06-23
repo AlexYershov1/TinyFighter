@@ -22,8 +22,13 @@ ConclusionWindow::~ConclusionWindow()
 {
 }
 
-void ConclusionWindow::activateConclusionWindow(sf::RenderWindow& window, Arena& arena)
+void ConclusionWindow::activateConclusionWindow(sf::RenderWindow& window, Arena& arena, int plyNum)
 {
+	if (plyNum != -1)
+	{
+		plyNum ? setHeader("Player 1 won", HEADER_SIZE) : setHeader("Player 2 won", HEADER_SIZE);
+		//setHeader("Player " + std::to_string(plyNum +1) + " Won", HEADER_SIZE);
+	}
 	activateWindow(window, arena);
 }
 void ConclusionWindow::addText(const std::string& str)
