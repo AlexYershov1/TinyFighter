@@ -42,8 +42,8 @@ inline void GenericMenu::alignButtonsOnScreen(Vect& vect)
 	auto offsetScale = 1.f;
 	for (auto& item : vect)
 	{
-		item.first.setOrigin(item.first.getLocalBounds().height / 2,
-			item.first.getLocalBounds().width / 2);
+		//item.first.setOrigin(item.first.getLocalBounds().height / 2,
+			//item.first.getLocalBounds().width / 2);
 		item.first.setPosition({ xOffset * offsetScale, CENTER.y });
 		offsetScale++;
 	}

@@ -33,11 +33,14 @@ namespace
         twoCharactersCollision(ply, enm);
         twoCharactersCollision(enm, ply);
     }
-
     void dynamicAttackCharacter(GameObject& dynamicAttack, GameObject& character)
     {
         auto& attack = static_cast<DynamicAttack&>(dynamicAttack);
         auto& obj = static_cast<Character&>(character);
+
+        //if dead
+        if (!character.isAlive() && !character.isFaded())
+            return;
 
         if (attack.ownerIsAlive() && attack.isMe(&obj))
             return;
@@ -57,6 +60,10 @@ namespace
     {
         auto& attack = static_cast<StaticAttack&>(staticAttack);
         auto& obj = static_cast<Character&>(character);
+
+        //if dead
+        if (!character.isAlive() && !character.isFaded())
+            return;
 
         if (attack.isMe(&obj))
             return;
@@ -88,6 +95,7 @@ namespace
         phm[Key(typeid(Player), typeid(StaticAttack))] = &characterstaticAttack;
         phm[Key(typeid(StaticAttack), typeid(Enemy))] = &staticAttackCharacter;
         phm[Key(typeid(Enemy), typeid(StaticAttack))] = &characterstaticAttack;
+        phm[Key(typeid(Player), typeid(Player))] = &playerEnemy;
 
         
         return phm;

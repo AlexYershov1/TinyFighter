@@ -72,6 +72,7 @@ void GenericMenu::setHeader(const std::string& str, float charSize)
 	m_header.setPosition(HEADER_POS);
 
 }
+//This function receives
 sf::Text GenericMenu::createText(const std::string& str) const
 {
 	//set string, give location according to vector
@@ -82,7 +83,6 @@ sf::Text GenericMenu::createText(const std::string& str) const
 	text.setString(str);
 	sf::FloatRect textRect = text.getLocalBounds();
 	text.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
-	//text.setPosition(location);
 	text.setOutlineColor(sf::Color::Magenta);
 	text.setOutlineThickness(OUTLINE_THICKNESS);
 	return text;

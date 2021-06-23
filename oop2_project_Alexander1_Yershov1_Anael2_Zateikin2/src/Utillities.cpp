@@ -1,6 +1,7 @@
 #pragma once
 #include "Utillities.h"
 #include "Character/Character.h"
+#include <cmath>
 
 bool outOfBounds(const sf::Vector2f& location)
 {
@@ -22,9 +23,14 @@ void correctDir(sf::Sprite& pic, Direction dir)
 void twoCharactersCollision(Character& first, Character& second)
 {
 	static Effect effect {(int)ActionType::Smacked};	// sound effect
+	
+	//if one of them is dead
+	if ((!first.isAlive() && !first.isFaded()) || (!second.isAlive() && !second.isFaded()))
+		return;
 
 	//check if someone is punching
-	if ((first.getActionType() == ActionType::Punching || first.punchDelayed()) && (first.facing(second)))
+	if ((first.getActionType() == ActionType::Punching || first.punchDelayed()) && (first.facing(second)) )//&&
+		//abs(first.getLocation().y - second.getLocation().y) < SIGMA)
 	{
 		if (effect.getStatus() != sf::Sound::Playing)
 			effect.play();

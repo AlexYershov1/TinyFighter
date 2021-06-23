@@ -40,7 +40,7 @@ void Arena::createEnemy(CharacterType type)
 void Arena::createSpecialAttack(ActionType actionType, AttackType attackType, Character* owner)
 {
 	static Effect effect;
-	if (actionType == ActionType::SpecialDynamic)
+	if (attackType != AttackType::IceStatic)
 	{
 		effect.setSound(attackType);
 		effect.play();
@@ -159,11 +159,15 @@ Arena::~Arena()
 void Arena::activateConclusionWindow(bool isWon, sf::RenderWindow& window)
 {
 	ConclusionWindow con{ isWon };
+	auto view = sf::View(sf::FloatRect(sf::FloatRect(0, 0, float(WINDOW_WIDTH), float(WINDOW_HEIGHT))));
+	window.setView(view);
 	con.activateConclusionWindow(window, *this);
 }
 
 bool Arena::isWon() const
 {
-	return !std::count_if(m_gameObjects.begin(), m_gameObjects.end(), 
-		[](const std::unique_ptr<GameObject>& obj) { return dynamic_cast<Enemy*>(obj.get()); });
+	return !std::count_if(m_gameObjects.begin(), m_gameObjects.end(),
+		[](const std::unique_ptr<GameObject>& obj) { return dynamic_cast<Enemy*>(obj.get()); })
+		&& std::count_if(m_gameObjects.begin(), m_gameObjects.end(),
+			[](const std::unique_ptr<GameObject>& obj) { return dynamic_cast<Player*>(obj.get()); }) == 1;
 }

@@ -21,10 +21,11 @@ void Controller::restart()
 {
 	do
 	{
-		run();
-		m_arena.clear();
 		m_view.reset(sf::FloatRect(0, 0, float(WINDOW_WIDTH), float(WINDOW_HEIGHT)));
 		m_gameWindow.setView(m_view);
+		run();
+		m_arena.clear();
+
 	} while (this->m_gameWindow.isOpen());
 }
 
@@ -35,8 +36,6 @@ void Controller::run() try
 	// game loop
 	while (this->m_gameWindow.isOpen())
 	{
-		//m_view = sf::View(sf::FloatRect(0, 0, float(WINDOW_WIDTH), float(WINDOW_HEIGHT)));
-		//m_gameWindow.setView(m_view);
 		alignView();
 		//clear, draw , display
 		this->m_gameWindow.clear(sf::Color::White);

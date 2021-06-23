@@ -21,6 +21,7 @@ struct Effect
 	void setSound(AttackType type)
 	{
 		m_data.setBuffer(ResourcesManager::instance().getSound((int)type));
+		m_data.setVolume(VOLUME);
 	}
 
 	void play() { m_data.play(); }

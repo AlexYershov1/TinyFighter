@@ -49,7 +49,7 @@ const auto OFFSET_SPECIAL_ATTACK_Y = 40.f;
 
 // game statistics
 const auto SPECIAL_DELAY = sf::seconds(1.f);
-const auto PUNCHING_DELAY = 1.f;
+const auto PUNCHING_DELAY = 0.8f;
 const auto BURNING_DAMAGE = 10.f;
 const auto PUNCH_DAMAGE = 10.f;
 const auto SPECIAL_DINAM_DAMAGE = 20.f;
@@ -57,6 +57,7 @@ const auto SPECIAL_DINAM_MANA = 30.f;
 const auto SPECIAL_STATIC_DAMAGE = 30.f;
 const auto SPECIAL_STATIC_MANA = 20.f;
 const auto ENEM_DIFFICULTY_CORR = 2;
+const auto SIGMA = 30.f;
 
 //const auto SNOW_BALL_DAMAGE = 20.f;
 //const auto EXPLOSION_DAMAGE = 30.f;
@@ -106,9 +107,9 @@ enum class AttackType
 {
 	FireDynamic = int(CharacterType::Max),
 	IceDynamic,
+	None,
 	FireStatic,
 	IceStatic,
-	None,
 	Max
 };
 

@@ -71,8 +71,8 @@ void Character::setActionType(ActionType actType)
 
 bool Character::facing(const sf::Vector2f* other) const
 {
-	if ((this->m_picture.getScale().x < 0 && other->x < this->x()) ||
-		(this->m_picture.getScale().x > 0 && other->x > this->x()))
+	if ((this->m_picture.getScale().x < 0 && other->x <= this->x()) ||
+		(this->m_picture.getScale().x > 0 && other->x >= this->x()))
 		return true;
 	return false;
 }
@@ -134,6 +134,11 @@ bool Character::inDisabledState(const sf::Time& deltaTime)
 		if (burningEffect.getStatus() != sf::Sound::Playing)
 			burningEffect.play();
 		m_picture.move(convert(opposite(m_action.second)) * m_speed * deltaTime.asSeconds());
+
+		//if was pushed to out of bounds 
+		if (outOfBounds(this->m_picture.getPosition()))
+			m_picture.move(convert(m_action.second) * m_speed * deltaTime.asSeconds());
+
 		m_manaAndHealth.decreaseHealth(deltaTime.asSeconds() * BURNING_DAMAGE);
 		return true;
 	}

@@ -7,7 +7,7 @@ Enemy::Enemy(std::vector<const sf::Vector2f*>& ply, const sf::Vector2f& location
 	: Character(location, character),
 	  m_players(ply)
 {
-	m_difficulty = rand() % 3;
+	m_difficulty = rand() % 3 + 1;
 	m_smart = character == CharacterType::Bandit ? false : true;
 	m_specialAttacks = character == CharacterType::Bandit ? 
 		std::make_pair(AttackType::None, AttackType::None) : std::make_pair(AttackType::None, AttackType::None);
@@ -52,7 +52,7 @@ void Enemy::engageClosestPlayer(Arena& arena)
 
 	if (facing(res))
 	{
-		if (distance < collisionDistance)
+		if (distance < collisionDistance )//&& (abs(res->y - this->getLocation().y) < SIGMA)) //if close enough to
 		{
 			if (m_disabled.getElapsedTime().asSeconds() > PUNCHING_DELAY + 1.5f)
 			{
