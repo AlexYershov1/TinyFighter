@@ -24,6 +24,7 @@ public:
 	void setMode(Mode);					//for online game
 	Mode getMode() const;
 	void setArenaBackground(ArenaType);
+	void correctPlayersLocations();
 
 	void draw(sf::RenderWindow&);
 	void move(const sf::Time&);

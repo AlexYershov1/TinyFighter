@@ -75,6 +75,12 @@ void Arena::setArenaBackground(ArenaType arenaType)
 	m_ground.setPosition({ 0,float(WINDOW_HEIGHT - TERRAIN_HIGHT) });
 }
 
+void Arena::correctPlayersLocations()
+{
+	std::swap(*m_playerLocations.begin(), *(m_playerLocations.begin() + 1));
+	//m_gameObjects.begin()->get()->switchPic((m_gameObjects.begin() + 1)->get());
+}
+
 void Arena::draw(sf::RenderWindow& window)
 {
 	window.draw(m_background);

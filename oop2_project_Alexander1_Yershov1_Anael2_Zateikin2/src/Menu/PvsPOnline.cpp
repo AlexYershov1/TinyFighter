@@ -15,10 +15,11 @@ void PvsPOnline::execute(sf::RenderWindow& window, Arena& arena)
 
 	m_chooseModeMenu.activateChooseMode(window, arena);
 
-	m_chooseCharMenu.activateChooseCharacter(window, arena);
+	//m_chooseCharMenu.activateChooseCharacter(window, arena);
 
 	if (arena.getMode() == Mode::Server)
 	{
+		m_chooseCharMenu.activateChooseCharacter(window, arena);
 		//choose arena
 		m_chooseArena.activateChooseArena(window, arena);
 
@@ -32,20 +33,24 @@ void PvsPOnline::execute(sf::RenderWindow& window, Arena& arena)
 		waitForOtherPlayer(window);
 	}
 	arena.createSocket();
+
 	if (arena.getMode() == Mode::Server)
 	{
-		
-		clientInfo = receive<CharacterType>();
 		sending(serverInfo);
+		clientInfo = receive<CharacterType>();
 		arena.createPlayer(clientInfo, true);
+		//arena.correctPlayersLocations();
 	}
+
 	if (arena.getMode() == Mode::Client)
 	{
+		serverInfo = receive<InitialServerInfo>();
+		arena.createPlayer(serverInfo.m_character, true);
+		m_chooseCharMenu.activateChooseCharacter(window, arena);
+		
 		clientInfo = m_chooseCharMenu.getChoice();
 		sending(clientInfo);
-		serverInfo = receive<InitialServerInfo>();
 		
-		arena.createPlayer(serverInfo.m_character, true);
 		arena.setArenaBackground(serverInfo.m_arena);
 		for (int i = 0; i < serverInfo.m_difficulty; i++)
 			arena.createEnemy(CharacterType::Bandit);

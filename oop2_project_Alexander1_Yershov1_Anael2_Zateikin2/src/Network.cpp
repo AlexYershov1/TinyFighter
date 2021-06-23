@@ -15,6 +15,7 @@
 
 #define DEFAULT_BUFLEN 512
 #define DEFAULT_PORT "55001"
+#define IP /*"localhost"*/ "192.168.14.192" //to switch to 2 different computers, enter local ip address 
 
 //--------------------------------------------//
 void init_socket_library() {
@@ -110,7 +111,7 @@ void* client_connect_to_server() {
     hints.ai_protocol = IPPROTO_TCP;
 
     // Resolve the server address and port
-    iResult = getaddrinfo("localhost", DEFAULT_PORT, &hints, &result);
+    iResult = getaddrinfo(IP, DEFAULT_PORT, &hints, &result);
     if (iResult != 0) {
         printf("getaddrinfo failed with error: %d\n", iResult);
         WSACleanup();

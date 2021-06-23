@@ -16,6 +16,7 @@ public:
 	virtual void correctOwnersPtr() = 0;
 	bool isAlive() const;
 	virtual bool isFaded() = 0;
+	void switchPic(GameObject*);
 
 	bool collidesWith(const GameObject&) const;
 	float y() const;

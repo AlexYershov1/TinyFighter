@@ -18,6 +18,8 @@ void Player::resetCount()
 Player::Player(const sf::Vector2f& location , CharacterType character, bool isPuppet)
 	: Character(location, character), m_playerNum(m_count), m_puppet(isPuppet)
 {
+    if (m_playerNum)
+        m_picture.setPosition(location.x, location.y + VERTICAL_OFFSET);
     m_specialAttacks = character == CharacterType::Alex ?
         std::make_pair(AttackType::FireDynamic, AttackType::FireStatic) : 
         std::make_pair(AttackType::IceDynamic, AttackType::IceStatic);
@@ -33,8 +35,8 @@ void Player::move(const sf::Time& deltaTime, Arena& arena)
     if (inDisabledState(deltaTime))
         return;
     m_action = getActionFromKey(arena);
-    //if (m_puppet)
-    //    sending(m_action);
+    if (!m_puppet)
+        sending(m_action);
     Character::move(deltaTime, arena);
     m_manaAndHealth.move(); //move the health and mana bars
 }
@@ -48,7 +50,6 @@ Action Player::getActionFromKey(Arena& arena) //auto vecOfPAirs = {{}}
 {
     if (m_puppet)
     {
-        sending(m_action);
         return receive<Action>();
     }
 
@@ -81,7 +82,7 @@ Action Player::getActionFromKey(Arena& arena) //auto vecOfPAirs = {{}}
     int i = 0;
     for (const auto& playerMap : keyToVectorMapping)
     {
-        if (i == m_playerNum) //use the keys according to the player number
+        if (i == m_playerNum || arena.getMode() != Mode::None) //use the keys according to the player number
         {
             for (const auto& pair : playerMap)
             {
