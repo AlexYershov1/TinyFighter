@@ -43,6 +43,11 @@ ChooseArena::~ChooseArena()
 {
 }
 
+ArenaType ChooseArena::getChoice() const
+{
+	return m_choice;
+}
+
 void ChooseArena::activateChooseArena(sf::RenderWindow& window, Arena& arena)
 {
 	activateWindow(window, arena);
@@ -64,6 +69,7 @@ bool ChooseArena::handleClick(const sf::Vector2f& location, sf::RenderWindow& wi
 	{
 		if (thumbnail.first.getGlobalBounds().contains(location))
 		{
+			m_choice = thumbnail.second;
 			arena.setArenaBackground(thumbnail.second); //set the arena's background type
 			return true;
 		}

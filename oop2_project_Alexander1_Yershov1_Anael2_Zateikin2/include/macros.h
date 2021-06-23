@@ -182,5 +182,5 @@ struct InitialServerInfo
 {
 	ArenaType m_arena;
 	CharacterType m_character;
-	Difficulty m_difficulty;
+	int m_difficulty;
 };

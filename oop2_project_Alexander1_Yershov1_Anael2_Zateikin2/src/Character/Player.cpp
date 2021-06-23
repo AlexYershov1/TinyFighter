@@ -15,8 +15,8 @@ void Player::resetCount()
     m_count = 0;
 }
 
-Player::Player(const sf::Vector2f& location , CharacterType character)
-	: Character(location, character), m_playerNum(m_count)//, m_manaAndHealth(character)
+Player::Player(const sf::Vector2f& location , CharacterType character, bool isPuppet)
+	: Character(location, character), m_playerNum(m_count), m_puppet(isPuppet)
 {
     m_specialAttacks = character == CharacterType::Alex ?
         std::make_pair(AttackType::FireDynamic, AttackType::FireStatic) : 
@@ -33,7 +33,8 @@ void Player::move(const sf::Time& deltaTime, Arena& arena)
     if (inDisabledState(deltaTime))
         return;
     m_action = getActionFromKey(arena);
-
+    //if (m_puppet)
+    //    sending(m_action);
     Character::move(deltaTime, arena);
     m_manaAndHealth.move(); //move the health and mana bars
 }
@@ -45,6 +46,12 @@ const sf::Vector2f* Player::getLocation() const
 
 Action Player::getActionFromKey(Arena& arena) //auto vecOfPAirs = {{}}
 {
+    if (m_puppet)
+    {
+        sending(m_action);
+        return receive<Action>();
+    }
+
     static const
        std::initializer_list<std::initializer_list<std::pair<sf::Keyboard::Key, Action>>>
         keyToVectorMapping =

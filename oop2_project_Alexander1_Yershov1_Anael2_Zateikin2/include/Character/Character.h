@@ -36,6 +36,7 @@ protected:
 	sf::Clock m_disabled;
 	ManaAndHealth m_manaAndHealth;
 	bool m_punchingDelayed;
+	bool m_puppet;
 
 	float operator-(const sf::Vector2f*) const;
 	float x() const;

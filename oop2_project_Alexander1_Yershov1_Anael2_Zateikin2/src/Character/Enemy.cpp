@@ -11,6 +11,7 @@ Enemy::Enemy(std::vector<const sf::Vector2f*>& ply, const sf::Vector2f& location
 	m_smart = character == CharacterType::Bandit ? false : true;
 	m_specialAttacks = character == CharacterType::Bandit ? 
 		std::make_pair(AttackType::None, AttackType::None) : std::make_pair(AttackType::None, AttackType::None);
+	m_puppet = false;
 }
 
 void Enemy::move(const sf::Time& deltaTime, Arena& arena)

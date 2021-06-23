@@ -26,6 +26,11 @@ ChooseDifficulty::~ChooseDifficulty()
 {
 }
 
+int ChooseDifficulty::getChoice() const
+{
+	return m_choice;
+}
+
 void ChooseDifficulty::activateChooseDifficulty(sf::RenderWindow& window, Arena& arena)
 {
 	activateWindow(window, arena);
@@ -74,6 +79,7 @@ bool ChooseDifficulty::handleClick(const sf::Vector2f& location, sf::RenderWindo
 		{
 			for (int i = 0; i < difficulty * ENEM_DIFFICULTY_CORR; i++)
 				arena.createEnemy(CharacterType::Bandit);
+			m_choice = difficulty * ENEM_DIFFICULTY_CORR;
 			return true;
 		}
 		difficulty++;
