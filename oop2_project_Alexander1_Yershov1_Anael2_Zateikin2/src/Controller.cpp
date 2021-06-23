@@ -23,6 +23,8 @@ void Controller::restart()
 	{
 		run();
 		m_arena.clear();
+		m_view.reset(sf::FloatRect(0, 0, float(WINDOW_WIDTH), float(WINDOW_HEIGHT)));
+		m_gameWindow.setView(m_view);
 	} while (this->m_gameWindow.isOpen());
 }
 

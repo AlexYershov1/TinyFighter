@@ -13,7 +13,9 @@ void PvsC::execute(sf::RenderWindow& window, Arena& arena)
 {
 	
 	//activate character selection + add player's name to vector
-	m_chooseCharMenu.activateChooseCharacter(window, arena);		//player 1
+	//m_chooseCharMenu.activateChooseCharacter(window, arena);		//player 1
+	ChooseCharacter m;
+	m.activateChooseCharacter(window, arena); 
 	
 	//choose arena 
 	m_chooseArena.activateChooseArena(window, arena);

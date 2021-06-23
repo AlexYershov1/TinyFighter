@@ -15,11 +15,12 @@ ChooseCharacter::ChooseCharacter()
 	modifySprites();
 	
 	//header
-	m_header.setCharacterSize(HEADER_SIZE- 20);
+	setHeader("Choose your character", HEADER_SIZE - 20);
+	/*m_header.setCharacterSize(HEADER_SIZE- 20);
 	m_header.setString("Choose your character");
 	sf::FloatRect textRect = m_header.getLocalBounds();
 	m_header.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
-	m_header.setPosition(HEADER_POS);
+	m_header.setPosition(HEADER_POS);*/
 
 
 }

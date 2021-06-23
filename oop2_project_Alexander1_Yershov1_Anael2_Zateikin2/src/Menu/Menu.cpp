@@ -1,6 +1,7 @@
 #include "Menu/Menu.h"
 #include "Menu/PvsPOnline.h"
 #include "Menu/PvsC.h"
+#include "Menu/PvsP.h"
 #include "Menu/Exit.h"
 
 
@@ -10,15 +11,16 @@ Menu::Menu()
 	// intialize header
 	/*this->m_header.setFont(ResourcesManager::instance().font());
 	m_header.setStyle(sf::Text::Style::Bold | sf::Text::Style::Italic);*/
-	m_header.setCharacterSize(HEADER_SIZE);
+	setHeader("Tiny Fighter", HEADER_SIZE);
+	/*m_header.setCharacterSize(HEADER_SIZE);
 	m_header.setString("Tiny Fighter");
 	sf::FloatRect textRect = m_header.getLocalBounds();
 	m_header.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
-	m_header.setPosition(HEADER_POS);
+	m_header.setPosition(HEADER_POS);*/
 	
 	//add Commands
 	addCommand("Player VS Computer", std::make_unique<PvsC>());
-	//add Player VS Player
+	addCommand("Player VS Player", std::make_unique < PvsP>());
 	addCommand("Player VS Player(online)", std::make_unique<PvsPOnline>());
 	addCommand("Exit", std::make_unique<Exit>());
 

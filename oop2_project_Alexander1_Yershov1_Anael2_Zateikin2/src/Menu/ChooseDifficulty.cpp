@@ -6,15 +6,19 @@ ChooseDifficulty::ChooseDifficulty()
 	:GenericMenu()
 {
 	//header
-	m_header.setCharacterSize(HEADER_SIZE);
+	setHeader("Choose difficulty", HEADER_SIZE);
+	/*m_header.setCharacterSize(HEADER_SIZE);
 	m_header.setString("Choose difficulty");
 	sf::FloatRect textRect = m_header.getLocalBounds();
 	m_header.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
-	m_header.setPosition(HEADER_POS);
+	m_header.setPosition(HEADER_POS);*/
 
-	addText("Easy");
-	addText("Normal");
-	addText("Hard");
+	//addText("Easy");
+	m_difficulties.push_back(createText("Easy"));
+	m_difficulties.push_back(createText("Normal"));
+	m_difficulties.push_back(createText("Hard"));
+	//addText("Normal");
+	//addText("Hard");
 	setTextsLocations(); //arrange on window
 }
 
@@ -26,21 +30,21 @@ void ChooseDifficulty::activateChooseDifficulty(sf::RenderWindow& window, Arena&
 {
 	activateWindow(window, arena);
 }
-void ChooseDifficulty::addText(const std::string& str)
-{
-	//set string, give location according to vector
-	sf::Text text;
-	text.setFont(ResourcesManager::instance().font());
-	text.setColor(sf::Color::Green);
-	text.setCharacterSize(REG_CHAR_SIZE);
-	text.setString(str);
-	sf::FloatRect textRect = text.getLocalBounds();
-	text.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
-	//text.setPosition(location);
-	text.setOutlineColor(sf::Color::Magenta);
-	text.setOutlineThickness(OUTLINE_THICKNESS);
-	m_difficulties.push_back(text);
-}
+//void ChooseDifficulty::addText(const std::string& str)
+//{
+//	//set string, give location according to vector
+//	sf::Text text;
+//	text.setFont(ResourcesManager::instance().font());
+//	text.setColor(sf::Color::Green);
+//	text.setCharacterSize(REG_CHAR_SIZE);
+//	text.setString(str);
+//	sf::FloatRect textRect = text.getLocalBounds();
+//	text.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+//	//text.setPosition(location);
+//	text.setOutlineColor(sf::Color::Magenta);
+//	text.setOutlineThickness(OUTLINE_THICKNESS);
+//	m_difficulties.push_back(text);
+//}
 
 void ChooseDifficulty::draw(sf::RenderWindow& window) const
 {

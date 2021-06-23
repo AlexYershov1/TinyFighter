@@ -19,6 +19,13 @@ GenericMenu::~GenericMenu()
 {
 }
 
+void GenericMenu::draw(sf::RenderWindow& window) const
+{
+	window.draw(m_background);
+	window.draw(m_header);
+
+}
+
 void GenericMenu::activateWindow(sf::RenderWindow& window, Arena& arena)
 {
 	//window loop
@@ -56,3 +63,44 @@ void GenericMenu::setBackground(sf::Texture* texutrePtr)
 {
 	m_background.setTexture(texutrePtr);
 }
+void GenericMenu::setHeader(const std::string& str, float charSize)
+{
+	m_header.setCharacterSize(charSize);
+	m_header.setString(str);
+	sf::FloatRect textRect = m_header.getLocalBounds();
+	m_header.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+	m_header.setPosition(HEADER_POS);
+
+}
+sf::Text GenericMenu::createText(const std::string& str) const
+{
+	//set string, give location according to vector
+	sf::Text text;
+	text.setFont(ResourcesManager::instance().font());
+	text.setColor(sf::Color::Green);
+	text.setCharacterSize(REG_CHAR_SIZE);
+	text.setString(str);
+	sf::FloatRect textRect = text.getLocalBounds();
+	text.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+	//text.setPosition(location);
+	text.setOutlineColor(sf::Color::Magenta);
+	text.setOutlineThickness(OUTLINE_THICKNESS);
+	return text;
+}
+//void GenericMenu::addText(const std::string& str, void* (*funcPtr)(sf::RenderWindow& window, Arena&))
+//{
+//	m_textButtons.push_back({ createText(str), funcPtr });
+//}
+//
+//void GenericMenu::addText(const std::string& str, void* funcPtr)
+//{
+//	button.setFont(ResourcesManager::instance().font());
+//	button.setColor(sf::Color::Green);
+//	button.setCharacterSize(REG_CHAR_SIZE);
+//	button.setString(str);
+//	sf::FloatRect textRect = button.getLocalBounds();
+//	button.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+//	button.setPosition(location);
+//	button.setOutlineColor(sf::Color::Magenta);
+//	button.setOutlineThickness(OUTLINE_THICKNESS);
+//}

@@ -17,11 +17,6 @@ class Arena
 public:
 	Arena();
 
-	/*
-	* add enums for arenas, add game info to know how many objects and which
-	* objects (characters) to build.
-	*/
-
 	void clear();
 	void createPlayer(CharacterType);
 	void createEnemy( CharacterType);	//inside get the players locations
