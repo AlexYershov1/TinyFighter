@@ -14,7 +14,7 @@ void Arena::clear()
 		if (auto ply = dynamic_cast<Player*>(obj.get()))
 			ply->resetCount();
 	}
-
+	//add setview
 	m_gameObjects.clear();
 	m_mode = Mode::None;
 	m_playerLocations.clear();
@@ -122,7 +122,7 @@ void Arena::collision(sf::RenderWindow& window)
 	{
 		if (!(*it)->isAlive() && (*it)->isFaded()) //if dead
 		{
-			if (typeid((*it)) == typeid(Player*))
+			if (dynamic_cast<Player*>(it->get()))
 				activateConclusionWindow(false, window);
 
 			it = m_gameObjects.erase(it);
