@@ -6,7 +6,7 @@ class ChooseDifficulty :public GenericMenu
 public:
 	ChooseDifficulty();
 	~ChooseDifficulty();
-
+	int getChoice() const;
 	void activateChooseDifficulty(sf::RenderWindow&, Arena&);
 	//void addText(const std::string&);
 	virtual void draw(sf::RenderWindow&) const;
@@ -19,5 +19,6 @@ private:
 	void unmark(sf::Text&);
 
 
-	std::vector<sf::Text> m_difficulties;
+	std::vector<sf::Text > m_difficulties;
+	int m_choice;
 };

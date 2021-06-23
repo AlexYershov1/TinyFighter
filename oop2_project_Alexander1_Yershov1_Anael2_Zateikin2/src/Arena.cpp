@@ -3,6 +3,8 @@
 #include "Character/Enemy.h"
 #include <algorithm>
 
+void* Arena::m_socket;
+
 Arena::Arena()
 {
 }
@@ -20,11 +22,11 @@ void Arena::clear()
 	m_playerLocations.clear();
 }
 
-void Arena::createPlayer( CharacterType type )
+void Arena::createPlayer(CharacterType type, bool isPuppet = false)
 {
 	auto location = INITIAL_LOC;
 	location.x += LOC_OFFSET * m_gameObjects.size();
-	auto ply = std::make_unique<Player>(location, type);
+	auto ply = std::make_unique<Player>(location, type, isPuppet);
 	m_playerLocations.push_back(ply->getLocation());
 	m_gameObjects.push_back(std::move(ply));
 }
@@ -103,7 +105,14 @@ void Arena::move(const sf::Time& deltaTime)
 void Arena::update(const sf::Time& deltaTime)
 {
 	for (auto& object : m_gameObjects)
+	{
 		object->update(deltaTime);
+
+		// sending the puppets' 
+		/*if (m_mode != Mode::None && dynamic_cast<Player*>(object.get()))
+			object->sendAction();*/
+	}
+	
 }
 
 void Arena::collision(sf::RenderWindow& window)

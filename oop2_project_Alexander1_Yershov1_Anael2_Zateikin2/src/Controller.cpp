@@ -31,7 +31,7 @@ void Controller::restart()
 
 void Controller::run() try
 {
-	m_menu.activateMenu(m_gameWindow, m_arena); //create objects
+	m_menu.activateMenu(m_gameWindow, m_arena);		//create objects
 
 	// game loop
 	while (this->m_gameWindow.isOpen())
@@ -39,10 +39,8 @@ void Controller::run() try
 		alignView();
 		//clear, draw , display
 		this->m_gameWindow.clear(sf::Color::White);
-		auto test = m_gameWindow.getView();
-		m_states.draw(m_gameWindow);
-		m_arena.draw(m_gameWindow);
-
+		m_states.draw(m_gameWindow);				//draw the life an mana section
+		m_arena.draw(m_gameWindow);					//draw all the game objects
 		this->m_gameWindow.display();
 
 		for (auto evnt = sf::Event(); m_gameWindow.pollEvent(evnt); )
@@ -52,7 +50,7 @@ void Controller::run() try
 			case sf::Event::Closed:
 				m_gameWindow.close();
 				break;
-			case sf::Event::MouseButtonReleased:		// stopping and resuming background music
+			case sf::Event::MouseButtonReleased:	// stopping and resuming background music
 				break;
 			default:
 				break;
@@ -60,17 +58,12 @@ void Controller::run() try
 		}
 		auto time = m_elapsed.restart();
 		m_arena.move(time);
-		m_states.move(); //keep the states sction on screen
+		m_states.move();							//keep the states sction on screen
 		
-		//check collisions
-		m_arena.collision(m_gameWindow);
-		//Collision::instance().processCollision(ply, enemy);
-
-		m_arena.update(time);
-		//ply.update(time);	// implement in Arena
-		//enemy.update(time);	// implement in Arena
-
 		
+		m_arena.collision(m_gameWindow);			//check collisions
+
+		m_arena.update(time);						//update animation
 	}
 }
 
@@ -83,6 +76,8 @@ catch (std::exception& ex)
 	std::cerr << "problem: " << ex.what() << '\n';
 	return;
 }
+
+//This function aligns the view according to player number 1
 void Controller::alignView()
 {
 	auto centerLocation = m_arena.getFirstPlayerPos();

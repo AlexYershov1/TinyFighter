@@ -5,7 +5,7 @@
 class Player : public Character
 {
 public:
-	Player(const sf::Vector2f&, CharacterType);
+	Player(const sf::Vector2f&, CharacterType, bool);
 	void move(const sf::Time&, Arena&);
 	
 	const sf::Vector2f* getLocation() const;
@@ -19,4 +19,5 @@ public:
 private:
 	int m_playerNum;
 	static int m_count;
+	bool m_puppet; // is this player a puppet, for online mode
 };

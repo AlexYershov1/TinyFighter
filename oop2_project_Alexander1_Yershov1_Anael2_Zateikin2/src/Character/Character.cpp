@@ -1,5 +1,6 @@
 #pragma once
 #include "Character/Character.h"
+#include "Network.h"
 
 Character::Character(const sf::Vector2f& location, CharacterType character)
 	: GameObject(location),

@@ -29,6 +29,11 @@ ChooseCharacter::~ChooseCharacter()
 {
 }
 
+CharacterType ChooseCharacter::getChoice() const
+{
+	return m_choice;
+}
+
 void ChooseCharacter::activateChooseCharacter(sf::RenderWindow& window, Arena& arena)
 {
 	GenericMenu::activateWindow(window, arena);
@@ -62,7 +67,8 @@ bool ChooseCharacter::handleClick(const sf::Vector2f& location, sf::RenderWindow
 	{
 		if (button.first.getGlobalBounds().contains(location))
 		{
-			arena.createPlayer(button.second());
+			m_choice = button.second();
+			arena.createPlayer(button.second(), false);
 			return true;
 		}	
 	}

@@ -4,7 +4,6 @@
 
 #include "network.h"
 #include <windows.h>
-#include <winsock2.h>
 #include <ws2tcpip.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -149,109 +148,4 @@ void* client_connect_to_server() {
     }
 
     return (void*)ConnectSocket;
-}
-
-void initialSocketSendServer(InitialServerInfo& info)
-{
-    // Send an initial buffer
-    SOCKET s = (SOCKET)socket;
-    void* buff = &info;
-    int iResult = send(s, (char*)buff, sizeof(InitialServerInfo), 0);
-
-    if (iResult == SOCKET_ERROR) {
-        printf("send failed with error: %d\n", WSAGetLastError());
-        closesocket(s);
-        WSACleanup();
-        exit(-1);
-    }
-}
-InitialServerInfo initialSocketReceiveClient()
-{
-    int updated_buff;
-    char buffer[sizeof(InitialServerInfo) + 1];
-    int iResult = recv((SOCKET)socket, buffer, sizeof(InitialServerInfo), 0);
-    buffer[sizeof(InitialServerInfo)] = '\0';
-
-    if (iResult == 0)
-        throw std::exception("Connection closed\n");
-
-    if (iResult < 0)
-        throw std::exception("recv failed with error: %d\n", WSAGetLastError());
-
-    void* info = buffer;
-    auto translatedInfo = (InitialServerInfo*)info;
-    return *translatedInfo;
-}
-void initialSocketSendClient()
-{
-}
-//--------------------------------------------//
-void socket_send(void* socket, const int buffer) {
-    // Send an initial buffer
-    SOCKET s = (SOCKET)socket;
-
-    // translate buffer from int to char
-    char* updated_buff = translate_buff(buffer);
-
-    int iResult = send(s, (const char*)updated_buff, 2, 0);
-    delete[] updated_buff;
-    if (iResult == SOCKET_ERROR) {
-        printf("send failed with error: %d\n", WSAGetLastError());
-        closesocket(s);
-        WSACleanup();
-        exit(-1);
-    }
-}
-
-//--------------------------------------------//
-void socket_send(void* socket, bool another_turn) {
-    // Send an initial buffer
-    SOCKET s = (SOCKET)socket;
-
-    if (another_turn)
-        send(s, "-1", 2, 0);
-    else
-        send(s, "-2", 2, 0);
-}
-//--------------------------------------------//
-char* translate_buff(const int buffer) {
-    char* updated_buff = new (std::nothrow) char[2];
-
-    if (updated_buff == NULL) {
-        std::cerr << "couldn't allocate memory\n";
-        exit(EXIT_FAILURE);
-    }
-
-    updated_buff[0] = (buffer / 10) + '0';
-    updated_buff[1] = (buffer % 10) + '0';
-
-    return updated_buff;
-}
-
-//--------------------------------------------//
-int socket_recv(void* socket) {
-    int updated_buff;
-    char buffer[3];
-    int iResult = recv((SOCKET)socket, buffer, 2, 0);
-    buffer[2] = '\0';
-    if (iResult == 0) {
-        printf("Connection closed\n");
-        return EXIT_FAILURE;
-    }
-
-    if (iResult < 0) {
-        printf("recv failed with error: %d\n", WSAGetLastError());
-        return EXIT_FAILURE;
-    }
-
-    // receiving result
-    if (strcmp(buffer, "-1") == 0)
-        return -1;
-    else if (strcmp(buffer, "-2") == 0)
-        return -2;
-
-    // translate buffer from char to int
-    updated_buff = (int)(buffer[0] - '0') * 10 + (int)(buffer[1] - '0');
-
-    return updated_buff;
 }

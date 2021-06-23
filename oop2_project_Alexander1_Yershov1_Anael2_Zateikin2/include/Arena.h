@@ -17,11 +17,11 @@ class Arena
 public:
 	Arena();
 
-	void clear();
-	void createPlayer(CharacterType);
-	void createEnemy( CharacterType);	//inside get the players locations
+	void clear();						//clear all vectors and data
+	void createPlayer(CharacterType, bool);	
+	void createEnemy( CharacterType);
 	void createSpecialAttack(ActionType, AttackType, Character*);
-	void setMode(Mode);
+	void setMode(Mode);					//for online game
 	Mode getMode() const;
 	void setArenaBackground(ArenaType);
 
@@ -33,6 +33,7 @@ public:
 
 	// online
 	void createSocket();
+	static void* m_socket;
 	~Arena();
 
 private:
@@ -41,10 +42,8 @@ private:
 	Mode m_mode;
 	
 	std::vector <std::unique_ptr<GameObject>> m_gameObjects;
-	std::vector<std::unique_ptr<GameObject>> m_tempHolder;
-	std::vector<const sf::Vector2f*> m_playerLocations;
-
-	void* m_socket;
+	std::vector<std::unique_ptr<GameObject>> m_tempHolder;	//for new objects to be inserted in vector
+	std::vector<const sf::Vector2f*> m_playerLocations;		//for enemies
 
 	void activateConclusionWindow(bool, sf::RenderWindow&);
 	bool isWon() const;
