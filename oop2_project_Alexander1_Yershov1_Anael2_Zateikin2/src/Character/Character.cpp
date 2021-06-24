@@ -47,11 +47,6 @@ void Character::setAlive(bool isAlive)
 {
 	m_alive = isAlive;
 }
-//
-//sf::Vector2f Character::getLocation() const
-//{
-//	return m_picture.getPosition();
-//}
 
 void Character::decreaseHealth(float value)
 {

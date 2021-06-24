@@ -15,7 +15,7 @@
 
 #define DEFAULT_BUFLEN 512
 #define DEFAULT_PORT "55001"
-#define IP "localhost" //"192.168.14.192" //to switch to 2 different computers, enter local ip address 
+#define IP "192.168.1.31" /*"localhost"*/ /*"192.168.14.192"*/ //to unable online gaming, enter local ip address 
 
 //--------------------------------------------//
 void init_socket_library() {

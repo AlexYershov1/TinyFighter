@@ -1,5 +1,5 @@
 #include "Menu/ChooseCharacter.h"
-
+#include "Menu/InstructionsWindow.h"
 
 ChooseCharacter::ChooseCharacter()
 	: GenericMenu()
@@ -49,6 +49,10 @@ void ChooseCharacter::setSecondHeader(const std::string& str)
 
 void ChooseCharacter::activateChooseCharacter(sf::RenderWindow& window, Arena& arena)
 {
+	// showing instructions before picking a character
+	InstructionsWindow inst;
+	inst.activateInstructionsWindow(window, arena);
+
 	GenericMenu::activateWindow(window, arena);
 }
 

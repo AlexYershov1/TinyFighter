@@ -18,6 +18,7 @@ public:
 
     const sf::Texture& texture(int object, int index) const { return m_textures[object][index]; }
     const sf::Texture* texture(ArenaType, BackroundAssets) const; 
+    const sf::Texture* texture(Buttons) const;
     const sf::Texture* menuBGTexture() const { return &m_MenuBackground; }
     const sf::Texture* arrowTexture() const { return &m_arrow; }
     const sf::Font& font() const { return m_font; }
@@ -31,6 +32,7 @@ public:
 private:
 	ResourcesManager();
     std::vector<std::vector<sf::Texture>> m_textures;
+    std::vector<sf::Texture> m_buttons;
     std::vector<std::vector<sf::Texture>> m_BGtextures; //backgroung textures
     std::unordered_map<int, sf::SoundBuffer> m_audio;
     std::vector<AnimeMap> m_animationData;
@@ -39,6 +41,7 @@ private:
     sf::Font m_font;
 
     void loadImage(const std::string&, int);
+    void loadImage(const std::string&);
     void loadArenaImages(const std::string&, const std::string&, int);
     AnimeMap playerData() const;
     AnimeMap banditData() const;

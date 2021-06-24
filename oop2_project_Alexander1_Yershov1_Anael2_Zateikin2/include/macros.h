@@ -29,6 +29,8 @@ const sf::Vector2f RECT_SIZE = { 200.f, 200.f };
 const sf::Vector2f ARROW_SIZE = { 100.f, 50.f };
 
 const float VERTICAL_OFFSET = 110.f;
+const auto BUTTONS_ON_SIDE = 3;
+const auto ADJUST = 50.f;
 
 // animation
 const auto AnimationTime = sf::seconds(0.1f);
@@ -184,5 +186,9 @@ struct InitialServerInfo
 {
 	ArenaType m_arena;
 	CharacterType m_character;
-	//int m_difficulty;
+};
+
+enum class Buttons
+{
+	Arrows, WASD, I, O, P, C, V, B, Max
 };

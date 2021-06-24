@@ -15,6 +15,5 @@ private:
 	virtual bool handleClick(const sf::Vector2f&, sf::RenderWindow&, Arena&);
 	virtual void handleMove(const sf::Vector2f&) {}
 
-	// change to pair
 	std::vector<sf::Text> m_texts;
 };

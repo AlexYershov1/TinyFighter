@@ -87,20 +87,4 @@ sf::Text GenericMenu::createText(const std::string& str) const
 	text.setOutlineThickness(OUTLINE_THICKNESS);
 	return text;
 }
-//void GenericMenu::addText(const std::string& str, void* (*funcPtr)(sf::RenderWindow& window, Arena&))
-//{
-//	m_textButtons.push_back({ createText(str), funcPtr });
-//}
-//
-//void GenericMenu::addText(const std::string& str, void* funcPtr)
-//{
-//	button.setFont(ResourcesManager::instance().font());
-//	button.setColor(sf::Color::Green);
-//	button.setCharacterSize(REG_CHAR_SIZE);
-//	button.setString(str);
-//	sf::FloatRect textRect = button.getLocalBounds();
-//	button.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
-//	button.setPosition(location);
-//	button.setOutlineColor(sf::Color::Magenta);
-//	button.setOutlineThickness(OUTLINE_THICKNESS);
-//}
+

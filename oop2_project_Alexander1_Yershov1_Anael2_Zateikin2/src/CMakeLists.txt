@@ -29,4 +29,5 @@ target_sources (oop2_project_Alexander1_Yershov1_Anael2_Zateikin2 PRIVATE "main.
 																		  "StatesSection.cpp"
 																		  "Network.cpp"
 																		  "Menu/ConclusionWindow.cpp"
-																		  "RestartExc.cpp")
+																		  "RestartExc.cpp"
+																		  "Menu/InstructionsWindow.cpp")

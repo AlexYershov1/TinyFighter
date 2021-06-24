@@ -12,6 +12,11 @@ const sf::Texture* ResourcesManager::texture(ArenaType arenaType, BackroundAsset
     return &m_BGtextures[int(arenaType)][int(bgAsset)]; 
 }
 
+const sf::Texture* ResourcesManager::texture(Buttons button) const
+{
+    return &m_buttons[(int)button];
+}
+
 AnimeMap ResourcesManager::playerData() const
 {
     const auto size = sf::Vector2i(80, 80);
@@ -185,7 +190,7 @@ ResourcesManager::~ResourcesManager()
 
 ResourcesManager::ResourcesManager()
     :m_animationData(int(AttackType::Max)), m_textures(int(AttackType::Max)),
-    m_BGtextures(int(ArenaType::Max))
+    m_BGtextures(int(ArenaType::Max))//, m_buttons(int(Buttons::Max))
 {
     //create characters' animations
     loadImage("firen_0.png", int(CharacterType::Alex)); //sprite sheet
@@ -202,6 +207,15 @@ ResourcesManager::ResourcesManager()
     loadImage("firen_exp.png", int(AttackType::FireStatic));
     loadImage("freeze_col.png", int(AttackType::IceStatic));
 
+    //create buttons explanations
+    loadImage("arrows.png");
+    loadImage("wasd.png");
+    loadImage("letterI.png");
+    loadImage("letterO.png");
+    loadImage("letterP.png");
+    loadImage("letterC.png");
+    loadImage("letterV.png");
+    loadImage("letterB.png");
 
     // cropping the correct animations
     m_animationData[int(CharacterType::Alex)] = playerData();
@@ -268,6 +282,17 @@ void ResourcesManager::loadImage(const std::string& fileName, int character)
     }
 
     m_textures[character].emplace_back(image);
+}
+
+void ResourcesManager::loadImage(const std::string& fileName)
+{
+    sf::Texture image;
+    if (!image.loadFromFile(fileName))
+    {
+        throw std::runtime_error("Can't load file");
+    }
+
+    m_buttons.emplace_back(image);
 }
 
 void ResourcesManager::loadArenaImages(const std::string& background, const std::string& ground, int arenaType)
