@@ -71,7 +71,7 @@ const sf::Vector2f* Player::getLocation() const
 
 Action Player::getActionFromKey(Arena& arena) //auto vecOfPAirs = {{}}
 {
-    sf::Keyboard::Key keyPressed = sf::Keyboard::F9;
+    sf::Keyboard::Key keyPressed = DEFAULT_KEY;
     if (m_puppet && arena.getMode() != Mode::Offline) //if online and a puppet
     {
         keyPressed = receive<sf::Keyboard::Key>();
@@ -89,7 +89,8 @@ Action Player::getActionFromKey(Arena& arena) //auto vecOfPAirs = {{}}
         { sf::Keyboard::I    , Action { ActionType::Punching, Direction::Stay } },
         { sf::Keyboard::O    , Action { ActionType::SpecialDynamic, Direction::Stay } },
         { sf::Keyboard::P    , Action { ActionType::SpecialStatic, Direction::Stay } },
-        { sf::Keyboard::RShift, Action { ActionType::Sprinting, Direction::Stay } }
+        { sf::Keyboard::RShift, Action { ActionType::Sprinting, Direction::Stay } },
+        { DEFAULT_KEY, Action { ActionType::Standing, Direction::Stay } }
       },
       {
         { sf::Keyboard::D    , Action { ActionType::Walking, Direction::Right } },
@@ -99,7 +100,8 @@ Action Player::getActionFromKey(Arena& arena) //auto vecOfPAirs = {{}}
         { sf::Keyboard::C    , Action { ActionType::Punching, Direction::Stay } },
         { sf::Keyboard::V    , Action { ActionType::SpecialDynamic, Direction::Stay } },
         { sf::Keyboard::B    , Action { ActionType::SpecialStatic, Direction::Stay } },
-        { sf::Keyboard::Space    , Action { ActionType::Sprinting, Direction::Stay } }
+        { sf::Keyboard::Space    , Action { ActionType::Sprinting, Direction::Stay } },
+        { DEFAULT_KEY, Action { ActionType::Standing, Direction::Stay } }
       }
     };
     //auto playerNumMap = keyToVectorMapping.at(m_playerNum)
@@ -161,7 +163,8 @@ Action Player::getActionFromKey(Arena& arena) //auto vecOfPAirs = {{}}
         }
         i++;
     }
-
+    if (!m_puppet && arena.getMode() != Mode::Offline)
+        sending(DEFAULT_KEY);
     return Action{ ActionType::Standing, Direction::Stay }; //default return
 }
 
