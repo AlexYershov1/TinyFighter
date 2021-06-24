@@ -160,11 +160,15 @@ Action Player::getActionFromKey(Arena& arena) //auto vecOfPAirs = {{}}
                     return pair.second;
                 }
             }
+            if (!m_puppet && arena.getMode() != Mode::Offline)
+            {
+                sending(DEFAULT_KEY);
+                return Action{ ActionType::Standing, Direction::Stay }; //default return
+            }
         }
         i++;
     }
-    if (!m_puppet && arena.getMode() != Mode::Offline)
-        sending(DEFAULT_KEY);
+
     return Action{ ActionType::Standing, Direction::Stay }; //default return
 }
 
