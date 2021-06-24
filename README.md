@@ -23,7 +23,10 @@ The classes:
 Controller:
 A class that runs the game loop - creates the game window, draws the objects and calls the functions in 
 the correct order.
-The class has a member of Arena, which represents the stage (arena)
+The class has a member of Arena, which represents the stage (arena), m_statesSection -a member that represents
+the upper part of the window, containing life bars and mana (note: enemies dont display their bars).
+The class is also responsile for the view of the window.
+
 
 Arena:
 Holds a vector of of the game objects. Responsible to search for collisions between objects and send to 
