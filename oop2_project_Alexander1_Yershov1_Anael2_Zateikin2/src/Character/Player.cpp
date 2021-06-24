@@ -38,7 +38,11 @@ Player::Player(const sf::Vector2f& location , CharacterType character, bool isPu
 void Player::move(const sf::Time& deltaTime, Arena& arena)
 {
     if (inDisabledState(deltaTime))
+    {
+        if (!m_puppet && arena.getMode() != Mode::Offline) //if in online mode and not a puppet
+            sending(m_action);
         return;
+    }
     m_action = getActionFromKey(arena);
     if (!m_puppet && arena.getMode() != Mode::Offline) //if in online mode and not a puppet
         sending(m_action);
