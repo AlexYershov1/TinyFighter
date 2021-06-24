@@ -117,18 +117,15 @@ Action Player::getActionFromKey(Arena& arena) //auto vecOfPAirs = {{}}
                 if (!m_puppet && arena.getMode() != Mode::Offline && sf::Keyboard::isKeyPressed(pair.first)) //if in online mode and not a puppet
                     sending(pair.first);
 
-                if (sf::Keyboard::isKeyPressed(pair.first) || (m_puppet && keyPressed == pair.first))
+                if ((!m_puppet && sf::Keyboard::isKeyPressed(pair.first)) || (m_puppet && keyPressed == pair.first))
                 {
                     switch (auto type = pair.second.first)
                     {
                     case ActionType::Sprinting:
                         m_speed = RUN_SPEED;
-                        //pair.second.second = getFacingDirection();
                         return Action{ pair.second.first,getFacingDirection() };
                         break;
                     case ActionType::SpecialDynamic:
-                        //m_manaAndHealth.decreaseMana(10);
-                        // continue to fall through to static
                     case ActionType::SpecialStatic:
                         attackType = type == ActionType::SpecialDynamic ? m_specialAttacks.first : m_specialAttacks.second;
                         if (enoughMana(type) && m_specialAttackClock.getElapsedTime() > SPECIAL_DELAY)
