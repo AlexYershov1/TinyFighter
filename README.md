@@ -108,12 +108,20 @@ Data Structures:
 4. In resourcesManager - maps and vectors to hold textures, fonts and music.
 
 ----------------------------------------------------------------------------------------------------------------
+List of Files:
+
+In resources - fonts, pictures and sounds.
+List of header files, containing classes' prototypes and declerations.
+List of cpp files, containing the header files' implementaaions.
+
+
+----------------------------------------------------------------------------------------------------------------
 Known Bugs:
 
 1. sometimes enemies can merge, and look as one. 
 2. one of the backgrounds sometimes doesn’t load appropriately and might look smudged. 
 
-
+----------------------------------------------------------------------------------------------------------------
 
 Notes: 
 1. there are no enemies in mode PVP (online\offline).
