@@ -1,7 +1,13 @@
 # TinyFighter
-An action game based on little-fighter 2 built using C++ and SFML graphic library
+Written by Alexander Yershov and Anael Zateikin.
 
-This is an explenation file for the UML class-diagram.
+
+This is an action game based on little-fighter 2 built using C++ and SFML graphic library.
+The game is a fighting game with different modes:
+1) Player vs computer - a player controlled by the keyboard fights enemies which are controlled
+   by the computer. There are three difficulty levels, each affects the number of enemies.
+2) Player vs Player - two players on one keyboard.
+
 
 The classes:
 Controller:
@@ -39,3 +45,7 @@ a class which deals with a GameObject's sprite sheet and privides the wished ani
 The classes resourceManager and Collisions are singletons. 
 resourceManager - for uploading fonts, sounds and textures
 Collisions - to hold function table for dealing with collisions.
+
+Keyboard controlls:
+Player 1:
+
