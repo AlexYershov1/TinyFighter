@@ -39,27 +39,27 @@ void Player::move(const sf::Time& deltaTime, Arena& arena)
 {
     if (inDisabledState(deltaTime))
     {
-        if (!m_puppet && arena.getMode() != Mode::Offline) //if in online mode and not a puppet
-            sending(m_action);
+        //if (!m_puppet && arena.getMode() != Mode::Offline) //if in online mode and not a puppet
+        //    sending(m_action);
         return;
     }
     m_action = getActionFromKey(arena);
-    if (!m_puppet && arena.getMode() != Mode::Offline) //if in online mode and not a puppet
-        sending(m_action);
+    //if (!m_puppet && arena.getMode() != Mode::Offline) //if in online mode and not a puppet
+    //    sending(m_action);
     Character::move(deltaTime, arena);
     m_manaAndHealth.move(); //move the health and mana bars
 }
 
 void Player::update(const sf::Time& deltaTime)
 {
-    if (!m_puppet && Arena::getMode() != Mode::Offline) //if in online mode and not a puppet
-    {
-        sending(m_action);
-    }
-    if (m_puppet)
-    {
-        m_action = receive<Action>();
-    }
+    //if (!m_puppet && Arena::getMode() != Mode::Offline) //if in online mode and not a puppet
+    //{
+    //    sending(m_action);
+    //}
+    //if (m_puppet)
+    //{
+    //    m_action = receive<Action>();
+    //}
 
     Character::update(deltaTime);
 }
@@ -71,9 +71,10 @@ const sf::Vector2f* Player::getLocation() const
 
 Action Player::getActionFromKey(Arena& arena) //auto vecOfPAirs = {{}}
 {
+    sf::Keyboard::Key keyPressed = sf::Keyboard::F9;
     if (m_puppet && arena.getMode() != Mode::Offline) //if online and a puppet
     {
-        return receive<Action>();
+        keyPressed = receive<sf::Keyboard::Key>();
     }
 
     static const
@@ -111,7 +112,10 @@ Action Player::getActionFromKey(Arena& arena) //auto vecOfPAirs = {{}}
             {
                 AttackType attackType;  // for special attacks
 
-                if (sf::Keyboard::isKeyPressed(pair.first))
+                if (!m_puppet && arena.getMode() != Mode::Offline && sf::Keyboard::isKeyPressed(pair.first)) //if in online mode and not a puppet
+                    sending(pair.first);
+
+                if (sf::Keyboard::isKeyPressed(pair.first) || (m_puppet && keyPressed == pair.first))
                 {
                     switch (auto type = pair.second.first)
                     {
