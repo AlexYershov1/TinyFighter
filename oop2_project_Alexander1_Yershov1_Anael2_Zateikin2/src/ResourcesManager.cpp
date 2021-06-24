@@ -227,6 +227,9 @@ ResourcesManager::ResourcesManager()
     audio.loadFromFile("freeze_dynamic.wav");
     m_audio.emplace((int)AttackType::IceDynamic, audio);
 
+    audio.loadFromFile("freeze_static.wav");
+    m_audio.emplace((int)AttackType::IceStatic, audio);
+
     audio.loadFromFile("firen-dynamic.wav");
     m_audio.emplace((int)AttackType::FireDynamic, audio);
 

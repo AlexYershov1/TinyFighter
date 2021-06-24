@@ -24,7 +24,7 @@ ConclusionWindow::~ConclusionWindow()
 
 void ConclusionWindow::activateConclusionWindow(sf::RenderWindow& window, Arena& arena, int deadPlyNum)
 {
-	if (deadPlyNum != -1) //if not the default value
+	if (deadPlyNum != -1 ) //if not the default value
 	{
 		deadPlyNum ? setHeader("Player 1 won", HEADER_SIZE) : setHeader("Player 2 won", HEADER_SIZE);
 	}

@@ -43,11 +43,11 @@ void Arena::createEnemy(CharacterType type)
 void Arena::createSpecialAttack(ActionType actionType, AttackType attackType, Character* owner)
 {
 	static Effect effect;
-	if (attackType != AttackType::IceStatic)
-	{
+	//if (attackType != AttackType::IceStatic)
+	//{
 		effect.setSound(attackType);
 		effect.play();
-	}
+	//}
 
 	actionType == ActionType::SpecialDynamic ?
 		m_tempHolder.emplace_back(std::make_unique<DynamicAttack>(owner->getLocation(), attackType, owner)) :
@@ -132,9 +132,12 @@ void Arena::collision(sf::RenderWindow& window)
 	{
 		if (!(*it)->isAlive() && (*it)->isFaded()) //if dead
 		{
+			
 			if (auto ply = dynamic_cast<Player*>(it->get()))
-				activateConclusionWindow(false, window, ply->getPlayerNum());
-
+			{
+				auto mode = Player::getCount() > 1 ? ply->getPlayerNum() : -1  ;
+				activateConclusionWindow(false, window, mode);
+			}
 			it = m_gameObjects.erase(it);
 		}
 		else
