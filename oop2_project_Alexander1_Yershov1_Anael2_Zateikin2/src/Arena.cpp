@@ -4,9 +4,9 @@
 #include <algorithm>
 
 void* Arena::m_socket;
+Mode Arena::m_mode = Mode::Offline;
 
 Arena::Arena() 
-	: m_mode(Mode::Offline)
 {
 }
 
@@ -59,7 +59,7 @@ void Arena::setMode(Mode mode = Mode::Offline)
 	m_mode = mode;
 }
 
-Mode Arena::getMode() const
+Mode Arena::getMode()
 {
 	return m_mode;
 }
@@ -94,7 +94,7 @@ void Arena::move(const sf::Time& deltaTime)
 	for (auto& object : m_gameObjects)
 	{
 		if(object)
-			object->move(deltaTime, *this); //suicides when has three objects in the vector
+			object->move(deltaTime, *this); 
 	}
 	//move from tempHolder to main vector
 	for (auto& newObj : m_tempHolder)

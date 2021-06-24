@@ -21,8 +21,8 @@ public:
 	void createPlayer(CharacterType, bool);	
 	void createEnemy( CharacterType);
 	void createSpecialAttack(ActionType, AttackType, Character*);
-	void setMode(Mode);					//for online game
-	Mode getMode() const;
+	static void setMode(Mode);					//for online game
+	static Mode getMode();
 	void setArenaBackground(ArenaType);
 
 	void draw(sf::RenderWindow&);
@@ -39,7 +39,7 @@ public:
 private:
 	sf::RectangleShape m_background;
 	sf::RectangleShape m_ground;
-	Mode m_mode;
+	static Mode m_mode;
 	
 	std::vector <std::unique_ptr<GameObject>> m_gameObjects;
 	std::vector<std::unique_ptr<GameObject>> m_tempHolder;	//for new objects to be inserted in vector

@@ -7,7 +7,7 @@ class Player : public Character
 public:
 	Player(const sf::Vector2f&, CharacterType, bool);
 	void move(const sf::Time&, Arena&);
-	
+	virtual void update(const sf::Time&);
 	const sf::Vector2f* getLocation() const;
 
 	Action getActionFromKey(Arena&);

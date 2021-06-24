@@ -50,6 +50,20 @@ void Player::move(const sf::Time& deltaTime, Arena& arena)
     m_manaAndHealth.move(); //move the health and mana bars
 }
 
+void Player::update(const sf::Time& deltaTime)
+{
+    if (!m_puppet && Arena::getMode() != Mode::Offline) //if in online mode and not a puppet
+    {
+        sending(m_action);
+    }
+    if (m_puppet)
+    {
+        m_action = receive<Action>();
+    }
+
+    Character::update(deltaTime);
+}
+
 const sf::Vector2f* Player::getLocation() const
 {
     return &(m_picture.getPosition());
