@@ -25,27 +25,42 @@ A class that runs the game loop - creates the game window, draws the objects and
 the correct order.
 The class has a member of Arena, which represents the stage (arena), m_statesSection -a member that represents
 the upper part of the window, containing life bars and mana (note: enemies dont display their bars).
-The class is also responsile for the view of the window.
+The class is also responsile for the view of the window. Note - in PlayerVsPlayer on one keyboard, the view follows 
+player 1.
 
 
 Arena:
-Holds a vector of of the game objects. Responsible to search for collisions between objects and send to 
-the multymethod class "Collision".
-There might be two players - playing one vs another.
+Holds a vector of of the game objects. Responsible to create players, enemies and spacial attacks.
+This class calls to 3 main actions using polymorphism - move, check collisions and update.
+Move - moves all objects (players, enemies and spacial attacks). Check Collisions checks if two objects
+intersect, if so - calls the singleton "Collisions" to process collisions, using multymethods.
+Update - updates the animation of each object.
+Arena is also responsible for distinguishing if the game is online or offline and for that holds a static
+member, saving the mode (server, client or offline).
 
 GameObject: 
-An abstract class which represents a game object. Holds a member of strite.
-
-MovingObject:
-Derived from GameObject, also an abstract class with a virtual function move.
+An abstract class which represents a game object. Mainly a member of sprite, a member for action (struct of enum 
+and a direction). Has a pure virtual move function.
 
 Character :
-Derived from GameObject,  represents a character. A character can have special attacks, which are NonCharacter.
-A character can attack and receive damage.
+Derived from GameObject,  represents a character. A character can have special attacks.
+A character can attack and receive damage. Character has a member of Animation, which is responsible for the animation
+of the character.
+The class implements the move function and update function.
+In addition, the class holds timers for actions to help determine the state of the caracter (disabled or not).
+A character holds a ManaAndHealth member, which represents the caracters states (with animation).
 
-NonCharacter:
-A non-living object, such as a fire ball, ice ball, and maybe also throwable objects, such as a rock.
-A nonCharacter can move and deal damage.
+Player:
+Derived from Character. A player receives its movements from a keys map. In an online mode, a player can be a puppet
+and receives its movements from a socket.
+
+Enemy:
+Derived from Character. An enemy receives a vector of players' locations and chases the closest player. If a special enemy - will
+try a special attack, otherwise, try to move closer to player and punch. Randomly chosing on which axis to move. 
+Enemy has a difficulty, which determins how often it's "resting".
+
+Special Attack:
+An abstract class, derived from GameObject. A Special Attack can move and deal damage.
 
 Player:
 Derived from Character. This is a player controlled by the keyboard
