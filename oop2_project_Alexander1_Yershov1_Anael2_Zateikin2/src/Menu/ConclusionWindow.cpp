@@ -22,12 +22,11 @@ ConclusionWindow::~ConclusionWindow()
 {
 }
 
-void ConclusionWindow::activateConclusionWindow(sf::RenderWindow& window, Arena& arena, int plyNum)
+void ConclusionWindow::activateConclusionWindow(sf::RenderWindow& window, Arena& arena, int deadPlyNum)
 {
-	if (plyNum != -1)
+	if (deadPlyNum != -1) //if not the default value
 	{
-		plyNum ? setHeader("Player 1 won", HEADER_SIZE) : setHeader("Player 2 won", HEADER_SIZE);
-		//setHeader("Player " + std::to_string(plyNum +1) + " Won", HEADER_SIZE);
+		deadPlyNum ? setHeader("Player 1 won", HEADER_SIZE) : setHeader("Player 2 won", HEADER_SIZE);
 	}
 	activateWindow(window, arena);
 }

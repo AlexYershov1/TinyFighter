@@ -166,7 +166,7 @@ enum class ArenaType
 };
 enum class Difficulty
 {
-	Easy, Normal , Hard
+	Easy, Normal , Hard, Max
 };
 enum class BackroundAssets
 {

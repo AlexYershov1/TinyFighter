@@ -7,7 +7,7 @@ Enemy::Enemy(std::vector<const sf::Vector2f*>& ply, const sf::Vector2f& location
 	: Character(location, character),
 	  m_players(ply)
 {
-	m_difficulty = rand() % 3 + 1;
+	m_difficulty = rand() % int(Difficulty::Max) + 1;
 	m_smart = character == CharacterType::Bandit ? false : true;
 	m_specialAttacks = character == CharacterType::Bandit ? 
 		std::make_pair(AttackType::None, AttackType::None) : std::make_pair(AttackType::None, AttackType::None);
@@ -18,8 +18,7 @@ void Enemy::move(const sf::Time& deltaTime, Arena& arena)
 {
 	if (inDisabledState(deltaTime))
 	{
-		//Action(ActionType::Standing, Direction::Stay);
-		return;
+		return; //don't move
 	}
 	engageClosestPlayer(arena);
 

@@ -30,10 +30,11 @@ public:
 protected:
 	Animation m_animation;
 	std::pair<AttackType, AttackType> m_specialAttacks;	// first is dynamic and second is static
-	//int m_health, m_mana;
+	//clocks
 	sf::Clock m_specialAttackClock;
 	sf::Clock m_punchingClock;
 	sf::Clock m_disabled;
+	//sf::Clock m_freezingClock;
 	ManaAndHealth m_manaAndHealth;
 	bool m_punchingDelayed;
 	bool m_puppet;

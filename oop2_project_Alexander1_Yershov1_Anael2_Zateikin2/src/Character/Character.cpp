@@ -126,11 +126,13 @@ bool Character::enoughMana(ActionType attack) const
 	return false;
 }
 
+//checks if in disabled state and activates sound / moves according to state
 bool Character::inDisabledState(const sf::Time& deltaTime)
 {
 	static Effect burningEffect{(int)ActionType::Burning}, freezingEffect{(int)ActionType::Freezing};
+	auto elapsedDisabledTime = m_disabled.getElapsedTime().asSeconds();
 
-	if (m_action.first == ActionType::Burning && m_disabled.getElapsedTime().asSeconds() < 0.5f)
+	if (m_action.first == ActionType::Burning && elapsedDisabledTime < 0.5f)
 	{
 		if (burningEffect.getStatus() != sf::Sound::Playing)
 			burningEffect.play();
@@ -143,9 +145,9 @@ bool Character::inDisabledState(const sf::Time& deltaTime)
 		m_manaAndHealth.decreaseHealth(deltaTime.asSeconds() * BURNING_DAMAGE);
 		return true;
 	}
-	if (m_action.first == ActionType::Freezing && m_disabled.getElapsedTime().asSeconds() < 2.f)
+	if (m_action.first == ActionType::Freezing && elapsedDisabledTime < 2.f)
 	{
-		if (freezingEffect.getStatus() != sf::Sound::Playing)
+		if (freezingEffect.getStatus() != sf::Sound::Playing && elapsedDisabledTime < 0.4f)
 			freezingEffect.play();
 		return true;
 	}
@@ -153,7 +155,7 @@ bool Character::inDisabledState(const sf::Time& deltaTime)
 		m_disabled.getElapsedTime().asSeconds() < 0.3)
 		return true;
 
-	if (m_action.first == ActionType::Punching && m_disabled.getElapsedTime().asSeconds() < PUNCHING_DELAY)
+	if (m_action.first == ActionType::Punching && elapsedDisabledTime < PUNCHING_DELAY)
 	{
 		m_punchingDelayed = true;
   		m_action.first = ActionType::Standing;
