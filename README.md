@@ -1,6 +1,7 @@
 # TinyFighter
 Written by Alexander Yershov and Anael Zateikin.
 
+Video - https://youtu.be/ovZPiL64H-E
 
 This is an action game based on little-fighter 2 built using C++ and SFML graphic library.
 The game is a fighting game with different modes:
@@ -15,11 +16,12 @@ When running the game, the user can pick one of the three modes as stated above.
 the user picks a character and an arena. If in the first mode (vs computer), the user needs to chose a
 difficulty and the game begins.
 To win, the player must eliminate his enemies, using punches and special attacks. Special attacks const
-energy, displayed as mana bar. Mana restores itself.
+energy, displayed as mana bar. Mana restores itself over time.
 Receiving hits causes loss of health (displayed as health bar). When health reaches zero - the player dies.
 
+----------------------------------------------------------------------------------------------------------------
+The main classes:
 
-The classes:
 Controller:
 A class that runs the game loop - creates the game window, draws the objects and calls the functions in 
 the correct order.
@@ -87,7 +89,42 @@ function "execute". Possible windows after Menu are Player Vs Player (online/ of
 receives the window and the arena by reference and calls the corresponding "create" functions (player/ arena/ enemy...).
 
 ChooseCharacter, ChooseArena, ... :
-Classes derived from GenericMenu
+Classes derived from GenericMenu. Those classes have a vector of pairs. The first element is a drawable object of SFML
+(text\sprite\rectangle). The second element is a pointer to a function which is called when the button 
+(text\sprite\rectangle) is clicked. ChooseArena sets the background of the Arena. ChooseCharacter creates a player. 
+ChooseDifficulty creates the amount of enemies according to the chosen difficulty. 
+
+Online game:
+When chosen an online game the first user must choose create game, choose his character, choose the arena, and wait for a 
+second user to connect. The second user must click Join game and choose his character. And then the game begins. 
+The online game is implemented using a socket. By default the ip is set to LocalHost. 
+
+----------------------------------------------------------------------------------------------------------------
+Data Structures:
+
+1. In Arena - a vector of GameObjects, holds the GameObjects. 
+2. A vector of references to players' location - givrn to enemies in their c-tor
+3. AnimationData – a map for sprites.
+4. In resourcesManager - maps and vectors to hold textures, fonts and music.
+
+----------------------------------------------------------------------------------------------------------------
+Known Bugs:
+
+1. sometimes enemies can merge, and look as one. 
+2. one of the backgrounds sometimes doesn’t load appropriately and might look smudged. 
+
+
+
+Notes: 
+1. there are no enemies in mode PVP (online\offline).
+2. In the video, the online game looks speeded up. That is because the game was ran on the same computer. This does not 
+   happen when played on different computers.
+3. The game is written for 2 players, but can easily support more (up to 8 players).
+4. The game at this stage does not include strong/special enemies, but has all the infrastructure to support it.
+
+   
+
+
 
 Keyboard controlls:
 Player 1:
