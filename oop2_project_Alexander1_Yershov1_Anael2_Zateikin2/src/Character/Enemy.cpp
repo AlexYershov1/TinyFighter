@@ -8,6 +8,8 @@ Enemy::Enemy(std::vector<const sf::Vector2f*>& ply, const sf::Vector2f& location
 	  m_players(ply)
 {
 	m_difficulty = rand() % int(Difficulty::Max) + 1;
+
+	//for texture
 	m_smart = character == CharacterType::Bandit ? false : true;
 	m_specialAttacks = character == CharacterType::Bandit ? 
 		std::make_pair(AttackType::None, AttackType::None) : std::make_pair(AttackType::None, AttackType::None);
@@ -52,7 +54,7 @@ void Enemy::engageClosestPlayer(Arena& arena)
 
 	if (facing(res))
 	{
-		if (distance < collisionDistance )//&& (abs(res->y - this->getLocation().y) < SIGMA)) //if close enough to
+		if (distance < collisionDistance )
 		{
 			if (m_disabled.getElapsedTime().asSeconds() > PUNCHING_DELAY + 1.5f)
 			{
@@ -96,18 +98,18 @@ Direction Enemy::directionToPlayer(const sf::Vector2f* ply) const
 
 void Enemy::attemptSpecialAbility(float distance, const sf::Vector2f* ply, Arena& arena)
 {
+	//try special static
 	if (distance < collisionDistance + 30 && enoughMana(ActionType::SpecialStatic))
 	{
 		arena.createSpecialAttack(ActionType::SpecialStatic, m_specialAttacks.second, this);
-		//m_disabled.restart();
 		m_action.first = ActionType::SpecialStatic;
 	}
+	//try special dynamic
 	else if (enoughMana(ActionType::SpecialDynamic))
 	{
 		arena.createSpecialAttack(ActionType::SpecialDynamic, m_specialAttacks.first, this);
-		//m_disabled.restart();
 		m_action.first = ActionType::SpecialDynamic;
 	}
-	else
+	else //walk to player
 		m_action = Action{ ActionType::Walking, directionToPlayer(ply) };
 }

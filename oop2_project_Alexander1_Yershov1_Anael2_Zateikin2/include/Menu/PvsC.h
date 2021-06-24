@@ -1,5 +1,4 @@
 #pragma once
-//#include "Command.h"
 #include "ChooseCharacter.h"
 #include "ChooseArena.h"
 #include "ChooseDifficulty.h"

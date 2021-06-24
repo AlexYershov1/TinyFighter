@@ -40,7 +40,6 @@ void ConclusionWindow::addText(const std::string& str)
 	text.setString(str);
 	sf::FloatRect textRect = text.getLocalBounds();
 	text.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
-	//text.setPosition(location);
 	text.setOutlineColor(sf::Color::Magenta);
 	text.setOutlineThickness(OUTLINE_THICKNESS);
 	m_texts.push_back(text);

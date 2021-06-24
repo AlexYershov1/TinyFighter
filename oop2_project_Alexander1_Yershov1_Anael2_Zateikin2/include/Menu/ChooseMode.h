@@ -18,6 +18,5 @@ private:
 	void mark(sf::Text&);
 	void unmark(sf::Text&);
 
-	// change to pair
 	std::vector<sf::Text> m_options;
 };

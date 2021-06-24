@@ -1,12 +1,11 @@
 #pragma once
-//#include <SFML/Graphics.hpp>
 #include "ResourcesManager.h"
 #include "Menu/GenericMenu.h"
 #include "Utillities.h"
 #include "Arena.h"
 #include "Command.h"
 #include <string>
-//#include <memory>
+
 
 class ChooseCharacter : public GenericMenu
 {
@@ -16,6 +15,7 @@ public:
 	CharacterType getChoice() const;
 	void addSecondHeader(const std::string& str);
 	void setSecondHeader(const std::string& str);
+
 	void activateChooseCharacter(sf::RenderWindow&, Arena&);
 	virtual void draw(sf::RenderWindow&) const;
 private:

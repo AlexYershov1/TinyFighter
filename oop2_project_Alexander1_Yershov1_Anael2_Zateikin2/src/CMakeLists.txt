@@ -24,7 +24,6 @@ target_sources (oop2_project_Alexander1_Yershov1_Anael2_Zateikin2 PRIVATE "main.
 																		  "Menu/ChooseArena.cpp"
 																		  "Menu/ChooseDifficulty.cpp"
 																		  "Menu/ChooseMode.cpp"
-																		  "Menu/EnemyChoice.cpp"
 																		  "Character/ManaAndHealth.cpp"
 																		  "StatesSection.cpp"
 																		  "Network.cpp"

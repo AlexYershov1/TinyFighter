@@ -8,8 +8,11 @@ Character::Character(const sf::Vector2f& location, CharacterType character)
 	  m_punchingDelayed(false)
 {
 	m_picture.setTexture(ResourcesManager::instance().texture((int)character, 0));
-	m_picture.setOrigin(m_picture.getLocalBounds().height / 2, m_picture.getLocalBounds().width / 2);	// for correct rotation, setting origin at center
-	m_action = Action(ActionType::Standing, Direction::Stay);
+	// for correct rotation, setting origin at center
+	m_picture.setOrigin(m_picture.getLocalBounds().height / 2,
+						m_picture.getLocalBounds().width / 2);
+
+	m_action = Action(ActionType::Standing, Direction::Stay); //initial action
 }
 
 void Character::move(const sf::Time& deltaTime, Arena& arena)
@@ -22,16 +25,19 @@ void Character::move(const sf::Time& deltaTime, Arena& arena)
 	}
 	m_picture.move(convert(m_action.second) * m_speed * deltaTime.asSeconds());
 
+	//move back if out of bounds
 	if (outOfBounds(this->m_picture.getPosition()))
 		m_picture.move(convert(opposite(m_action.second)) * m_speed * deltaTime.asSeconds());
 }
 
 void Character::update(const sf::Time& deltaTime)
 {
+	//if in delay - display as punching
 	if (m_action.first == ActionType::Standing && m_punchingClock.getElapsedTime().asSeconds() < PUNCHING_DELAY)
 		m_animation.update(deltaTime, Action{ ActionType::Punching, m_action.second });
 	else
 	{
+		//set not delayed
 		m_animation.update(deltaTime, m_action);
 		m_punchingDelayed = false;
 	}

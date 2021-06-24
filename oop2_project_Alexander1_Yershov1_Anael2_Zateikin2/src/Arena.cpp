@@ -17,7 +17,7 @@ void Arena::clear()
 		if (auto ply = dynamic_cast<Player*>(obj.get()))
 			ply->resetCount();
 	}
-	//add setview
+
 	m_gameObjects.clear();
 	m_mode = Mode::Offline;
 	m_playerLocations.clear();
@@ -26,9 +26,10 @@ void Arena::clear()
 void Arena::createPlayer(CharacterType type, bool isPuppet = false)
 {
 	auto location = INITIAL_LOC;
-	location.x += LOC_OFFSET * m_gameObjects.size();
+	location.x += LOC_OFFSET * m_gameObjects.size(); //calculate start location
+
 	auto ply = std::make_unique<Player>(location, type, isPuppet);
-	m_playerLocations.push_back(ply->getLocation());
+	m_playerLocations.push_back(ply->getLocation()); //add location to locations vector
 	m_gameObjects.push_back(std::move(ply));
 }
 
@@ -43,12 +44,11 @@ void Arena::createEnemy(CharacterType type)
 void Arena::createSpecialAttack(ActionType actionType, AttackType attackType, Character* owner)
 {
 	static Effect effect;
-	//if (attackType != AttackType::IceStatic)
-	//{
-		effect.setSound(attackType);
-		effect.play();
-	//}
 
+	effect.setSound(attackType);
+	effect.play();
+	
+	//emplace into tempHolder
 	actionType == ActionType::SpecialDynamic ?
 		m_tempHolder.emplace_back(std::make_unique<DynamicAttack>(owner->getLocation(), attackType, owner)) :
 		m_tempHolder.emplace_back(std::make_unique<StaticAttack>(owner->getLocation(), attackType, owner));
@@ -80,7 +80,8 @@ void Arena::draw(sf::RenderWindow& window)
 {
 	window.draw(m_background);
 	window.draw(m_ground);
-	
+
+	//sort by YAxis, to print in 3D
 	std::sort(m_gameObjects.begin(), m_gameObjects.end(), 
 				[](const std::unique_ptr<GameObject>& first, const std::unique_ptr<GameObject>& second) { return first->y() < second->y(); });
 
@@ -94,8 +95,9 @@ void Arena::move(const sf::Time& deltaTime)
 	for (auto& object : m_gameObjects)
 	{
 		if(object)
-			object->move(deltaTime, *this); 
+			object->move(deltaTime, *this);  //might create a special attack into tempHolder
 	}
+
 	//move from tempHolder to main vector
 	for (auto& newObj : m_tempHolder)
 	{
@@ -108,10 +110,6 @@ void Arena::update(const sf::Time& deltaTime)
 	for (auto& object : m_gameObjects)
 	{
 		object->update(deltaTime);
-
-		// sending the puppets' 
-		/*if (m_mode != Mode::None && dynamic_cast<Player*>(object.get()))
-			object->sendAction();*/
 	}
 	
 }
@@ -135,7 +133,8 @@ void Arena::collision(sf::RenderWindow& window)
 			
 			if (auto ply = dynamic_cast<Player*>(it->get()))
 			{
-				auto mode = Player::getCount() > 1 ? ply->getPlayerNum() : -1  ;
+				//if Player vs Player ot not
+				auto mode = Player::getCount() > 1 ? ply->getPlayerNum() : OFFLINE  ;
 				activateConclusionWindow(false, window, mode);
 			}
 			it = m_gameObjects.erase(it);
@@ -144,7 +143,7 @@ void Arena::collision(sf::RenderWindow& window)
 			++it;
 	}
 	if (isWon())
-		activateConclusionWindow(true, window);
+		activateConclusionWindow(true, window); //won / lost
 }
 
 sf::Vector2f Arena::getFirstPlayerPos() const
@@ -172,11 +171,15 @@ Arena::~Arena()
 void Arena::activateConclusionWindow(bool isWon, sf::RenderWindow& window, int plyNum)
 {
 	ConclusionWindow con{ isWon };
+
+	//restore view
 	auto view = sf::View(sf::FloatRect(sf::FloatRect(0, 0, float(WINDOW_WIDTH), float(WINDOW_HEIGHT))));
 	window.setView(view);
+
 	con.activateConclusionWindow(window, *this, plyNum);
 }
 
+//checks if no enemies left and at least one player is alive
 bool Arena::isWon() const
 {
 	return !std::count_if(m_gameObjects.begin(), m_gameObjects.end(),

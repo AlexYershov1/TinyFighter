@@ -8,7 +8,7 @@
 Animation::Animation(const AnimeMap& animeMap, sf::Sprite& sprite)
     :m_animeMap(animeMap), m_sprite(sprite), m_animationTime(AnimationTime)
 {
-    update(Action { ActionType::Standing, Direction::Right } );
+    update(Action { ActionType::Standing, Direction::Right } ); //initial state
 }
 
 Animation::~Animation()
@@ -50,7 +50,7 @@ void Animation::burningFreezingCase(Action action)
         && m_index == m_animeMap.m_data.find(action.first)->second.size() - 1)
     {
         update(action);
-        m_index--;
+        m_index--;          //stay on the same frame
     }
 }
 

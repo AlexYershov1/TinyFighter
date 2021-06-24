@@ -4,7 +4,6 @@
 #include <vector>
 #include "AnimationData.h"
 #include "macros.h"
-//class AnimationData;
 
 //This is a singleton
 class ResourcesManager

@@ -47,7 +47,6 @@ void GenericMenu::activateWindow(sf::RenderWindow& window, Arena& arena)
 				Location = window.mapPixelToCoords
 				({ event.mouseButton.x, event.mouseButton.y });
 				if (handleClick(Location, window, arena))
-					//stageInfo = handleClick(Location, window);
 					return;
 				break;
 			case sf::Event::MouseMoved:
@@ -72,7 +71,7 @@ void GenericMenu::setHeader(const std::string& str, float charSize)
 	m_header.setPosition(HEADER_POS);
 
 }
-//This function receives
+//This function receives a string and returns a modified text
 sf::Text GenericMenu::createText(const std::string& str) const
 {
 	//set string, give location according to vector

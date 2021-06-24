@@ -19,8 +19,4 @@ void PvsP::execute(sf::RenderWindow& window, Arena& arena)
 	//choose arena 
 	m_chooseArena.activateChooseArena(window, arena);
 
-	//with enemies / no enemies
-	/*EnemyChoice enemyChoiceWindow;
-	enemyChoiceWindow.activateEnemyChoice(window, arena);*/
-	//m_chooseDifficulty.activateChooseDifficulty(window, arena);
 }

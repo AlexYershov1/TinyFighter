@@ -35,21 +35,7 @@ void ChooseDifficulty::activateChooseDifficulty(sf::RenderWindow& window, Arena&
 {
 	activateWindow(window, arena);
 }
-//void ChooseDifficulty::addText(const std::string& str)
-//{
-//	//set string, give location according to vector
-//	sf::Text text;
-//	text.setFont(ResourcesManager::instance().font());
-//	text.setColor(sf::Color::Green);
-//	text.setCharacterSize(REG_CHAR_SIZE);
-//	text.setString(str);
-//	sf::FloatRect textRect = text.getLocalBounds();
-//	text.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
-//	//text.setPosition(location);
-//	text.setOutlineColor(sf::Color::Magenta);
-//	text.setOutlineThickness(OUTLINE_THICKNESS);
-//	m_difficulties.push_back(text);
-//}
+
 
 void ChooseDifficulty::draw(sf::RenderWindow& window) const
 {

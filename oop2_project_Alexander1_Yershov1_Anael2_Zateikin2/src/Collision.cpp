@@ -18,11 +18,6 @@ Collision& Collision::instance()
 	return instance;
 }
 
-//collision between character and enemy - check which is punching
-// 
-//collision between character and special attack - check if the attack 
-//was not created by the character
-
 namespace
 {
     void playerEnemy(GameObject& player, GameObject& enemy)
@@ -42,11 +37,13 @@ namespace
         if (!character.isAlive() && !character.isFaded())
             return;
 
-        if (attack.ownerIsAlive() && attack.isMe(&obj))
+        if (attack.ownerIsAlive() && attack.isMe(&obj)) 
             return;
         
+        //if character is in freeze state or burning - decrease health
         if (obj.getActionType() != ActionType::Burning && obj.getActionType() != ActionType::Freezing)
             obj.decreaseHealth(SPECIAL_DINAM_DAMAGE);
+
         attack.getKind() == AttackType::FireDynamic ? obj.setActionType(ActionType::Burning) : obj.setActionType(ActionType::Freezing);
         
         attack.setHit();
@@ -65,7 +62,7 @@ namespace
         if (!character.isAlive() && !character.isFaded())
             return;
 
-        if (attack.isMe(&obj))
+        if (attack.isMe(&obj))  //check if the attack was not created by the character
             return;
 
         if (obj.getActionType() != ActionType::Burning && obj.getActionType() != ActionType::Freezing)
@@ -117,7 +114,6 @@ void Collision::processCollision(GameObject& obj1, GameObject& obj2)
     if (!phf)   // collision is irrelevent between two objects 
     {
         return;
-        //throw UnknownCollision(obj1, obj2);
     }
     phf(obj1, obj2);
 }

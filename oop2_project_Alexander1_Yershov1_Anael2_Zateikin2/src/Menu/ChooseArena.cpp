@@ -6,6 +6,7 @@
 ChooseArena::ChooseArena()
 	:GenericMenu()
 {
+	//set arrows
 	auto texturePtr = ResourcesManager::instance().arrowTexture();
 	sf::RectangleShape arrowRight, arrowLeft;
 	arrowRight.setTexture(texturePtr);
@@ -21,11 +22,7 @@ ChooseArena::ChooseArena()
 	m_arrows = { arrowLeft, arrowRight };
 	
 	//header
-	m_header.setCharacterSize(HEADER_SIZE);
-	m_header.setString("Choose Arena");
-	rect = m_header.getLocalBounds();
-	m_header.setOrigin(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
-	m_header.setPosition(HEADER_POS);
+	setHeader("Choose Arena", HEADER_SIZE);
 	
 	//add arena thumbnails
 	sf::RectangleShape thumbnail;
@@ -63,7 +60,7 @@ void ChooseArena::draw(sf::RenderWindow& window) const
 		window.draw(thumnbail.first);
 }
 
-bool ChooseArena::handleClick(const sf::Vector2f& location, sf::RenderWindow& window, Arena& arena)
+bool ChooseArena::handleClick(const sf::Vector2f& location, sf::RenderWindow& , Arena& arena)
 {
 	for (auto& thumbnail : m_arenasThumbnails)
 	{

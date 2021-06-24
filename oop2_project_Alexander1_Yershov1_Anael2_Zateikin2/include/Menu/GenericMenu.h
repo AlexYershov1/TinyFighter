@@ -16,21 +16,17 @@ public:
 protected:
 	void activateWindow(sf::RenderWindow& window, Arena&);
 	void setBackground(sf::Texture*);
-	void setHeader(const std::string&, float); //set the string and character size
+	void setHeader(const std::string&, float);	//set the string and character size
 	virtual bool handleClick(const sf::Vector2f&, sf::RenderWindow&, Arena&) = 0;
 	virtual void handleMove(const sf::Vector2f&) = 0;
 	sf::Text createText(const std::string&) const ;
-	//void addText(const std::string&, void* (*)(sf::RenderWindow& window, Arena&));
 
 	template <typename Vect>
 	void alignButtonsOnScreen(Vect&); //alignes locations on screen 
 
 	sf::Text m_header;
 	sf::RectangleShape m_background;
-	std::vector<std::pair<sf::Text, void* (*)(sf::RenderWindow& window, Arena&)>> m_textButtons;
-	std::vector<sf::Sprite> m_spriteButtons;
-	std::vector<sf::RectangleShape> m_rectButtons;
-
+	
 };
 
 

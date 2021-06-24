@@ -67,9 +67,9 @@ void Controller::run() try
 	}
 }
 
-catch (RestartExc& ex)
+catch (RestartExc& ) //fight ended
 {
-	return;
+	return; //stop run()
 }
 catch (std::exception& ex)
 {

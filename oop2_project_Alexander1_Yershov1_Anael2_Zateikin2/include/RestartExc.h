@@ -2,6 +2,8 @@
 #include <exception>
 #include <stdexcept>
 
+
+//Exception for end of fight
 class RestartExc : public std::exception
 {
 public:

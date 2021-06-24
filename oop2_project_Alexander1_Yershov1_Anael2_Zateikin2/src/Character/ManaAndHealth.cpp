@@ -25,11 +25,6 @@ ManaAndHealth::ManaAndHealth()
 	m_manaBar.rectangles.first.setOutlineThickness(SHADOW_THICKNESS); //shdow
 	m_manaBar.rectangles.second.setFillColor(sf::Color(20, 150, 150, 255));
 }
-//
-//ManaAndHealth::ManaAndHealth(CharacterType character)
-//{
-//	//m_charIcon.setTexture(ResourcesManager::instance().)
-//}
 
 ManaAndHealth::~ManaAndHealth()
 {
@@ -46,33 +41,31 @@ void ManaAndHealth::draw(sf::RenderWindow& window) const
 
 void ManaAndHealth::move()
 {
-	setPositions();
+	setPositions(); //move along with the view
 }
 
 void ManaAndHealth::increaseMana(const sf::Time& deltaTime)
 {
-	//m_manaBar.value += deltaTime.asSeconds() * INCREASE_RATE;
 	m_manaBar.update(deltaTime.asSeconds() * INCREASE_RATE, MAX_MANA);
 }
 
 void ManaAndHealth::decreaseMana(float value)
 {
-	//decrease(m_manaBar.value, value);
-	m_manaBar.update(-value, MAX_MANA);
-	
+	m_manaBar.update(-value, MAX_MANA);	
 }
 
 void ManaAndHealth::decreaseMana(ActionType type)
 {
-	if (type == ActionType::SpecialDynamic)
+	//distinguish dynamic from static
+	if (type == ActionType::SpecialDynamic)  
 		decreaseMana(SPECIAL_DINAM_MANA);
+
 	else if (type == ActionType::SpecialStatic)
 		decreaseMana(SPECIAL_STATIC_MANA);
 }
 
 bool ManaAndHealth::decreaseHealth(float value)
 {
-	//decrease(m_healthBar.value, value);
 	m_healthBar.update(-value, MAX_HEALTH);
 	if (m_healthBar.value <= 0)
 	{
@@ -87,15 +80,8 @@ void ManaAndHealth::setLocation(int plynum)
 {
 	static  float sectionWidth = m_charIcon.getGlobalBounds().width + BAR_WIDTH + INNER_VERT_SPACE;
 	m_blockOffset = { float(plynum) * sectionWidth,float(plynum / 4) * BAR_HEIGHT };
-	//sf::Vector2f pos = 
 
 	setPositions(); //set The inner rectangles positions
-	//m_charIcon.setPosition(pos);
-	//m_healthBar.rectangles.first.setPosition({pos.x + m_charIcon.getGlobalBounds().width, pos.y });
-	//m_healthBar.rectangles.second.setPosition(pos.x + m_charIcon.getGlobalBounds().width, pos.y);
-	//m_manaBar.rectangles.first.setPosition(pos.x + m_charIcon.getGlobalBounds().width, pos.y+BAR_HEIGHT);
-	//m_manaBar.rectangles.second.setPosition(pos.x + m_charIcon.getGlobalBounds().width, pos.y + BAR_HEIGHT);
-
 }
 void ManaAndHealth::setIcon(CharacterType character)
 {
@@ -125,10 +111,3 @@ void ManaAndHealth::setPositions()
 	m_manaBar.rectangles.first.setPosition(xBarsPos, m_blockOffset.y+BAR_HEIGHT + viewOffset.y);
 	m_manaBar.rectangles.second.setPosition(xBarsPos, m_blockOffset.y + BAR_HEIGHT + viewOffset.y);
 }
-//
-//void ManaAndHealth::decrease(float& bar,float value) 
-//{
-//	bar -= value;
-//	if (bar < 0)
-//		bar = 0;	//set to zero
-//}

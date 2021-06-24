@@ -8,16 +8,14 @@ class ManaAndHealth
 {
 public:
 	ManaAndHealth();
-	//ManaAndHealth(CharacterType); //for players
 
 	~ManaAndHealth();
 	void draw(sf::RenderWindow&) const;
 	void move(); //move with the view and stay on the screen
 
-	void increaseMana(const sf::Time&);
-	//void increaseMana(const sf::Time&);
+	void increaseMana(const sf::Time&); //increase over time
 	void decreaseMana(float);
-	void decreaseMana(ActionType);
+	void decreaseMana(ActionType); //decrease sccording to action
 	bool decreaseHealth(float);
 
 	void setLocation(int); //sets location according to player number
@@ -25,7 +23,7 @@ public:
 	float getMana() const;
 	float getHealth() const;
 
-	bool isFaded() const;
+	bool isFaded() const;	//to help determin if dead
 private:
 	void setPositions();
 
@@ -34,7 +32,7 @@ private:
 		float value;
 		std::pair<sf::RectangleShape, sf::RectangleShape> rectangles;
 		
-		void update(float addition, float maxValue)
+		void update(float addition, float maxValue) //update vaues and rectangles
 		{
 			value += addition;
 			if (value > maxValue)
@@ -49,6 +47,6 @@ private:
 	Bar m_manaBar;
 	Bar m_healthBar;
 	sf::Sprite m_charIcon;
-	sf::Vector2f m_blockOffset;
-	sf::Clock m_fading;
+	sf::Vector2f m_blockOffset; //to place on StatesSection
+	sf::Clock m_fading;	
 };

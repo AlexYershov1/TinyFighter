@@ -23,8 +23,9 @@ void Player::resetCount()
 Player::Player(const sf::Vector2f& location , CharacterType character, bool isPuppet)
 	: Character(location, character), m_playerNum(m_count), m_puppet(isPuppet)
 {
-    if (m_playerNum)
+    if (m_playerNum) //if more than one player
         m_picture.setPosition(location.x, location.y + VERTICAL_OFFSET);
+
     m_specialAttacks = character == CharacterType::Alex ?
         std::make_pair(AttackType::FireDynamic, AttackType::FireStatic) : 
         std::make_pair(AttackType::IceDynamic, AttackType::IceStatic);
@@ -41,6 +42,7 @@ void Player::move(const sf::Time& deltaTime, Arena& arena)
         return;
     m_action = getActionFromKey(arena);
     Character::move(deltaTime, arena);
+
     m_manaAndHealth.move(); //move the health and mana bars
 }
 
@@ -99,7 +101,7 @@ Action Player::getActionFromKey(Arena& arena) //auto vecOfPAirs = {{}}
 
                 if ((!m_puppet && sf::Keyboard::isKeyPressed(pair.first)) || (m_puppet && keyPressed == pair.first))
                 {
-                    if (!m_alive)
+                    if (!m_alive) //if dead do nothing
                         break;
                     switch (auto type = pair.second.first)
                     {
@@ -119,7 +121,6 @@ Action Player::getActionFromKey(Arena& arena) //auto vecOfPAirs = {{}}
                             m_disabled.restart();
                         }
                         else
-                            //pair.second.first = ActionType::Standing;
                             return Action{ ActionType::Standing,pair.second.second };
                         break;
                     case ActionType::Punching:
@@ -141,7 +142,7 @@ Action Player::getActionFromKey(Arena& arena) //auto vecOfPAirs = {{}}
             }
             if (!m_puppet && arena.getMode() != Mode::Offline)
             {
-                sending(DEFAULT_KEY);
+                sending(DEFAULT_KEY); //send key
                 return Action{ ActionType::Standing, Direction::Stay }; //default return
             }
         }

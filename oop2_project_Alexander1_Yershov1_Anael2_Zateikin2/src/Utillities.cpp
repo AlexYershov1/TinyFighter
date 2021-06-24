@@ -29,8 +29,7 @@ void twoCharactersCollision(Character& first, Character& second)
 		return;
 
 	//check if someone is punching
-	if ((first.getActionType() == ActionType::Punching || first.punchDelayed()) && (first.facing(second)) )//&&
-		//abs(first.getLocation().y - second.getLocation().y) < SIGMA)
+	if ((first.getActionType() == ActionType::Punching || first.punchDelayed()) && (first.facing(second)) )
 	{
 		if (effect.getStatus() != sf::Sound::Playing)
 			effect.play();
