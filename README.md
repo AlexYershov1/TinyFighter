@@ -1,7 +1,7 @@
 # TinyFighter
 Written by Alexander Yershov and Anael Zateikin.
 
-Video - https://www.youtube.com/watch?v=i20L2J-0Otc&t=48s
+Video - https://youtu.be/i20L2J-0Otc
 
 This is an action game based on little-fighter 2 built using C++ and SFML graphic library.
 The game is a fighting game with different modes:
