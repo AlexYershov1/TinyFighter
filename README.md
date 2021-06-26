@@ -1,7 +1,7 @@
 # TinyFighter
 Written by Alexander Yershov and Anael Zateikin.
 
-Video - https://youtu.be/ovZPiL64H-E
+Video - https://www.youtube.com/watch?v=i20L2J-0Otc&t=48s
 
 This is an action game based on little-fighter 2 built using C++ and SFML graphic library.
 The game is a fighting game with different modes:
@@ -97,7 +97,8 @@ ChooseDifficulty creates the amount of enemies according to the chosen difficult
 Online game:
 When chosen an online game the first user must choose create game, choose his character, choose the arena, and wait for a 
 second user to connect. The second user must click Join game and choose his character. And then the game begins. 
-The online game is implemented using a socket. By default the ip is set to LocalHost. 
+The online game is implemented using a socket. By default the ip is set to garbage ip. To change, go to Network.cpp line 18
+and enter your home wifi ip.
 
 ----------------------------------------------------------------------------------------------------------------
 Data Structures:
